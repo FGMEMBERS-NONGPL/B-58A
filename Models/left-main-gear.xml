@@ -1,0 +1,237 @@
+<?xml version="1.0"?>
+
+<!--B-58A left main gear assembly-->
+
+<PropertyList>
+
+<path>main-gear.ac</path>
+
+<!--METAL EFFECTS-->
+
+<animation>
+	<type>noshadow</type>
+		<object-name>main-gear-assembly</object-name>
+</animation>
+
+<animation>
+	<type>shader</type>
+	<shader>chrome</shader>
+	<texture>gear.png</texture>
+		<object-name>upper-main-assembly</object-name>
+		<object-name>scissors</object-name>
+		<object-name>lower-strut</object-name>
+		<object-name>axle-assembly</object-name>
+		<object-name>wheel</object-name>
+</animation>
+
+<animation>
+	<type>shader</type>
+	<shader>chrome</shader>
+	<texture>chrome.png</texture>
+		<object-name>oleo</object-name>
+</animation>
+
+<!--SELECTION-->
+
+<animation>
+	<type>select</type>
+	<object-name>main-gear-assembly</object-name>
+	<condition>
+		<greater-than>
+			<property>gear/gear[2]/position-norm</property>
+			<value>.05</value>
+		</greater-than>
+	</condition>
+</animation>    
+
+<!--ROTATIONS AND TRANSLATION-->
+
+<animation> 
+	<type>rotate</type>
+	<object-name>support1</object-name>
+	<property>gear/gear[1]/position-norm</property>
+	<interpolation> 
+		<entry><ind>0</ind><dep>45</dep></entry>
+		<entry><ind>1</ind><dep>0</dep></entry>
+	</interpolation>
+   <center>
+		<x-m>-0.227234</x-m>
+		<y-m>0</y-m>
+		<z-m>-1.156296</z-m>
+   </center>
+	<axis> 
+		<y>1</y>
+	</axis>
+</animation>
+
+<animation> 
+	<type>rotate</type>
+	<object-name>support2</object-name>
+	<property>gear/gear[1]/position-norm</property>
+	<interpolation> 
+		<entry><ind>0</ind><dep>35</dep></entry>
+		<entry><ind>1</ind><dep>0</dep></entry>
+	</interpolation>
+	<axis> 
+		<y>1</y>
+	</axis>
+</animation>
+
+<animation> 
+	<type>rotate</type>
+	<object-name>support3</object-name>
+	<object-name>support4</object-name>
+	<property>gear/gear[1]/position-norm</property>
+	<interpolation> 
+		<entry><ind>0</ind><dep>155</dep></entry>
+		<entry><ind>1</ind><dep>0</dep></entry>
+	</interpolation>
+	<axis> 
+		<y>1</y>
+	</axis>
+</animation>
+
+<animation> 
+	<type>rotate</type>
+	<object-name>contact-assembly</object-name>
+	<property>gear/gear[1]/position-norm</property>
+	<interpolation> 
+		<entry><ind>0</ind><dep>90</dep></entry>
+		<entry><ind>1</ind><dep>0</dep></entry>
+	</interpolation>
+   <center>
+		<x-m>0</x-m>
+		<y-m>0</y-m>
+		<z-m>-1.685478</z-m>
+   </center>
+	<axis> 
+		<y>1</y>
+	</axis>
+</animation>
+
+<animation>
+	<type>translate</type>
+	<object-name>main-gear-assembly</object-name>
+	<property>gear/gear[1]/position-norm</property>
+	<interpolation>
+		<entry><ind>0</ind><dep>1.024942</dep></entry>
+		<entry><ind>1</ind><dep>0</dep></entry>
+	</interpolation>
+	<axis> 
+		<z>1</z>
+	</axis>
+</animation>
+
+<animation> 
+	<type>rotate</type>
+	<object-name>contact-assembly</object-name>
+	<property>/fdm/jsbsim/gear/unit[1]/WOW</property>
+	<interpolation> 
+		<entry><ind>0</ind><dep>30</dep></entry>
+		<entry><ind>1</ind><dep>0</dep></entry>
+	</interpolation>
+   <center>
+		<x-m>0</x-m>
+		<y-m>0</y-m>
+		<z-m>-1.659973</z-m>
+   </center>
+	<axis> 
+		<y>1</y>
+	</axis>
+</animation>
+
+<!--COMPRESSION-->
+
+<animation>
+	<type>translate</type>
+	<object-name>lower-main-assembly</object-name>
+	<property>gear/gear[1]/compression-norm</property>
+	<factor>.375138</factor>
+	<axis> 
+		<z>1</z>
+	</axis>
+</animation>
+
+<animation>
+	<type>translate</type>
+	<object-name>scissors</object-name>
+	<property>gear/gear[1]/compression-norm</property>
+	<factor>.187414</factor>
+	<axis> 
+		<z>1</z>
+	</axis>
+</animation>
+
+<animation> 
+	<type>rotate</type>
+	<object-name>upper</object-name>
+	<property>gear/gear[1]/compression-norm</property>
+	<factor>11.5</factor>
+	<center>
+		<x-m>-0.968860</x-m>
+		<y-m>0</y-m>
+		<z-m>-1.440595</z-m>
+	</center>
+	<axis> 
+		<y>1</y>
+	</axis>
+</animation>
+
+<animation> 
+	<type>rotate</type>
+	<object-name>lower</object-name>
+	<property>gear/gear[1]/compression-norm</property>
+	<factor>-15</factor>
+	<center>
+		<x-m>-0.968860</x-m>
+		<y-m>0</y-m>
+		<z-m>-1.440595</z-m>
+	</center>
+	<axis> 
+		<y>1</y>
+	</axis>
+</animation>
+
+<!--WHEEL AND TIRE ROTATION-->
+
+<animation>
+	<type>spin</type>
+	<object-name>wheels+tires1</object-name>
+	<property>/fdm/jsbsim/gear/unit[1]/RPM</property>
+	<condition>
+		<equals>
+			<property>fdm/jsbsim/gear/unit[1]/WOW</property>
+			<value type="bool">true</value>
+		</equals>
+	</condition>
+   <center>
+     <x-m>-0.290302</x-m>
+     <y-m>0</y-m>
+     <z-m>-1.787933</z-m>
+   </center>
+	<axis> 
+		<y>-1</y>
+	</axis>
+</animation>
+
+<animation>
+	<type>spin</type>
+	<object-name>wheels+tires2</object-name>
+	<property>/fdm/jsbsim/gear/unit[1]/RPM</property>
+	<condition>
+		<equals>
+			<property>fdm/jsbsim/gear/unit[1]/WOW</property>
+			<value type="bool">true</value>
+		</equals>
+	</condition>
+   <center>
+     <x-m>0.499698</x-m>
+     <y-m>0</y-m>
+     <z-m>-1.787933</z-m>
+   </center>
+	<axis> 
+		<y>-1</y>
+	</axis>
+</animation>
+
+</PropertyList>

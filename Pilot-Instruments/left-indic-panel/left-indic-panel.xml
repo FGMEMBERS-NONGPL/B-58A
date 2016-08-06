@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--B-58A Left Indicator Panel-->
+
+<PropertyList>
+
+  <path>left-indic-panel.ac</path>
+
+<!--LIGHTING-->
+
+<animation>
+	<type>material</type>
+	<object-name>face1</object-name>
+	<object-name>face2</object-name>
+	<object-name>face3</object-name>
+	<emission>
+		<red>0.30</red>
+		<green>0.30</green>
+		<blue>0.30</blue>
+		<factor-prop>/controls/lighting/left-panel</factor-prop>
+	</emission>
+</animation>    
+
+<animation>
+	<type>material</type>
+	<object-name>full</object-name>
+	<object-name>half</object-name>
+	<object-name>intermediate</object-name>
+	<emission>
+		<red>0.75</red>
+		<green>0.25</green>
+		<blue>0.25</blue>
+		<factor-prop>/controls/lighting/left-panel</factor-prop>
+	</emission>
+</animation>    
+
+<!--METAL EFFECTS-->
+
+<animation>
+	<type>shader</type>
+	<shader>chrome</shader>
+	<texture>metal-shader.png</texture>
+		<object-name>base</object-name>
+</animation>
+
+<!--AILERON CONTROL AVAILABLE INDICATOR-->
+
+<animation>
+    <type>select</type>
+    <object-name>full</object-name>
+	<condition>
+		<equals>
+			<property>/fdm/jsbsim/fcs/aileron-ratio</property>
+			<value>1</value>
+		</equals>
+	</condition>
+</animation>
+
+<animation>
+    <type>select</type>
+    <object-name>half</object-name>
+	<condition>
+		<equals>
+			<property>/fdm/jsbsim/fcs/aileron-ratio</property>
+			<value>.5</value>
+		</equals>
+	</condition>
+</animation>
+
+<animation>
+	<type>select</type>
+	<object-name>intermediate</object-name>
+	<condition>
+		<and>
+			<not-equals>
+				<property>/fdm/jsbsim/fcs/aileron-ratio</property>
+				<value>.5</value>
+			</not-equals>
+			<not-equals>
+				<property>/fdm/jsbsim/fcs/aileron-ratio</property>
+				<value>1</value>
+			</not-equals>
+		</and>
+	</condition>
+</animation>
+
+<!--TRIM INDICATOR-->
+
+<animation>
+    <type>select</type>
+    <object-name>trim-off</object-name>
+	<condition>
+		<or>
+			<not-equals>
+				<property>/fdm/jsbsim/fcs/yaw-trim-cmd-norm</property>
+				<value>0</value>
+			</not-equals>
+			<not-equals>
+				<property>/fdm/jsbsim/fcs/pitch-trim-cmd-norm</property>
+				<value>0</value>
+			</not-equals>
+		</or>
+	</condition>
+</animation>
+
+<animation>
+	<type>select</type>
+	<object-name>trim-on</object-name>
+	<condition>
+		<and>
+			<equals>
+				<property>/fdm/jsbsim/fcs/yaw-trim-cmd-norm</property>
+				<value>0</value>
+			</equals>
+			<equals>
+				<property>/fdm/jsbsim/fcs/pitch-trim-cmd-norm</property>
+				<value>0</value>
+			</equals>
+		</and>
+	</condition>
+</animation>
+
+<!--MACH INDICATOR-->
+
+<animation>
+	<type>select</type>
+	<object-name>mach-off</object-name>
+	<condition>
+		<or>
+			<less-than>
+				<property>/velocities/mach</property>
+				<value>1</value>
+			</less-than>
+			<greater-than>
+				<property>/velocities/mach</property>
+				<value>1.55</value>
+			</greater-than>
+		</or>
+	</condition>
+</animation>
+
+<animation>
+	<type>select</type>
+	<object-name>mach-on</object-name>
+	<condition>
+		<and>
+			<less-than-equals>
+				<property>/velocities/mach</property>
+				<value>1.55</value>
+			</less-than-equals>
+			<greater-than-equals>
+				<property>/velocities/mach</property>
+				<value>1</value>
+			</greater-than-equals>
+		</and>
+	</condition>
+</animation>
+
+<!--  LoD  -->
+
+<animation> 
+	<type>range</type>
+	<min-m>0</min-m>
+	<max-m>5</max-m>
+</animation>
+
+</PropertyList>

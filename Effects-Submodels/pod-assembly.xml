@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+ <path>pod-assembly.ac</path>
+
+<!--METAL EFFECTS-->
+
+<!--animation>
+	<type>noshadow</type>
+		<object-name>pod-assembly</object-name>
+</animation-->
+
+<animation>
+	<type>shader</type>
+	<shader>chrome</shader>
+	<texture>aluminum.png</texture>
+		<object-name>pod-assembly</object-name>
+</animation>
+
+<!--SELECT-->
+
+<animation>
+	<type>select</type>
+	<object-name>pod-assembly</object-name>
+	<condition>
+		<not>
+			<property>/fdm/jsbsim/systems/pod/release</property>
+		</not>
+	</condition>
+</animation>  
+
+</PropertyList>

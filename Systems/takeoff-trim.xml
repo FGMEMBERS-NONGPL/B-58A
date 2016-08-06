@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+
+<system name="takeoff trim">
+
+	<property value="1">systems/takeoff-trim/factor</property>
+
+	<channel name ="trim adjust">
+
+		<scheduled_gain>
+			<input>systems/takeoff-trim/factor</input>
+			<table>
+				<independentVar lookup="row">gear/gear-pos-norm</independentVar>
+				<tableData>
+					.1		-.25
+					1		0
+				</tableData>
+			</table>
+			<output>systems/takeoff-trim/elevator-trim</output>
+		</scheduled_gain>
+
+  </channel>
+
+</system>

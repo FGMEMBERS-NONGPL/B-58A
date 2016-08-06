@@ -1,0 +1,1721 @@
+<?xml version="1.0"?>
+
+<system name="astro">
+
+	<property value="0">/sim[0]/time/utc/second</property>
+	<property value="0">/sim[0]/time/utc/minute</property>
+	<property value="0">/sim[0]/time/utc/hour</property>
+	<property value="0">/sim[0]/time/utc/day</property>
+	<property value="0">/sim[0]/time/utc/month</property>
+	<property value="0">/sim[0]/time/utc/year</property>
+	<property value="0">systems/astro/sun/M</property>
+	<property value="46.129911">systems/astro/capella/declination</property>
+	<property value="80.723296">systems/astro/capella/right-ascension</property>
+	<property value="-52.806605">systems/astro/canopus/declination</property>
+	<property value="98.1295785">systems/astro/canopus/right-ascension</property>
+
+	<channel name="time">
+
+		<fcs_function>
+			<function>
+				<sum>
+					<property>/sim[0]/time/utc/hour</property>
+					<quotient>
+						<property>/sim[0]/time/utc/minute</property>
+						<value>60</value>
+					</quotient>
+					<quotient>
+						<property>/sim[0]/time/utc/second</property>
+						<value>3600</value>
+					</quotient>
+				</sum>
+			</function>
+			<output>systems/astro/time/utc-hour</output>
+		</fcs_function>
+
+		<fcs_function>
+			<function>
+				<sum>
+					<property>/sim[0]/time/utc/hour</property>
+					<quotient>
+						<property>/sim[0]/time/utc/minute</property>
+						<value>60</value>
+					</quotient>
+					<quotient>
+						<property>/sim[0]/time/utc/second</property>
+						<value>3600</value>
+					</quotient>
+				</sum>
+			</function>
+			<output>/systems/astrotracker/time/utc-hour</output>
+		</fcs_function>
+
+		<fcs_function>
+			<function>
+				<sum>
+					<difference>
+						<product>
+							<value>367</value>
+							<property>/sim[0]/time/utc/year</property>
+						</product>
+						<integer>
+							<quotient>
+								<product>
+									<value>7</value>
+									<sum>
+										<property>/sim[0]/time/utc/year</property>
+										<integer>
+											<quotient>
+												<sum>
+													<property>/sim[0]/time/utc/month</property>
+													<value>9</value>
+												</sum>
+												<value>12</value>
+											</quotient>
+										</integer>
+									</sum>
+								</product>
+								<value>4</value>
+							</quotient>
+						</integer>
+					</difference>
+					<integer>
+						<product>
+							<value>30.555556</value>
+							<property>/sim[0]/time/utc/month</property>
+						</product>
+					</integer>
+					<difference>
+						<property>/sim[0]/time/utc/day</property>
+						<value>730531.5</value>
+					</difference>
+					<quotient>
+						<property>systems/astro/time/utc-hour</property>
+						<value>24</value>
+					</quotient>
+				</sum>
+			</function>
+			<output>systems/astro/time/utc-days</output>
+		</fcs_function>
+
+		<fcs_function>
+			<function>
+				<sum>
+					<difference>
+						<product>
+							<value>367</value>
+							<property>/sim[0]/time/utc/year</property>
+						</product>
+						<integer>
+							<quotient>
+								<product>
+									<value>7</value>
+									<sum>
+										<property>/sim[0]/time/utc/year</property>
+										<integer>
+											<quotient>
+												<sum>
+													<property>/sim[0]/time/utc/month</property>
+													<value>9</value>
+												</sum>
+												<value>12</value>
+											</quotient>
+										</integer>
+									</sum>
+								</product>
+								<value>4</value>
+							</quotient>
+						</integer>
+					</difference>
+					<integer>
+						<product>
+							<value>30.555556</value>
+							<property>/sim[0]/time/utc/month</property>
+						</product>
+					</integer>
+					<difference>
+						<property>/sim[0]/time/utc/day</property>
+						<value>730531.5</value>
+					</difference>
+				</sum>
+			</function>
+			<output>/systems/astrotracker/time/utc-days</output>
+		</fcs_function>
+
+		<fcs_function>
+			<function>
+				<sum>
+					<value>98.9818</value>
+					<product>
+						<value>0.985647352</value>
+						<property>systems/astro/time/utc-days</property>
+					</product>
+					<product>
+						<value>15</value>
+						<property>systems/astro/time/utc-hour</property>
+					</product>
+					<property>/position/longitude-deg</property>
+				</sum>
+			</function>
+			<output>systems/astro/time/LST-init</output>
+		</fcs_function>
+
+		<fcs_function>
+			<function>
+				<difference>
+					<property>systems/astro/time/LST-init</property>
+					<product>
+						<integer>
+							<quotient>
+								<property>systems/astro/time/LST-init</property>
+								<value>360</value>
+							</quotient>
+						</integer>
+						<value>360</value>
+					</product>
+				</difference>
+			</function>
+			<output>systems/astro/time/LST-corr</output>
+		</fcs_function>
+
+		<switch>
+			<default value="systems/astro/time/LST-init"/>
+				<test value="-systems/astro/time/LST-corr">
+					systems/astro/time/LST-init LT 0
+				</test>
+				<test value="systems/astro/time/LST-corr">
+					systems/astro/time/LST-init GT 360
+				</test>
+			<output>systems/astro/time/local-sidereal-time</output>
+		</switch>
+
+		<fcs_function>
+			<function>
+				<mod>
+					<property>/sim[0]/time/utc/year</property>
+					<value>4</value>
+				</mod>
+			</function>
+			<output>systems/astro/time/leap-year-calc1</output><!--if value is 0, then IS PROBABLY leap year-->
+		</fcs_function>
+
+		<fcs_function>
+			<function>
+				<mod>
+					<property>/sim[0]/time/utc/year</property>
+					<value>100</value>
+				</mod>
+			</function>
+			<output>systems/astro/time/leap-year-calc2</output><!--if value is 0, then IS NOT leap year-->
+		</fcs_function>
+
+		<fcs_function>
+			<function>
+				<mod>
+					<property>/sim[0]/time/utc/year</property>
+					<value>400</value>
+				</mod>
+			</function>
+			<output>systems/astro/time/leap-year-calc3</output><!--if value is 0, then IS leap year-->
+		</fcs_function>
+
+		<switch>
+			<default value="0"/>
+				<test logic="AND" value="0">
+					systems/astro/time/leap-year-calc1 EQ 0
+					systems/astro/time/leap-year-calc2 EQ 0
+					systems/astro/time/leap-year-calc3 NE 0
+				</test>
+				<test logic="AND" value="1">
+					systems/astro/time/leap-year-calc1 EQ 0
+					systems/astro/time/leap-year-calc2 NE 0
+					systems/astro/time/leap-year-calc3 EQ 0
+				</test>
+			<output>systems/astro/time/leap-year</output><!--0 = no leap year; 1 = leap year-->
+		</switch>
+
+		<fcs_function>
+			<function>
+				<sum>
+					<property>/sim[0]/time/utc/day</property>
+					<property>systems/astro/time/leap-year</property>
+					<quotient>
+						<property>systems/astro/time/utc-hour</property>
+						<value>24</value>
+					</quotient>
+					<table>
+						<independentVar>/sim[0]/time/utc/month</independentVar>
+						<tableData>
+                          1	0
+                          2	31
+                          3	59
+                          4	90
+                          5	120
+                          6	151
+                          7	181
+                          8	212
+                          9	243
+                          10	273
+                          11	304
+                          12	334
+						</tableData>
+					</table>
+				</sum>
+			</function>
+			<output>systems/astro/time/ordinal-day</output>
+		</fcs_function>
+
+		<!--fcs_function>
+			<function>
+				<product>
+					<value>0.01721420632</value>
+					<sum>
+						<property>systems/astro/time/ordinal-day</property>
+						<quotient>
+							<property>systems/astro/time/utc-hour</property>
+							<value>24</value>
+						</quotient>
+					</sum>
+				</product>
+			</function>
+			<output>systems/astro/time/fractional-year-rad</output>
+		</fcs_function-->
+
+		<fcs_function>
+			<function>
+				<product>
+					<value>0.01721420632</value>
+					<sum>
+						<difference>
+							<property>systems/astro/time/ordinal-day</property>
+							<value>1</value>
+						</difference>
+						<quotient>
+							<difference>
+								<property>systems/astro/time/utc-hour</property>
+								<value>12</value>
+							</difference>
+							<value>24</value>
+						</quotient>
+					</sum>
+				</product>
+			</function>
+			<output>systems/astro/time/fractional-year-rad</output>
+		</fcs_function>
+
+		<fcs_function>
+			<function>
+				<product>
+					<value>0.01721420632</value>
+					<sum>
+						<difference>
+							<property>systems/astro/time/ordinal-day</property>
+							<value>1</value>
+						</difference>
+						<quotient>
+							<difference>
+								<property>systems/astro/time/utc-hour</property>
+								<value>12</value>
+							</difference>
+							<value>24</value>
+						</quotient>
+					</sum>
+				</product>
+			</function>
+			<output>/systems/astrotracker/time/fractional-year-rad</output>
+		</fcs_function>
+
+		<fcs_function>
+			<function>
+				<sum>
+					<value>280.46061837</value>
+					<product>
+						<value>360.98564736629</value>
+						<property>systems/astro/time/utc-days</property>
+					</product>
+					<product>
+						<value>0.000387933</value>
+						<product>
+							<value>0.0000273785</value>
+							<property>systems/astro/time/utc-days</property>
+						</product>
+						<product>
+							<value>0.0000273785</value>
+							<property>systems/astro/time/utc-days</property>
+						</product>
+					</product>
+					<product>
+						<value>-1</value>
+						<quotient>
+							<product>
+								<product>
+									<value>0.0000273785</value>
+									<property>systems/astro/time/utc-days</property>
+								</product>
+								<product>
+									<value>0.0000273785</value>
+									<property>systems/astro/time/utc-days</property>
+								</product>
+								<product>
+									<value>0.0000273785</value>
+									<property>systems/astro/time/utc-days</property>
+								</product>
+							</product>
+							<value>38710000</value>
+						</quotient>
+					</product>
+				</sum>
+			</function>
+			<output>systems/astro/time/GMST-init</output>
+		</fcs_function>
+
+		<fcs_function>
+			<function>
+				<difference>
+					<property>systems/astro/time/GMST-init</property>
+					<product>
+						<integer>
+							<quotient>
+								<property>systems/astro/time/GMST-init</property>
+								<value>360</value>
+							</quotient>
+						</integer>
+						<value>360</value>
+					</product>
+				</difference>
+			</function>
+			<output>systems/astro/time/GMST</output>
+		</fcs_function>
+
+	</channel>
+
+	<channel name="orbital-elements">
+
+		<fcs_function>
+			<function>
+				<sum>
+					<value>23</value>
+					<quotient>
+						<sum>
+							<value>26</value>
+							<quotient>
+								<difference>
+									<value>21.448</value>
+									<product>
+										<value>0.0000273785</value>
+										<property>systems/astro/time/utc-days</property>
+										<sum>
+											<value>46.8150</value>
+											<product>
+												<value>0.0000273785</value>
+												<property>systems/astro/time/utc-days</property>
+												<difference>
+													<value>0.00059</value>
+													<product>
+														<value>0.001813</value>
+														<value>0.0000273785</value>
+														<property>systems/astro/time/utc-days</property>
+													</product>
+												</difference>
+											</product>
+										</sum>
+									</product>
+								</difference>
+								<value>60</value>
+							</quotient>
+						</sum>
+						<value>60</value>
+					</quotient>
+				</sum>
+			</function>
+			<output>systems/astro/earth/mo</output><!--mean obliquity of the ecliptic-->
+		</fcs_function>
+
+		<fcs_function>
+			<function>
+				<sum>
+					<property>systems/astro/earth/mo</property>
+					<product>
+						<value>0.00256</value>
+						<cos>
+							<product>
+								<value>0.0174532925</value>
+								<difference>
+									<value>125.04</value>
+									<product>
+										<value>1934.136</value>
+										<product>
+											<value>0.0000273785</value>
+											<property>systems/astro/time/utc-days</property>
+										</product>
+									</product>
+								</difference>
+							</product>
+						</cos>
+					</product>
+				</sum>
+			</function>
+			<output>systems/astro/earth/o</output><!--corrected obliquity of the ecliptic-->
+		</fcs_function>
+
+		<fcs_function>
+			<function>
+				<difference>
+					<value>23.4393</value>
+						<product>
+							<value>0.0000003563</value>
+							<property>systems/astro/time/utc-days</property>
+						</product>
+				</difference>
+			</function>
+			<output>systems/astro/earth/ecl</output><!--obliquity of the ecliptic-->
+		</fcs_function>
+
+		<fcs_function>
+			<function>
+				<difference>
+					<value>0.016708634</value>
+					<product>
+						<product>
+							<value>0.0000273785</value>
+							<property>systems/astro/time/utc-days</property>
+						</product>
+						<sum>
+							<value>.000042037</value>
+							<product>
+								<value>0.0000000000034689</value>
+								<property>systems/astro/time/utc-days</property>
+							</product>
+						</sum>
+					</product>
+				</difference>
+			</function>
+			<output>systems/astro/earth/e</output><!--eccentricity of earth orbit-->
+		</fcs_function>
+
+		<fcs_function>
+			<function>
+				<sum>
+					<property>systems/astro/sun/M</property>
+					<product>
+						<property>systems/astro/earth/e</property>
+						<value>57.2957795131</value>
+						<sin>
+							<property>systems/astro/sun/M</property>
+						</sin>
+						<sum>
+							<value>1</value>
+							<product>
+								<property>systems/astro/earth/e</property>
+								<cos>
+									<property>systems/astro/sun/M</property>
+								</cos>
+							</product>
+						</sum>
+					</product>
+				</sum>
+			</function>
+			<output>systems/astro/earth/E</output><!--eccentric anomoly-->
+		</fcs_function>
+
+		<fcs_function>
+			<function>
+				<sum>
+					<product>
+						<sin>
+							<property>systems/astro/sun/M</property>
+						</sin>
+						<difference>
+							<value>1.914602</value>
+							<product>
+								<product>
+									<value>0.0000273785</value>
+									<property>systems/astro/time/utc-days</property>
+								</product>
+								<sum>
+									<value>0.004817</value>
+									<product>
+										<value>0.000014</value>
+										<property>systems/astro/time/utc-days</property>
+									</product>
+								</sum>
+							</product>
+						</difference>
+					</product>
+					<product>
+						<sin>
+							<product>
+								<value>2</value>
+								<property>systems/astro/sun/M</property>
+							</product>
+						</sin>
+						<difference>
+							<value>0.019993</value>
+							<product>
+								<value>0.000101</value>
+								<product>
+									<value>0.0000273785</value>
+									<property>systems/astro/time/utc-days</property>
+								</product>
+							</product>
+						</difference>
+					</product>
+					<product>
+						<sin>
+							<product>
+								<value>3</value>
+								<property>systems/astro/sun/M</property>
+							</product>
+						</sin>
+						<value>0.000289</value>
+					</product>
+				</sum>
+			</function>
+			<output>systems/astro/sun/C</output><!--equation of center-->
+		</fcs_function>
+
+	</channel>
+
+	<channel name="position-sun">
+
+		<fcs_function>
+			<function>
+				<sum>
+					<value>357.52911</value>
+					<product>
+						<product>
+							<value>0.0000273785</value>
+							<property>systems/astro/time/utc-days</property>
+						</product>
+						<difference>
+							<value>35999.05029</value>
+							<product>
+								<value>0.0000000042080767</value>
+								<property>systems/astro/time/utc-days</property>
+							</product>
+						</difference>
+					</product>
+				</sum>
+			</function>
+			<output>systems/astro/sun/M-init</output>
+		</fcs_function>
+
+		<fcs_function>
+			<function>
+				<difference>
+					<property>systems/astro/sun/M-init</property>
+					<product>
+						<integer>
+							<quotient>
+								<property>systems/astro/sun/M-init</property>
+								<value>360</value>
+							</quotient>
+						</integer>
+						<value>360</value>
+					</product>
+				</difference>
+			</function>
+			<output>systems/astro/sun/M-corr</output>
+		</fcs_function>
+
+		<switch>
+			<default value="systems/astro/sun/M-init"/>
+				<test value="-systems/astro/sun/M-corr">
+					systems/astro/sun/M-init LT 0
+				</test>
+				<test value="systems/astro/sun/M-corr">
+					systems/astro/sun/M-init GT 360
+				</test>
+			<output>systems/astro/sun/M</output><!--mean anomoly-->
+		</switch>
+
+		<fcs_function>
+			<function>
+				<sum>
+					<property>systems/astro/sun/M</property>
+					<property>systems/astro/sun/C</property>
+				</sum>
+			</function>
+			<output>systems/astro/sun/ta</output><!--true anomoly-->
+		</fcs_function>
+
+		<fcs_function>
+			<function>
+				<sum>
+					<value>280.46646</value>
+					<product>
+						<product>
+							<value>0.0000273785</value>
+							<property>systems/astro/time/utc-days</property>
+						</product>
+						<sum>
+							<value>36000.76983</value>
+							<product>
+								<value>0.0000000083011612</value>
+								<property>systems/astro/time/utc-days</property>
+							</product>
+						</sum>
+					</product>
+				</sum>
+			</function>
+			<output>systems/astro/sun/mean-longitude-init</output>
+		</fcs_function>
+
+		<fcs_function>
+			<function>
+				<difference>
+					<property>systems/astro/sun/mean-longitude-init</property>
+					<product>
+						<integer>
+							<quotient>
+								<property>systems/astro/sun/mean-longitude-init</property>
+								<value>360</value>
+							</quotient>
+						</integer>
+						<value>360</value>
+					</product>
+				</difference>
+			</function>
+			<output>systems/astro/sun/mean-longitude-corr</output>
+		</fcs_function>
+
+		<switch>
+			<default value="systems/astro/sun/mean-longitude-init"/>
+				<test value="-systems/astro/sun/mean-longitude-corr">
+					systems/astro/sun/M-init LT 0
+				</test>
+				<test value="systems/astro/sun/mean-longitude-corr">
+					systems/astro/sun/M-init GT 360
+				</test>
+			<output>systems/astro/sun/mean-longitude</output><!--mean longitude-->
+		</switch>
+
+		<fcs_function>
+			<function>
+				<sum>
+					<property>systems/astro/sun/mean-longitude</property>
+					<property>systems/astro/sun/C</property>
+				</sum>
+			</function>
+			<output>systems/astro/sun/ecliptical-longitude</output><!--true longitude-->
+		</fcs_function>
+
+		<fcs_function>
+			<function>
+				<quotient>
+					<product>
+						<value>1.000001018</value>
+						<difference>
+							<value>1</value>
+							<product>
+								<property>systems/astro/earth/e</property>
+								<property>systems/astro/earth/e</property>
+							</product>
+						</difference>
+					</product>
+					<sum>
+						<value>1</value>
+						<product>
+							<property>systems/astro/earth/e</property>
+							<cos>
+								<product>
+									<value>0.0174532925</value>
+									<property>systems/astro/sun/ta</property>
+								</product>
+							</cos>
+						</product>
+					</sum>
+				</quotient>
+			</function>
+			<output>systems/astro/sun/R</output><!--distance to sun in AUs-->
+		</fcs_function>
+
+		<fcs_function>
+			<function>
+				<difference>
+					<property>systems/astro/sun/ecliptical-longitude</property>
+					<value>0.00569</value>
+					<product>
+						<value>0.00478</value>
+						<sin>
+							<product>
+								<value>0.0174532925</value>
+								<difference>
+									<value>125.04</value>
+									<product>
+										<value>1934.136</value>
+										<product>
+											<value>0.0000273785</value>
+											<property>systems/astro/time/utc-days</property>
+										</product>
+									</product>
+								</difference>
+							</product>
+						</sin>
+					</product>
+				</difference>
+			</function>
+			<output>systems/astro/sun/apparent-longitude</output>
+		</fcs_function>
+
+		<fcs_function>
+			<function>
+				<product>
+					<cos>
+						<product>
+							<value>0.0174532925</value>
+							<property>systems/astro/earth/o</property>
+						</product>
+					</cos>
+					<sin>
+						<product>
+							<value>0.0174532925</value>
+							<property>systems/astro/sun/apparent-longitude</property>
+						</product>
+					</sin>
+				</product>
+			</function>
+			<output>systems/astro/sun/RAy</output>
+		</fcs_function>
+
+		<fcs_function>
+			<function>
+				<product>
+					<cos>
+						<product>
+							<value>0.0174532925</value>
+							<property>systems/astro/sun/apparent-longitude</property>
+						</product>
+					</cos>
+				</product>
+			</function>
+			<output>systems/astro/sun/RAx</output>
+		</fcs_function>
+
+		<fcs_function>
+			<function>
+				<sum>
+					<value>180</value>
+					<product>
+						<value>57.2957795131</value>
+						<atan>
+							<quotient>
+								<property>systems/astro/sun/RAy</property>
+								<property>systems/astro/sun/RAx</property>
+							</quotient>
+						</atan>
+					</product>
+				</sum>
+			</function>
+			<output>systems/astro/sun/right-ascension</output><!--right ascension-->
+		</fcs_function>
+
+		<fcs_function>
+			<function>
+				<difference>
+					<value>360</value>
+					<property>systems/astro/sun/right-ascension</property>
+				</difference>
+			</function>
+			<output>systems/astro/sun/SHA</output><!--sidereal hour angle-->
+		</fcs_function>
+
+		<fcs_function>
+			<function>
+				<difference>
+					<property>systems/astro/time/GMST</property>
+					<property>systems/astro/sun/right-ascension</property>
+				</difference>
+			</function>
+			<output>systems/astro/sun/GHA1</output>
+		</fcs_function>
+
+		<fcs_function>
+			<function>
+				<sum>
+					<value>360</value>
+					<property>systems/astro/sun/GHA1</property>
+				</sum>
+			</function>
+			<output>systems/astro/sun/GHA2</output>
+		</fcs_function>
+
+		<switch>
+			<default value="systems/astro/sun/GHA1"/>
+				<test value="systems/astro/sun/GHA2">
+					systems/astro/sun/GHA1 LT 0
+				</test>
+			<output>systems/astro/sun/GHA</output><!--Greenwich hour angle-->
+		</switch>
+
+		<fcs_function>
+			<function>
+				<product>
+					<value>57.2957795131</value>
+					<asin>
+						<product>
+							<sin>
+								<product>
+									<value>0.0174532925</value>
+									<property>systems/astro/earth/o</property>
+								</product>
+							</sin>
+							<sin>
+								<product>
+									<value>0.0174532925</value>
+									<property>systems/astro/sun/apparent-longitude</property>
+								</product>
+							</sin>
+						</product>
+					</asin>
+				</product>
+			</function>
+			<output>systems/astro/sun/declination</output>
+		</fcs_function>
+
+		<fcs_function>
+			<function>
+				<difference>
+					<property>systems/astro/time/local-sidereal-time</property>
+					<property>systems/astro/sun/right-ascension</property>
+				</difference>
+			</function>
+			<output>systems/astro/sun/hour-angle</output>
+		</fcs_function>
+
+		<fcs_function>
+			<function>
+				<product>
+					<value>57.2957795131</value>
+					<asin>
+						<sum>
+							<product>
+								<sin>
+									<product>
+										<value>0.0174532925</value>
+										<property>/position/latitude-deg</property>
+									</product>
+								</sin>
+								<sin>
+									<product>
+										<value>0.0174532925</value>
+										<property>systems/astro/sun/declination</property>
+									</product>
+								</sin>
+							</product>
+							<product>
+								<cos>
+									<product>
+										<value>0.0174532925</value>
+										<property>/position/latitude-deg</property>
+									</product>
+								</cos>
+								<cos>
+									<product>
+										<value>0.0174532925</value>
+										<property>systems/astro/sun/declination</property>
+									</product>
+								</cos>
+								<cos>
+									<product>
+										<value>0.0174532925</value>
+										<property>systems/astro/sun/hour-angle</property>
+									</product>
+								</cos>
+							</product>
+						</sum>
+					</asin>
+				</product>
+			</function>
+			<output>systems/astro/sun/altitude</output>
+		</fcs_function>
+
+		<fcs_function>
+			<function>
+				<product>
+					<value>57.2957795131</value>
+					<difference>
+						<sin>
+							<product>
+								<value>0.0174532925</value>
+								<property>systems/astro/sun/declination</property>
+							</product>
+						</sin>
+						<product>
+							<sin>
+								<product>
+									<value>0.0174532925</value>
+									<property>/position/latitude-deg</property>
+								</product>
+							</sin>
+							<sin>
+								<product>
+									<value>0.0174532925</value>
+									<property>systems/astro/sun/altitude</property>
+								</product>
+							</sin>
+						</product>
+					</difference>
+				</product>
+			</function>
+			<output>systems/astro/sun/AZx</output>
+		</fcs_function>
+
+		<fcs_function>
+			<function>
+				<product>
+					<value>57.2957795131</value>
+					<product>
+						<value>-1</value>
+						<cos>
+							<product>
+								<value>0.0174532925</value>
+								<property>systems/astro/sun/declination</property>
+							</product>
+						</cos>
+					</product>
+					<cos>
+						<product>
+							<value>0.0174532925</value>
+							<property>/position/latitude-deg</property>
+						</product>
+					</cos>
+					<sin>
+						<product>
+							<value>0.0174532925</value>
+							<property>systems/astro/sun/hour-angle</property>
+						</product>
+					</sin>
+				</product>
+			</function>
+			<output>systems/astro/sun/AZy</output>
+		</fcs_function>
+
+		<fcs_function>
+			<function>
+				<product>
+					<value>57.2957795131</value>
+					<atan>
+						<quotient>
+							<product>
+								<value>0.0174532925</value>
+								<property>systems/astro/sun/AZy</property>
+							</product>
+							<product>
+								<value>0.0174532925</value>
+								<property>systems/astro/sun/AZx</property>
+							</product>
+						</quotient>
+					</atan>
+				</product>
+			</function>
+			<output>systems/astro/sun/azimuth-init</output>
+		</fcs_function>
+
+		<fcs_function>
+			<function>
+				<sum>
+					<value>180</value>
+					<property>systems/astro/sun/azimuth-init</property>
+				</sum>
+			</function>
+			<output>systems/astro/sun/azimuth1</output>
+		</fcs_function>
+
+		<fcs_function>
+			<function>
+				<sum>
+					<value>360</value>
+					<property>systems/astro/sun/azimuth-init</property>
+				</sum>
+			</function>
+			<output>systems/astro/sun/azimuth2</output>
+		</fcs_function>
+
+		<switch>
+			<default value="systems/astro/sun/azimuth-init"/>
+				<test value="systems/astro/sun/azimuth1">
+					systems/astro/sun/AZx LT 0
+				</test>
+				<test logic="AND" value="systems/astro/sun/azimuth2">
+					systems/astro/sun/AZx GT 0
+					systems/astro/sun/AZy LT 0
+				</test>
+			<output>systems/astro/sun/azimuth</output>
+		</switch>
+
+	</channel>
+
+	<channel name="position-capella">
+
+<!--Capella: RA = 80.723296 deg, 1.408887 rad ; Dec = 46.129911 deg, .805119 rad-->
+
+		<fcs_function>
+			<function>
+				<difference>
+					<value>360</value>
+					<property>systems/astro/capella/right-ascension</property>
+				</difference>
+			</function>
+			<output>systems/astro/capella/SHA</output><!--sidereal hour angle-->
+		</fcs_function>
+
+		<fcs_function>
+			<function>
+				<difference>
+					<property>systems/astro/time/GMST</property>
+					<property>systems/astro/capella/right-ascension</property>
+				</difference>
+			</function>
+			<output>systems/astro/capella/GHA1</output>
+		</fcs_function>
+
+		<fcs_function>
+			<function>
+				<sum>
+					<value>360</value>
+					<property>systems/astro/capella/GHA1</property>
+				</sum>
+			</function>
+			<output>systems/astro/capella/GHA2</output>
+		</fcs_function>
+
+		<switch>
+			<default value="systems/astro/capella/GHA1"/>
+				<test value="systems/astro/capella/GHA2">
+					systems/astro/capella/GHA1 LT 0
+				</test>
+			<output>systems/astro/capella/GHA</output><!--Greenwich hour angle-->
+		</switch>
+
+		<fcs_function>
+			<function>
+				<sum>
+					<property>systems/astro/capella/GHA</property>
+					<property>/position/longitude-deg</property>
+				</sum>
+			</function>
+			<output>systems/astro/capella/LHA1</output>
+		</fcs_function>
+
+		<fcs_function>
+			<function>
+				<sum>
+					<value>360</value>
+					<property>systems/astro/capella/LHA1</property>
+				</sum>
+			</function>
+			<output>systems/astro/capella/LHA2</output>
+		</fcs_function>
+
+		<switch>
+			<default value="systems/astro/capella/LHA1"/>
+				<test value="systems/astro/capella/LHA2">
+					systems/astro/capella/LHA1 LT 0
+				</test>
+			<output>systems/astro/capella/LHA</output><!--local hour angle-->
+		</switch>
+
+		<fcs_function>
+			<function>
+				<product>
+					<value>57.2957795131</value>
+					<asin>
+						<sum>
+							<product>
+								<sin>
+									<product>
+										<value>0.0174532925</value>
+										<property>/position/latitude-deg</property>
+									</product>
+								</sin>
+								<sin>
+									<product>
+										<value>0.0174532925</value>
+										<property>systems/astro/capella/declination</property>
+									</product>
+								</sin>
+							</product>
+							<product>
+								<cos>
+									<product>
+										<value>0.0174532925</value>
+										<property>/position/latitude-deg</property>
+									</product>
+								</cos>
+								<cos>
+									<product>
+										<value>0.0174532925</value>
+										<property>systems/astro/capella/declination</property>
+									</product>
+								</cos>
+								<cos>
+									<product>
+										<value>0.0174532925</value>
+										<property>systems/astro/capella/LHA</property>
+									</product>
+								</cos>
+							</product>
+						</sum>
+					</asin>
+				</product>
+			</function>
+			<output>systems/astro/capella/altitude</output>
+		</fcs_function>
+
+		<fcs_function>
+			<function>
+				<product>
+					<value>57.2957795131</value>
+					<difference>
+						<sin>
+							<product>
+								<value>0.0174532925</value>
+								<property>systems/astro/capella/declination</property>
+							</product>
+						</sin>
+						<product>
+							<sin>
+								<product>
+									<value>0.0174532925</value>
+									<property>/position/latitude-deg</property>
+								</product>
+							</sin>
+							<sin>
+								<product>
+									<value>0.0174532925</value>
+									<property>systems/astro/capella/altitude</property>
+								</product>
+							</sin>
+						</product>
+					</difference>
+				</product>
+			</function>
+			<output>systems/astro/capella/AZx</output>
+		</fcs_function>
+
+		<fcs_function>
+			<function>
+				<product>
+					<value>57.2957795131</value>
+					<product>
+						<value>-1</value>
+						<cos>
+							<product>
+								<value>0.0174532925</value>
+								<property>systems/astro/capella/declination</property>
+							</product>
+						</cos>
+					</product>
+					<cos>
+						<product>
+							<value>0.0174532925</value>
+							<property>/position/latitude-deg</property>
+						</product>
+					</cos>
+					<sin>
+						<product>
+							<value>0.0174532925</value>
+							<property>systems/astro/capella/LHA</property>
+						</product>
+					</sin>
+				</product>
+			</function>
+			<output>systems/astro/capella/AZy</output>
+		</fcs_function>
+
+		<fcs_function>
+			<function>
+				<product>
+					<value>57.2957795131</value>
+					<atan>
+						<quotient>
+							<product>
+								<value>0.0174532925</value>
+								<property>systems/astro/capella/AZy</property>
+							</product>
+							<product>
+								<value>0.0174532925</value>
+								<property>systems/astro/capella/AZx</property>
+							</product>
+						</quotient>
+					</atan>
+				</product>
+			</function>
+			<output>systems/astro/capella/azimuth-init</output>
+		</fcs_function>
+
+		<fcs_function>
+			<function>
+				<sum>
+					<value>180</value>
+					<property>systems/astro/capella/azimuth-init</property>
+				</sum>
+			</function>
+			<output>systems/astro/capella/azimuth1</output>
+		</fcs_function>
+
+		<fcs_function>
+			<function>
+				<sum>
+					<value>360</value>
+					<property>systems/astro/capella/azimuth-init</property>
+				</sum>
+			</function>
+			<output>systems/astro/capella/azimuth2</output>
+		</fcs_function>
+
+		<switch>
+			<default value="systems/astro/capella/azimuth-init"/>
+				<test value="systems/astro/capella/azimuth1">
+					systems/astro/capella/AZx LT 0
+				</test>
+				<test logic="AND" value="systems/astro/capella/azimuth2">
+					systems/astro/capella/AZx GT 0
+					systems/astro/capella/AZy LT 0
+				</test>
+			<output>systems/astro/capella/azimuth</output>
+		</switch>
+
+	</channel>
+
+	<channel name="position-canopus">
+
+<!--Canopus: RA = 98.1295785 deg; Dec = -52.806605 deg-->
+
+		<fcs_function>
+			<function>
+				<difference>
+					<value>360</value>
+					<property>systems/astro/canopus/right-ascension</property>
+				</difference>
+			</function>
+			<output>systems/astro/canopus/SHA</output><!--sidereal hour angle-->
+		</fcs_function>
+
+		<fcs_function>
+			<function>
+				<difference>
+					<property>systems/astro/time/GMST</property>
+					<property>systems/astro/canopus/right-ascension</property>
+				</difference>
+			</function>
+			<output>systems/astro/canopus/GHA1</output>
+		</fcs_function>
+
+		<fcs_function>
+			<function>
+				<sum>
+					<value>360</value>
+					<property>systems/astro/canopus/GHA1</property>
+				</sum>
+			</function>
+			<output>systems/astro/canopus/GHA2</output>
+		</fcs_function>
+
+		<switch>
+			<default value="systems/astro/canopus/GHA1"/>
+				<test value="systems/astro/canopus/GHA2">
+					systems/astro/canopus/GHA1 LT 0
+				</test>
+			<output>systems/astro/canopus/GHA</output><!--Greenwich hour angle-->
+		</switch>
+
+		<fcs_function>
+			<function>
+				<sum>
+					<property>systems/astro/canopus/GHA</property>
+					<property>/position/longitude-deg</property>
+				</sum>
+			</function>
+			<output>systems/astro/canopus/LHA1</output>
+		</fcs_function>
+
+		<fcs_function>
+			<function>
+				<sum>
+					<value>360</value>
+					<property>systems/astro/canopus/LHA1</property>
+				</sum>
+			</function>
+			<output>systems/astro/canopus/LHA2</output>
+		</fcs_function>
+
+		<switch>
+			<default value="systems/astro/canopus/LHA1"/>
+				<test value="systems/astro/canopus/LHA2">
+					systems/astro/canopus/LHA1 LT 0
+				</test>
+			<output>systems/astro/canopus/LHA</output><!--local hour angle-->
+		</switch>
+
+		<fcs_function>
+			<function>
+				<product>
+					<value>57.2957795131</value>
+					<asin>
+						<sum>
+							<product>
+								<sin>
+									<product>
+										<value>0.0174532925</value>
+										<property>/position/latitude-deg</property>
+									</product>
+								</sin>
+								<sin>
+									<product>
+										<value>0.0174532925</value>
+										<property>systems/astro/canopus/declination</property>
+									</product>
+								</sin>
+							</product>
+							<product>
+								<cos>
+									<product>
+										<value>0.0174532925</value>
+										<property>/position/latitude-deg</property>
+									</product>
+								</cos>
+								<cos>
+									<product>
+										<value>0.0174532925</value>
+										<property>systems/astro/canopus/declination</property>
+									</product>
+								</cos>
+								<cos>
+									<product>
+										<value>0.0174532925</value>
+										<property>systems/astro/canopus/LHA</property>
+									</product>
+								</cos>
+							</product>
+						</sum>
+					</asin>
+				</product>
+			</function>
+			<output>systems/astro/canopus/altitude</output>
+		</fcs_function>
+
+		<fcs_function>
+			<function>
+				<product>
+					<value>57.2957795131</value>
+					<difference>
+						<sin>
+							<product>
+								<value>0.0174532925</value>
+								<property>systems/astro/canopus/declination</property>
+							</product>
+						</sin>
+						<product>
+							<sin>
+								<product>
+									<value>0.0174532925</value>
+									<property>/position/latitude-deg</property>
+								</product>
+							</sin>
+							<sin>
+								<product>
+									<value>0.0174532925</value>
+									<property>systems/astro/canopus/altitude</property>
+								</product>
+							</sin>
+						</product>
+					</difference>
+				</product>
+			</function>
+			<output>systems/astro/canopus/AZx</output>
+		</fcs_function>
+
+		<fcs_function>
+			<function>
+				<product>
+					<value>57.2957795131</value>
+					<product>
+						<value>-1</value>
+						<cos>
+							<product>
+								<value>0.0174532925</value>
+								<property>systems/astro/canopus/declination</property>
+							</product>
+						</cos>
+					</product>
+					<cos>
+						<product>
+							<value>0.0174532925</value>
+							<property>/position/latitude-deg</property>
+						</product>
+					</cos>
+					<sin>
+						<product>
+							<value>0.0174532925</value>
+							<property>systems/astro/canopus/LHA</property>
+						</product>
+					</sin>
+				</product>
+			</function>
+			<output>systems/astro/canopus/AZy</output>
+		</fcs_function>
+
+		<fcs_function>
+			<function>
+				<product>
+					<value>57.2957795131</value>
+					<atan>
+						<quotient>
+							<product>
+								<value>0.0174532925</value>
+								<property>systems/astro/canopus/AZy</property>
+							</product>
+							<product>
+								<value>0.0174532925</value>
+								<property>systems/astro/canopus/AZx</property>
+							</product>
+						</quotient>
+					</atan>
+				</product>
+			</function>
+			<output>systems/astro/canopus/azimuth-init</output>
+		</fcs_function>
+
+		<fcs_function>
+			<function>
+				<sum>
+					<value>180</value>
+					<property>systems/astro/canopus/azimuth-init</property>
+				</sum>
+			</function>
+			<output>systems/astro/canopus/azimuth1</output>
+		</fcs_function>
+
+		<fcs_function>
+			<function>
+				<sum>
+					<value>360</value>
+					<property>systems/astro/canopus/azimuth-init</property>
+				</sum>
+			</function>
+			<output>systems/astro/canopus/azimuth2</output>
+		</fcs_function>
+
+		<switch>
+			<default value="systems/astro/canopus/azimuth-init"/>
+				<test value="systems/astro/canopus/azimuth1">
+					systems/astro/canopus/AZx LT 0
+				</test>
+				<test logic="AND" value="systems/astro/canopus/azimuth2">
+					systems/astro/canopus/AZx GT 0
+					systems/astro/canopus/AZy LT 0
+				</test>
+			<output>systems/astro/canopus/azimuth</output>
+		</switch>
+
+	</channel>
+
+	<channel name="tracking">
+
+		<switch>
+			<default value="0"/>
+				<test value="1">
+					systems/astro/sun/altitude GT 0
+				</test>
+				<test value="2">
+					systems/astro/capella/altitude GT 0
+				</test>
+				<test value="3">
+					systems/astro/canopus/altitude GT 0
+				</test>
+			<output>systems/astro/tracking/star</output>
+		</switch>
+
+		<switch>
+			<default value="0"/>
+				<test value="systems/astro/sun/GHA">
+					systems/astro/tracking/star EQ 1
+				</test>
+				<test value="systems/astro/capella/GHA">
+					systems/astro/tracking/star EQ 2
+				</test>
+				<test value="systems/astro/canopus/GHA">
+					systems/astro/tracking/star EQ 3
+				</test>
+			<output>systems/astro/tracking/GHA-dec</output>
+		</switch>
+
+		<fcs_function>
+			<function>
+				<integer>
+					<property>systems/astro/tracking/GHA-dec</property>
+				</integer>
+			</function>
+			<output>systems/astro/tracking/GHA-deg</output>
+		</fcs_function>
+
+		<fcs_function>
+			<function>
+				<product>
+					<value>60</value>
+					<difference>
+						<property>systems/astro/tracking/GHA-dec</property>
+						<property>systems/astro/tracking/GHA-deg</property>
+					</difference>
+				</product>
+			</function>
+			<output>systems/astro/tracking/GHA-min</output>
+		</fcs_function>
+
+		<switch>
+			<default value="0"/>
+				<test value="systems/astro/sun/SHA">
+					systems/astro/tracking/star EQ 1
+				</test>
+				<test value="systems/astro/capella/SHA">
+					systems/astro/tracking/star EQ 2
+				</test>
+				<test value="systems/astro/canopus/SHA">
+					systems/astro/tracking/star EQ 3
+				</test>
+			<output>systems/astro/tracking/SHA-dec</output>
+		</switch>
+
+		<fcs_function>
+			<function>
+				<integer>
+					<property>systems/astro/tracking/SHA-dec</property>
+				</integer>
+			</function>
+			<output>systems/astro/tracking/SHA-deg</output>
+		</fcs_function>
+
+		<fcs_function>
+			<function>
+				<product>
+					<value>60</value>
+					<difference>
+						<property>systems/astro/tracking/SHA-dec</property>
+						<property>systems/astro/tracking/SHA-deg</property>
+					</difference>
+				</product>
+			</function>
+			<output>systems/astro/tracking/SHA-min</output>
+		</fcs_function>
+
+		<switch>
+			<default value="0"/>
+				<test value="systems/astro/sun/altitude">
+					systems/astro/tracking/star EQ 1
+				</test>
+				<test value="systems/astro/capella/altitude">
+					systems/astro/tracking/star EQ 2
+				</test>
+				<test value="systems/astro/canopus/altitude">
+					systems/astro/tracking/star EQ 3
+				</test>
+			<output>systems/astro/tracking/altitude-dec</output>
+		</switch>
+
+		<fcs_function>
+			<function>
+				<integer>
+					<property>systems/astro/tracking/altitude-dec</property>
+				</integer>
+			</function>
+			<output>systems/astro/tracking/altitude-deg</output>
+		</fcs_function>
+
+		<fcs_function>
+			<function>
+				<product>
+					<value>60</value>
+					<difference>
+						<property>systems/astro/tracking/altitude-dec</property>
+						<property>systems/astro/tracking/altitude-deg</property>
+					</difference>
+				</product>
+			</function>
+			<output>systems/astro/tracking/altitude-min</output>
+		</fcs_function>
+
+		<switch>
+			<default value="0"/>
+				<test value="systems/astro/sun/azimuth">
+					systems/astro/tracking/star EQ 1
+				</test>
+				<test value="systems/astro/capella/azimuth">
+					systems/astro/tracking/star EQ 2
+				</test>
+				<test value="systems/astro/canopus/azimuth">
+					systems/astro/tracking/star EQ 3
+				</test>
+			<output>systems/astro/tracking/azimuth-deg</output>
+		</switch>
+
+		<!--fcs_function>
+			<function>
+				<integer>
+					<property>systems/astro/tracking/azimuth-dec</property>
+				</integer>
+			</function>
+			<output>systems/astro/tracking/azimuth-deg</output>
+		</fcs_function>
+
+		<fcs_function>
+			<function>
+				<product>
+					<value>60</value>
+					<difference>
+						<property>systems/astro/tracking/azimuth-dec</property>
+						<property>systems/astro/tracking/azimuth-deg</property>
+					</difference>
+				</product>
+			</function>
+			<output>systems/astro/tracking/azimuth-min</output>
+		</fcs_function-->
+
+		<switch>
+			<default value="0"/>
+				<test value="systems/astro/sun/declination">
+					systems/astro/tracking/star EQ 1
+				</test>
+				<test value="systems/astro/capella/declination">
+					systems/astro/tracking/star EQ 2
+				</test>
+				<test value="systems/astro/canopus/declination">
+					systems/astro/tracking/star EQ 3
+				</test>
+			<output>systems/astro/tracking/declination-dec1</output>
+		</switch>
+
+		<switch>
+			<default value="systems/astro/tracking/declination-dec1"/>
+				<test value="-systems/astro/tracking/declination-dec1">
+					systems/astro/tracking/declination-dec1 LT 0
+				</test>
+			<output>systems/astro/tracking/declination-dec</output>
+		</switch>
+
+		<fcs_function>
+			<function>
+				<integer>
+					<property>systems/astro/tracking/declination-dec</property>
+				</integer>
+			</function>
+			<output>systems/astro/tracking/declination-deg</output>
+		</fcs_function>
+
+		<fcs_function>
+			<function>
+				<product>
+					<value>60</value>
+					<difference>
+						<property>systems/astro/tracking/declination-dec</property>
+						<property>systems/astro/tracking/declination-deg</property>
+					</difference>
+				</product>
+			</function>
+			<output>systems/astro/tracking/declination-min</output>
+		</fcs_function>
+
+	</channel>
+
+</system>

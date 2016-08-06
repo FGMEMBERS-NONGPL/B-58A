@@ -1,0 +1,55 @@
+<?xml version="1.1"?>
+
+<!--B-58A low altitude warning-->
+
+<PropertyList>
+
+<path>warning-light.ac</path>
+
+<params>
+	<height>/position/altitude-agl-ft</height>
+	<set>/instrumentation/radar-altimeter/set</set>
+</params>
+
+<!--METAL EFFECTS-->
+
+<animation>
+	<type>shader</type>
+	<shader>chrome</shader>
+	<texture>metal-shader.png</texture>
+		<object-name>screws</object-name>
+</animation>
+
+<!--INDICATE LOW ALTITUDE WARNING-->
+
+<animation>
+	<type>select</type>
+	<object-name>warn-off</object-name>
+	<condition>
+		<greater-than>
+			<property>/position/altitude-agl-ft</property>
+			<property>/instrumentation/radar-altimeter/set</property>
+		</greater-than>
+	</condition>
+</animation> 
+
+<animation>
+	<type>select</type>
+	<object-name>warn-on</object-name>
+	<condition>
+		<less-than-equals>
+			<property>/position/altitude-agl-ft</property>
+			<property>/instrumentation/radar-altimeter/set</property>
+		</less-than-equals>
+	</condition>
+</animation> 
+
+<!--  LoD  -->
+
+<animation> 
+	<type>range</type>
+	<min-m>0</min-m>
+	<max-m>5</max-m>
+</animation>
+
+</PropertyList>

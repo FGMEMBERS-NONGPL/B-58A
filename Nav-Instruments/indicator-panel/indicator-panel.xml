@@ -1,0 +1,480 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--B-58A navigator's indicator panel-->
+
+<PropertyList>
+
+  <path>indicator-panel.ac</path>
+
+<!--LIGHTING-->
+
+<animation>
+	<type>material</type>
+	<object-name>panel-face</object-name>
+	<emission>
+		<red>0.15</red>
+		<green>0.15</green>
+		<blue>0.15</blue>
+		<factor-prop>/controls/lighting/panel</factor-prop>
+	</emission>
+</animation>    
+
+<animation>
+	<type>material</type>
+	<object-name>indicator</object-name>
+	<emission>
+		<red>0.75</red>
+		<green>0.50</green>
+		<blue>0.50</blue>
+		<factor-prop>/controls/lighting/panel</factor-prop>
+	</emission>
+</animation>
+
+<!--METAL EFFECTS-->
+
+<animation>
+	<type>shader</type>
+	<shader>chrome</shader>
+	<texture>metal-shader.png</texture>
+		<object-name>dzus-fasteners</object-name>
+</animation>
+
+<!--ALTITUDE ABOVE TERRAIN INDICATOR-->
+
+<animation>
+	<type>rotate</type>
+	<object-name>aat-needle</object-name>
+	<property>/position/altitude-agl-ft</property>
+	<interpolation>
+		<entry><ind>0</ind><dep>0</dep></entry>
+		<entry><ind>80000</ind><dep>120</dep></entry>
+	</interpolation>
+	<center>
+		<x-m>0</x-m>
+		<y-m>-0.138780</y-m>
+		<z-m>0.134151</z-m>
+	</center>
+	<axis>
+		<x>-1</x>
+	</axis>
+</animation>
+
+<!--TIME TO GO INDICATOR-->
+
+<animation>
+	<type>rotate</type>
+	<object-name>ttg-needle1</object-name>
+	<property>/systems/nav-computer/time-to-go-sec</property>
+	<interpolation>
+		<entry><ind>0</ind><dep>0</dep></entry>
+		<entry><ind>300</ind><dep>120</dep></entry>
+	</interpolation>
+	<center>
+		<x-m>0</x-m>
+		<y-m>-0.060937</y-m>
+		<z-m>0.207060</z-m>
+	</center>
+	<axis>
+		<x>-1</x>
+	</axis>
+</animation>
+
+<animation>
+	<type>rotate</type>
+	<object-name>ttg-needle2</object-name>
+	<property>/systems/nav-computer/time-to-go-sec</property>
+	<interpolation>
+		<entry><ind>0</ind><dep>0</dep></entry>
+		<entry><ind>30</ind><dep>120</dep></entry>
+	</interpolation>
+	<center>
+		<x-m>0</x-m>
+		<y-m>-0.060937</y-m>
+		<z-m>0.207060</z-m>
+	</center>
+	<axis>
+		<x>-1</x>
+	</axis>
+</animation>
+
+<!--TRUE AIRPSEED INDICATOR-->
+
+<animation>
+	<type>rotate</type>
+	<object-name>tas-needle</object-name>
+	<property>/velocities/true-airspeed-kt</property>
+	<interpolation>
+		<entry><ind>0</ind><dep>0</dep></entry>
+		<entry><ind>200</ind><dep>0</dep></entry>
+		<entry><ind>1400</ind><dep>120</dep></entry>
+	</interpolation>
+	<center>
+		<x-m>0</x-m>
+		<y-m>-0.060174</y-m>
+		<z-m>0.126970</z-m>
+	</center>
+	<axis>
+		<x>-1</x>
+	</axis>
+</animation>
+
+<!--DISTANCE TO DESTINATION-->
+
+<animation>
+	<type>textranslate</type>
+	<object-name>d-1</object-name>
+	<property>/systems/nav-computer/distance-nm</property>
+	<factor>0.0001</factor>
+	<step>1000</step>
+	<scroll>1</scroll>
+	<axis>
+		<y>-1</y>
+	</axis>
+</animation>
+
+<animation>
+	<type>textranslate</type>
+	<object-name>d-2</object-name>
+	<property>/systems/nav-computer/distance-nm</property>
+	<factor>0.001</factor>
+	<step>100</step>
+	<scroll>1</scroll>
+	<axis>
+		<y>-1</y>
+	</axis>
+</animation>
+
+<animation>
+	<type>textranslate</type>
+	<object-name>d-3</object-name>
+	<property>/systems/nav-computer/distance-nm</property>
+	<factor>0.01</factor>
+	<step>10</step>
+	<scroll>1</scroll>
+	<axis>
+		<y>-1</y>
+	</axis>
+</animation>
+
+<animation>
+	<type>textranslate</type>
+	<object-name>d-4</object-name>
+	<property>/systems/nav-computer/distance-nm</property>
+	<factor>0.1</factor>
+	<step>1</step>
+	<scroll>1</scroll>
+	<axis>
+		<y>-1</y>
+	</axis>
+</animation>
+
+<!--ALTITUDE ABOVE SEA LEVEL-->
+
+<animation>
+	<type>textranslate</type>
+	<object-name>asl-1</object-name>
+	<property>/position/altitude-ft</property>
+	<factor>0.00001</factor>
+	<step>10000</step>
+	<scroll>1</scroll>
+	<axis>
+		<y>-1</y>
+	</axis>
+</animation>
+
+<animation>
+	<type>textranslate</type>
+	<object-name>asl-2</object-name>
+	<property>/position/altitude-ft</property>
+	<factor>0.0001</factor>
+	<step>1000</step>
+	<scroll>1</scroll>
+	<axis>
+		<y>-1</y>
+	</axis>
+</animation>
+
+<animation>
+	<type>textranslate</type>
+	<object-name>asl-3</object-name>
+	<property>/position/altitude-ft</property>
+	<factor>0.001</factor>
+	<step>100</step>
+	<scroll>1</scroll>
+	<axis>
+		<y>-1</y>
+	</axis>
+</animation>
+
+<animation>
+	<type>textranslate</type>
+	<object-name>asl-4</object-name>
+	<property>/position/altitude-ft</property>
+	<factor>0.01</factor>
+	<step>10</step>
+	<scroll>1</scroll>
+	<axis>
+		<y>-1</y>
+	</axis>
+</animation>
+
+<animation>
+	<type>textranslate</type>
+	<object-name>asl-5</object-name>
+	<property>/position/altitude-ft</property>
+	<factor>0.1</factor>
+	<step>1</step>
+	<scroll>1</scroll>
+	<axis>
+		<y>-1</y>
+	</axis>
+</animation>
+
+<!--TRUE HEADING-->
+
+<animation>
+	<type>textranslate</type>
+	<object-name>th-1</object-name>
+	<property>/orientation/heading-deg</property>
+	<factor>0.001</factor>
+	<step>100</step>
+	<scroll>1</scroll>
+	<axis>
+		<y>-1</y>
+	</axis>
+</animation>
+
+<animation>
+	<type>textranslate</type>
+	<object-name>th-2</object-name>
+	<property>/orientation/heading-deg</property>
+	<factor>0.01</factor>
+	<step>10</step>
+	<scroll>1</scroll>
+	<axis>
+		<y>-1</y>
+	</axis>
+</animation>
+
+<animation>
+	<type>textranslate</type>
+	<object-name>th-3</object-name>
+	<property>/orientation/heading-deg</property>
+	<factor>0.1</factor>
+	<step>1</step>
+	<scroll>1</scroll>
+	<axis>
+		<y>-1</y>
+	</axis>
+</animation>
+
+<animation>
+	<type>textranslate</type>
+	<object-name>th-4</object-name>
+	<property>/orientation/heading-deg</property>
+	<factor>1.0</factor>
+	<step>.1</step>
+	<scroll>1</scroll>
+	<axis>
+		<y>-1</y>
+	</axis>
+</animation>
+
+<!--GROUND TRACK-->
+
+<animation>
+	<type>textranslate</type>
+	<object-name>gt-1</object-name>
+	<property>/orientation/track-magnetic-deg</property>
+	<factor>0.001</factor>
+	<step>100</step>
+	<scroll>1</scroll>
+	<axis>
+		<y>-1</y>
+	</axis>
+</animation>
+
+<animation>
+	<type>textranslate</type>
+	<object-name>gt-2</object-name>
+	<property>/orientation/track-magnetic-deg</property>
+	<factor>0.01</factor>
+	<step>10</step>
+	<scroll>1</scroll>
+	<axis>
+		<y>-1</y>
+	</axis>
+</animation>
+
+<animation>
+	<type>textranslate</type>
+	<object-name>gt-3</object-name>
+	<property>/orientation/track-magnetic-deg</property>
+	<factor>0.1</factor>
+	<step>1</step>
+	<scroll>1</scroll>
+	<axis>
+		<y>-1</y>
+	</axis>
+</animation>
+
+<animation>
+	<type>textranslate</type>
+	<object-name>gt-4</object-name>
+	<property>/orientation/track-magnetic-deg</property>
+	<factor>1.0</factor>
+	<step>.1</step>
+	<scroll>1</scroll>
+	<axis>
+		<y>-1</y>
+	</axis>
+</animation>
+
+<!--GROUND SPEED-->
+
+<animation>
+	<type>textranslate</type>
+	<object-name>gs-1</object-name>
+	<property>/velocities/groundspeed-kt</property>
+	<factor>0.0001</factor>
+	<step>1000</step>
+	<scroll>1</scroll>
+	<axis>
+		<y>-1</y>
+	</axis>
+</animation>
+
+<animation>
+	<type>textranslate</type>
+	<object-name>gs-2</object-name>
+	<property>/velocities/groundspeed-kt</property>
+	<factor>0.001</factor>
+	<step>100</step>
+	<scroll>1</scroll>
+	<axis>
+		<y>-1</y>
+	</axis>
+</animation>
+
+<animation>
+	<type>textranslate</type>
+	<object-name>gs-3</object-name>
+	<property>/velocities/groundspeed-kt</property>
+	<factor>0.01</factor>
+	<step>10</step>
+	<scroll>1</scroll>
+	<axis>
+		<y>-1</y>
+	</axis>
+</animation>
+
+<animation>
+	<type>textranslate</type>
+	<object-name>gs-4</object-name>
+	<property>/velocities/groundspeed-kt</property>
+	<factor>0.1</factor>
+	<step>1</step>
+	<scroll>1</scroll>
+	<axis>
+		<y>-1</y>
+	</axis>
+</animation>
+
+<!--STAR ALTITUDE-->
+
+<animation>
+	<type>textranslate</type>
+	<object-name>sa-1</object-name>
+	<property>/systems/astrotracker/altitude-deg</property>
+	<factor>0.01</factor>
+	<step>10</step>
+	<scroll>1</scroll>
+	<axis>
+		<y>-1</y>
+	</axis>
+</animation>
+
+<animation>
+	<type>textranslate</type>
+	<object-name>sa-2</object-name>
+	<property>/systems/astrotracker/altitude-deg</property>
+	<factor>0.1</factor>
+	<step>1</step>
+	<scroll>1</scroll>
+	<axis>
+		<y>-1</y>
+	</axis>
+</animation>
+
+<animation>
+	<type>textranslate</type>
+	<object-name>sa-3</object-name>
+	<property>/systems/astrotracker/altitude-min</property>
+	<factor>0.01</factor>
+	<step>10</step>
+	<scroll>1</scroll>
+	<axis>
+		<y>-1</y>
+	</axis>
+</animation>
+
+<animation>
+	<type>textranslate</type>
+	<object-name>sa-4</object-name>
+	<property>/systems/astrotracker/altitude-min</property>
+	<factor>0.1</factor>
+	<step>1</step>
+	<scroll>1</scroll>
+	<axis>
+		<y>-1</y>
+	</axis>
+</animation>
+
+<!--STAR AZIMUTH-->
+
+<animation>
+	<type>textranslate</type>
+	<object-name>saz-1</object-name>
+	<property>/systems/astrotracker/azimuth-deg</property>
+	<factor>0.001</factor>
+	<step>100</step>
+	<scroll>1</scroll>
+	<axis>
+		<y>-1</y>
+	</axis>
+</animation>
+
+<animation>
+	<type>textranslate</type>
+	<object-name>saz-2</object-name>
+	<property>/systems/astrotracker/azimuth-deg</property>
+	<factor>0.01</factor>
+	<step>10</step>
+	<scroll>1</scroll>
+	<axis>
+		<y>-1</y>
+	</axis>
+</animation>
+
+<animation>
+	<type>textranslate</type>
+	<object-name>saz-3</object-name>
+	<property>/systems/astrotracker/azimuth-deg</property>
+	<factor>0.1</factor>
+	<step>1</step>
+	<scroll>1</scroll>
+	<axis>
+		<y>-1</y>
+	</axis>
+</animation>
+
+<!--LoD-->
+
+<animation> 
+	<type>range</type>
+	<min-m>0</min-m>
+	<max-m>5</max-m>
+</animation>
+
+</PropertyList>
+

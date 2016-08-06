@@ -1,0 +1,350 @@
+<?xml version="1.0"?>
+
+<system name="nav-computer">
+
+	<channel name="present-position-conversions">
+	<!--converts present-position latitude and longitude minutes from decimal to whole number + decimal-->
+
+		<fcs_function>
+			<function>
+				<product>
+					<difference>
+						<property>/position/latitude-deg</property>
+						<integer>
+							<property>/position/latitude-deg</property>
+						</integer>
+					</difference>
+					<value>60</value>
+				</product>
+			</function>
+			<output>/position/latitude-min</output>
+		</fcs_function>
+
+		<switch>
+			<default value="/position/latitude-deg"/>
+				<test value="-/position/latitude-deg">
+					/position/latitude-deg LT 0
+				</test>
+			<output>/position/latitude-degrees</output>
+		</switch>
+
+		<switch>
+			<default value="/position/latitude-min"/>
+				<test value="-/position/latitude-min">
+					/position/latitude-min LT 0
+				</test>
+			<output>/position/latitude-minutes</output>
+		</switch>
+
+		<fcs_function>
+			<function>
+				<product>
+					<difference>
+						<property>/position/longitude-deg</property>
+						<integer>
+							<property>/position/longitude-deg</property>
+						</integer>
+					</difference>
+					<value>60</value>
+				</product>
+			</function>
+			<output>/position/longitude-min</output>
+		</fcs_function>
+
+		<switch>
+			<default value="/position/longitude-deg"/>
+				<test value="-/position/longitude-deg">
+					/position/longitude-deg LT 0
+				</test>
+			<output>/position/longitude-degrees</output>
+		</switch>
+
+		<switch>
+			<default value="/position/longitude-min"/>
+				<test value="-/position/longitude-min">
+					/position/longitude-min LT 0
+				</test>
+			<output>/position/longitude-minutes</output>
+		</switch>
+
+	</channel>
+
+	<channel name="destination-conversions">
+	<!--converts destination latitude and longitude from degrees + minutes to decimal degrees-->
+
+		<fcs_function>
+			<function>
+				<quotient>
+					<property>systems/nav-computer/dest-lat-min</property>
+					<value>60</value>
+				</quotient>
+			</function>
+			<output>systems/nav-computer/dest-lat-min-dec</output>
+		</fcs_function>
+
+		<fcs_function>
+			<function>
+				<sum>
+					<property>systems/nav-computer/dest-lat-min-dec</property>
+					<property>systems/nav-computer/dest-lat-deg</property>
+				</sum>
+			</function>
+			<output>systems/nav-computer/dest-lat</output>
+		</fcs_function>
+
+		<switch>
+			<default value="systems/nav-computer/dest-lat-deg"/>
+				<test value="-systems/nav-computer/dest-lat-deg">
+					systems/nav-computer/dest-lat-deg LT 0
+				</test>
+			<output>systems/nav-computer/destination-latitude-degrees</output>
+		</switch>
+
+		<switch>
+			<default value="systems/nav-computer/dest-lat-min"/>
+				<test value="-systems/nav-computer/dest-lat-min">
+					systems/nav-computer/dest-lat-deg LT 0
+				</test>
+			<output>systems/nav-computer/destination-latitude-minutes</output>
+		</switch>
+
+		<fcs_function>
+			<function>
+				<quotient>
+					<property>systems/nav-computer/dest-lon-min</property>
+					<value>60</value>
+				</quotient>
+			</function>
+			<output>systems/nav-computer/dest-lon-min-dec</output>
+		</fcs_function>
+
+		<fcs_function>
+			<function>
+				<sum>
+					<property>systems/nav-computer/dest-lon-min-dec</property>
+					<property>systems/nav-computer/dest-lon-deg</property>
+				</sum>
+			</function>
+			<output>systems/nav-computer/dest-lon</output>
+		</fcs_function>
+
+		<switch>
+			<default value="systems/nav-computer/dest-lon-deg"/>
+				<test value="-systems/nav-computer/dest-lon-deg">
+					systems/nav-computer/dest-lon-deg LT 0
+				</test>
+			<output>systems/nav-computer/destination-longitude-degrees</output>
+		</switch>
+
+		<switch>
+			<default value="systems/nav-computer/dest-lon-min"/>
+				<test value="-systems/nav-computer/dest-lon-min">
+					systems/nav-computer/dest-lon-min LT 0
+				</test>
+			<output>systems/nav-computer/destination-longitude-minutes</output>
+		</switch>
+
+	</channel>
+
+	<channel name="distance">
+	<!--calculates great circle distance between present position and destination-->
+
+		<fcs_function>
+			<function>
+				<acos>
+					<sum>
+						<product>
+							<sin>
+								<product>
+									<value>0.0174532925</value>
+									<property>/position/latitude-deg</property>
+								</product>
+							</sin>
+							<sin>
+								<product>
+									<value>0.0174532925</value>
+									<property>systems/nav-computer/dest-lat</property>
+								</product>
+							</sin>
+						</product>
+						<product>
+							<cos>
+								<product>
+									<value>0.0174532925</value>
+									<property>/position/latitude-deg</property>
+								</product>
+							</cos>
+							<cos>
+								<product>
+									<value>0.0174532925</value>
+									<property>systems/nav-computer/dest-lat</property>
+								</product>
+							</cos>
+							<cos>
+								<difference>
+									<product>
+										<value>0.0174532925</value>
+										<property>/position/longitude-deg</property>
+									</product>
+									<product>
+										<value>0.0174532925</value>
+										<property>systems/nav-computer/dest-lon</property>
+									</product>
+								</difference>
+							</cos>
+						</product>
+					</sum>
+				</acos>
+			</function>
+			<output>systems/nav-computer/distance-rad</output>
+		</fcs_function>
+
+		<fcs_function>
+			<function>
+				<product>
+					<value>3437.7467707849</value>
+					<property>systems/nav-computer/distance-rad</property>
+				</product>
+			</function>
+			<output>systems/nav-computer/distance-nm</output>
+		</fcs_function>
+
+	</channel>
+
+	<channel name="desired-true-track">
+	<!--calculates desired true track (course) between present position and destination-->
+
+		<fcs_function>
+			<function>
+				<atan2>
+					<product>
+						<sin>
+							<difference>
+								<product>
+									<value>0.0174532925</value>
+									<property>systems/nav-computer/dest-lon</property>
+								</product>
+								<product>
+									<value>0.0174532925</value>
+									<property>/position/longitude-deg</property>
+								</product>
+							</difference>
+						</sin>
+						<cos>
+							<product>
+								<value>0.0174532925</value>
+								<property>systems/nav-computer/dest-lat</property>
+							</product>
+						</cos>
+					</product>
+					<difference>
+						<product>
+							<cos>
+								<product>
+									<value>0.0174532925</value>
+									<property>/position/latitude-deg</property>
+								</product>
+							</cos>
+							<sin>
+								<product>
+									<value>0.0174532925</value>
+									<property>systems/nav-computer/dest-lat</property>
+								</product>
+							</sin>
+						</product>
+						<product>
+							<sin>
+								<product>
+									<value>0.0174532925</value>
+									<property>/position/latitude-deg</property>
+								</product>
+							</sin>
+							<cos>
+								<product>
+									<value>0.0174532925</value>
+									<property>systems/nav-computer/dest-lat</property>
+								</product>
+							</cos>
+							<cos>
+								<difference>
+									<product>
+										<value>0.0174532925</value>
+										<property>systems/nav-computer/dest-lon</property>
+									</product>
+									<product>
+										<value>0.0174532925</value>
+										<property>/position/longitude-deg</property>
+									</product>
+								</difference>
+							</cos>
+						</product>
+					</difference>
+				</atan2>
+			</function>
+			<output>systems/nav-computer/desired-track-rad-init1</output>
+		</fcs_function>
+
+		<fcs_function>
+			<function>
+				<sum>
+					<value>360</value>
+					<product>
+						<value>57.2957795131</value>
+						<property>systems/nav-computer/desired-track-rad-init1</property>
+					</product>
+				</sum>
+			</function>
+			<output>systems/nav-computer/desired-track-deg-init</output>
+		</fcs_function>
+
+		<fcs_function>
+			<function>
+				<difference>
+					<property>systems/nav-computer/desired-track-deg-init</property>
+					<product>
+						<integer>
+							<quotient>
+								<property>systems/nav-computer/desired-track-deg-init</property>
+								<value>360</value>
+							</quotient>
+						</integer>
+						<value>360</value>
+					</product>
+				</difference>
+			</function>
+			<output>systems/nav-computer/desired-track-deg</output>
+		</fcs_function>
+
+	</channel>
+
+	<channel name="time-to-go">
+
+		<fcs_function>
+			<function>
+				<quotient>
+					<property>systems/nav-computer/distance-nm</property>
+					<quotient>
+						<property>/velocities/groundspeed-kt</property>
+						<value>60</value>
+					</quotient>
+				</quotient>
+			</function>
+			<output>systems/nav-computer/time-to-go-min</output>
+		</fcs_function>
+
+		<fcs_function>
+			<function>
+				<product>
+					<property>systems/nav-computer/time-to-go-min</property>
+					<value>60</value>
+				</product>
+			</function>
+			<clipto>
+				<min>0</min>
+				<max>300</max>
+			</clipto>
+			<output>systems/nav-computer/time-to-go-sec</output>
+		</fcs_function>
+	</channel>
+
+</system>

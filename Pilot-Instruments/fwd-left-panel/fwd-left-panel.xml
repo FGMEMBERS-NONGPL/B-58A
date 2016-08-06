@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--B-58A Forward Left Panel-->
+
+<PropertyList>
+
+  <path>fwd-left-panel.ac</path>
+
+<!--LIGHTING-->
+
+<animation>
+	<type>material</type>
+	<object-name>face1</object-name>
+	<object-name>face2</object-name>
+	<emission>
+		<red>0.30</red>
+		<green>0.30</green>
+		<blue>0.30</blue>
+		<factor-prop>/controls/lighting/left-panel</factor-prop>
+	</emission>
+</animation>    
+
+<animation>
+	<type>material</type>
+	<object-name>warn-texture</object-name>
+	<emission>
+		<red>0.30</red>
+		<green>0.30</green>
+		<blue>0.30</blue>
+		<factor-prop>/controls/lighting/left-panel</factor-prop>
+	</emission>
+</animation>
+
+<!--METAL EFFECTS-->
+
+<animation>
+	<type>shader</type>
+	<shader>chrome</shader>
+	<texture>metal-shader.png</texture>
+		<object-name>base</object-name>
+		<object-name>nws-switch</object-name>
+		<object-name>shaft</object-name>
+		<object-name>switch</object-name>
+</animation>
+
+<!--DRAG CHUTE DEPLOY AND JETTISON-->
+
+<animation>
+	<type>translate</type>
+	<object-name>drag-chute-handle</object-name>
+	<property>/fdm/jsbsim/systems/drag-chute/deploy</property>
+	<factor>.02</factor>
+	<axis>
+		<x>1</x>
+	</axis>
+</animation>
+
+<animation>
+	<type>translate</type>
+	<object-name>drag-chute-handle</object-name>
+	<property>/fdm/jsbsim/systems/drag-chute/jettison</property>
+	<factor>.02</factor>
+	<axis>
+		<x>1</x>
+	</axis>
+</animation>
+
+<animation>
+	<type>rotate</type>
+	<object-name>drag-chute-handle</object-name>
+	<property>/fdm/jsbsim/systems/drag/chute-jettison</property>
+	<factor>90</factor>
+	<center>
+		<x-m>0</x-m>
+		<y-m>0.051324</y-m>
+		<z-m>0.013914</z-m>
+	</center>
+	<axis>
+		<x>-1</x>
+	</axis>
+</animation>
+
+<!--GEAR HANDLE-->
+
+<animation>
+	<type>rotate</type>
+	<object-name>gear-handle</object-name>
+	<property>fdm/jsbsim/gear/gear-cmd-norm</property>
+	<interpolation>
+		<entry><ind>1</ind><dep>20</dep></entry>
+		<entry><ind>0</ind><dep>-20</dep></entry> 
+	</interpolation>  
+	<axis>
+		<x1-m>-0.098048</x1-m>
+		<y1-m>0.023719</y1-m>
+		<z1-m>-0.085066</z1-m>
+		<x2-m>-0.067621</x2-m>
+		<y2-m>0.074358</y2-m>
+		<z2-m>-0.085066</z2-m>
+	</axis>
+</animation>
+
+<animation>
+	<type>select</type>
+	<object-name>light-off</object-name>
+	<condition>
+		<or>
+			<equals>
+				<property>/gear/gear[0]/position-norm</property>
+				<value>0</value>
+			</equals>
+			<equals>
+				<property>/gear/gear[0]/position-norm</property>
+				<value>1</value>
+			</equals>
+		</or>
+   	</condition>
+</animation>
+
+<animation>
+	<type>select</type>
+	<object-name>light-on</object-name>
+	<condition>
+		<and>
+			<not-equals>
+				<property>/gear/gear[0]/position-norm</property>
+				<value>0</value>
+			</not-equals>
+			<not-equals>
+				<property>/gear/gear[0]/position-norm</property>
+				<value>1.0</value>
+			</not-equals>
+		</and>
+   	</condition>
+</animation>
+
+<!--GEAR INDICATORS-->
+
+<!--Nose-->
+
+<animation>
+    <type>select</type>
+    <object-name>nose-off</object-name>
+    <condition>
+      <not-equals>
+        <property>gear/gear[0]/position-norm</property>
+	    <value>1</value>
+      </not-equals>
+    </condition>
+</animation>
+
+<animation>
+    <type>select</type>
+    <object-name>nose-on</object-name>
+    <condition>
+      <equals>
+        <property>gear/gear[0]/position-norm</property>
+	   <value>1</value>
+      </equals>
+    </condition>
+</animation>
+
+<!--Left-->
+
+<animation>
+	<type>select</type>
+	<object-name>left-main-off</object-name>
+	<condition>
+		<not-equals>
+			<property>gear/gear[1]/position-norm</property>
+			<value>1</value>
+		</not-equals>
+	</condition>
+</animation>
+
+<animation>
+	<type>select</type>
+	<object-name>left-main-on</object-name>
+	<condition>
+		<equals>
+			<property>gear/gear[1]/position-norm</property>
+			<value>1</value>
+		</equals>
+	</condition>
+</animation>
+
+<!--Right-->
+
+<animation>
+	<type>select</type>
+	<object-name>right-main-off</object-name>
+	<condition>
+		<not-equals>
+			<property>gear/gear[2]/position-norm</property>
+			<value>1</value>
+		</not-equals>
+	</condition>
+</animation>
+
+<animation>
+	<type>select</type>
+	<object-name>right-main-on</object-name>
+	<condition>
+		<equals>
+			<property>gear/gear[2]/position-norm</property>
+			<value>1</value>
+		</equals>
+	</condition>
+</animation>
+
+<!--NOSE WHEEL STEERING SWITCH-->
+
+<animation>
+	<type>pick</type>
+	<object-name>taxi</object-name>
+	<visible>false</visible>
+	<interval-sec>0.1</interval-sec>
+	<action>
+		<button>0</button>
+		<binding>
+			<command>property-adjust</command>
+			<property>/fdm/jsbsim/systems/NWS/ratio</property>
+			<step>.8</step>
+			<min>.2</min>
+			<max>1</max>
+			<wrap>0</wrap>
+		</binding>
+	</action>
+</animation>   
+
+<animation>
+	<type>pick</type>
+	<object-name>to+land</object-name>
+	<visible>false</visible>
+	<interval-sec>0.1</interval-sec>
+	<action>
+		<button>0</button>
+		<binding>
+			<command>property-adjust</command>
+			<property>/fdm/jsbsim/systems/NWS/ratio</property>
+			<step>-.8</step>
+			<min>.2</min>
+			<max>1</max>
+			<wrap>0</wrap>
+		</binding>
+	</action>
+</animation>   
+
+<animation>
+	<type>rotate</type>
+	<object-name>nws-shaft</object-name>
+	<property>/fdm/jsbsim/systems/NWS/ratio</property>
+	<interpolation>
+		<entry><ind>1</ind><dep>0</dep></entry>
+		<entry><ind>.2</ind><dep>60</dep></entry> 
+	</interpolation>  
+	<center>
+		<x-m>-0.001906</x-m>
+		<y-m>0</y-m>
+		<z-m>0.003088</z-m>
+	</center>
+	<axis>
+		<y>1</y>
+	</axis>
+</animation>
+
+<!--  LoD  -->
+
+<animation> 
+	<type>range</type>
+	<min-m>0</min-m>
+	<max-m>5</max-m>
+</animation>
+
+</PropertyList>

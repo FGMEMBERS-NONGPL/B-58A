@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--B-58A engine pressure ratio indicator-->
+
+<PropertyList>
+
+  <path>epr.ac</path>
+
+<!--LIGHTING-->
+
+<animation>
+	<type>material</type>
+	<object-name>indicator</object-name>
+	<emission>
+		<red>0.75</red>
+		<green>0.25</green>
+		<blue>0.25</blue>
+		<factor-prop>/controls/lighting/right-panel</factor-prop>
+	</emission>
+</animation>    
+
+<!--ROTATIONS-->
+
+<animation>
+	<type>rotate</type>
+	<object-name>needle1</object-name>
+	<property>/engines/engine[2]/epr</property>
+	<interpolation>
+		<entry><ind>0</ind><dep>0</dep></entry>
+		<entry><ind>4.0</ind><dep>360</dep></entry>
+	</interpolation>
+	<axis>
+      <x>-1</x>
+	</axis>
+</animation>
+
+<animation>
+	<type>rotate</type>
+	<object-name>needle2</object-name>
+	<property>/engines/engine[2]/epr</property>
+	<factor>3600</factor>
+	<center>
+		<x-m>0</x-m>
+		<y-m>0.013580</y-m>
+		<z-m>0</z-m>
+	</center>
+	<axis>
+		<x>-1</x>
+	</axis>
+</animation>
+
+<!--LoD-->
+
+<animation> 
+	<type>range</type>
+	<min-m>0</min-m>
+	<max-m>5</max-m>
+</animation>
+
+</PropertyList>
+

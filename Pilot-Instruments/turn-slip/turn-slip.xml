@@ -1,0 +1,78 @@
+<?xml version="1.1"?>
+
+<!--B-58A turn-slip indicator-->
+
+<PropertyList>
+
+<path>turn-slip.ac</path>
+
+<!--LIGHTING-->
+
+<animation>
+	<type>material</type>
+	<object-name>indicator</object-name>
+	<emission>
+		<red>0.75</red>
+		<green>0.25</green>
+		<blue>0.25</blue>
+		<factor-prop>/controls/lighting/left-panel</factor-prop>
+	</emission> 
+</animation> 
+
+<!--METAL EFFECTS-->
+
+<animation>
+	<type>shader</type>
+	<shader>chrome</shader>
+	<texture>metal-shader.png</texture>
+		<object-name>screws</object-name>
+</animation>
+
+<!--ROTATIONS-->
+
+<animation>
+	<type>rotate</type>
+	<object-name>slip-ball</object-name>
+	<property>instrumentation/slip-skid-ball/indicated-slip-skid</property>
+	<interpolation>
+		<entry><ind>-2.5</ind><dep>-25</dep></entry>
+		<entry><ind>2.5</ind><dep>25</dep></entry>
+	</interpolation>
+	<min>-2.5</min>
+	<max>2.5</max>
+	<center>
+		<x-m>0</x-m>
+		<y-m>0</y-m>
+		<z-m>0.056634</z-m>
+	</center>
+	<axis>
+		<x>-1</x>
+	</axis>
+</animation>
+
+<animation>
+	<type>rotate</type>
+	<object-name>needle</object-name>
+	<property>orientation/yaw-rate-degps</property>
+	<interpolation>
+		<entry><ind>-1.5</ind><dep>-15</dep></entry>
+		<entry><ind>1.5</ind><dep>15</dep></entry>
+	</interpolation>
+	<min>-1.5</min>
+	<max>1.5</max>
+	<axis>
+		<x>-1</x>
+	</axis>
+</animation>
+
+<!-- LoD-->
+
+<animation>
+	<type>range</type>
+	<min-m>0</min-m>
+	<max-m>5</max-m>
+</animation>
+
+</PropertyList>
+
+

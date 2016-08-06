@@ -1,0 +1,498 @@
+<?xml version="1.1"?>
+
+<PropertyList>
+
+<sim>
+
+	<description>Convair B-58A Hustler</description>
+	<author>J R Lucariny (original 3D) and Kent Esbenshade (3D revisions and panel, FDM)</author>
+	<status>ALPHA</status>
+	<flight-model>jsb</flight-model>
+	<aero>B-58A-jsbsim</aero>
+	<startup>
+		<splash-texture>Aircraft/B-58A/B-58A-splash.png</splash-texture>
+	</startup>
+
+
+	<view n="0">
+		<internal archive="y">true</internal>
+		<config>
+			<pitch-offset-deg>-17.5</pitch-offset-deg>
+			<!--x-offset-m archive="y">-.108571</x-offset-m--><!-- right/left -->
+			<x-offset-m archive="y">0</x-offset-m><!-- right/left -->
+			<!--y-offset-m archive="y">0</y-offset-m--><!-- up/down -->
+			<y-offset-m archive="y">0.75</y-offset-m><!-- up/down -->
+			<z-offset-m archive="y">-7.7</z-offset-m><!-- aft/fore -->
+		</config>
+	</view>
+
+        <view n="100">
+                <name>Nav View</name>
+                <type>lookfrom</type>
+                <internal archive="y">true</internal>
+                <config>
+                        <from-model type="bool">true</from-model>
+                        <from-model-idx type="int">0</from-model-idx>
+                        <ground-level-nearplane-m type="double">0.05f</ground-level-nearplane-m>
+                        <default-field-of-view-deg type="double">55.0</default-field-of-view-deg>
+                        <default-pitch-deg type="double">0</default-pitch-deg>
+                        <default-heading-deg type="double">0</default-heading-deg>
+                        <front-direction-deg type="double">0</front-direction-deg>
+                        <front-left-direction-deg type="double">45</front-left-direction-deg>
+                        <left-direction-deg type="double">90</left-direction-deg>
+                        <back-left-direction-deg type="double">135</back-left-direction-deg>
+                        <back-direction-deg type="double">180</back-direction-deg>
+                        <back-right-direction-deg type="double">225</back-right-direction-deg>
+                        <right-direction-deg type="double">270</right-direction-deg>
+                        <front-right-direction-deg type="double">315</front-right-direction-deg>
+                        <x-offset-m archive="y">0.0</x-offset-m>
+                        <y-offset-m archive="y">0.92</y-offset-m>
+                        <z-offset-m archive="y">-4.45</z-offset-m>
+                        <pitch-offset-deg>0</pitch-offset-deg>
+                        <default-field-of-view-deg>55</default-field-of-view-deg>
+                </config>
+        </view>
+
+	<chase-distance-m>-35</chase-distance-m>
+  
+	<model>
+		<path>Aircraft/B-58A/Models/B-58A.xml</path>
+	</model>
+
+	<sound>
+		<path>Aircraft/B-58A/Effects-Submodels/B-58A-sound.xml</path> 
+	</sound>
+
+	<submodels> 
+		<serviceable type="bool">true</serviceable>
+		<path>Aircraft/B-58A/Effects-Submodels/submodels.xml</path>
+	</submodels>
+
+	<systems>
+		<autopilot>
+			<path>Aircraft/B-58A/Systems/autopilot.xml</path>
+		</autopilot>
+	</systems>
+
+	<help>
+
+		<key>
+			<name>c (lower case c) </name>
+			<desc>OPEN/CLOSE HATCHES</desc>
+		</key>
+
+		<key>
+			<name>d (lower case d) </name>
+			<desc>DEPLOY DRAG CHUTE</desc>
+		</key>
+
+		<key>
+			<name>j (lower case j) </name>
+			<desc>JETTISON DRAG CHUTE</desc>
+		</key>
+
+		<key>
+			<name>D (shift-d)</name>
+			<desc>DUMP FUEL</desc>
+		</key>
+
+		<key>
+			<name>R (shift-r)</name>
+			<desc>ADD FUEL</desc>
+		</key>
+
+		<key>
+			<name>Control-i</name>
+			<desc>AUTO ILS ENGAGE (automatically disengaged below 50 feet AGL)</desc>
+		</key>
+
+		<key>
+			<name>Control-o or Joystick Trigger</name>
+			<desc>AUTOPILOT DISENGAGE, all axes</desc>
+		</key>
+
+	<line> </line>
+	<line>TAXI:</line>
+	<line>Nose Wheel Steering Switch--Taxi</line>
+	<line> </line>
+	<line>TAKEOFF:</line>
+	<line>Nose Wheel Steering Switch--Takeoff and Land</line>
+	<line>Parking brake--release (Shift-b)</line>
+	<line>Throttle--afterburner</line>
+	<line>200 KIAS--rotate to 14 degrees of pitch</line>
+	<line>Below 300 KIAS--raise gear (elevator trim will adjust nose-up as the gear comes up)</line>
+	<line>300-350 KIAS--reduce throttle to mil </line>
+	<line></line>
+	<line>LANDING:</line>
+	<line>Gear--extend (below 300 KIAS)</line>
+	<line>250 KIAS--penetrate/begin published approach</line>
+	<line>Speed--indicated final approach speed</line>
+	<line></line>
+	<line>PATTERN:</line>
+	<line>Gear--extend (below 300 KIAS)</line>
+	<line>250 KIAS--downwind</line>
+	<line>Indicated final approach speed + 20 kts (220 KIAS min)--base</line>
+	<line>Speed--indicated final approach speed</line>
+	<line> </line>
+	<line>TOUCH-DOWN AND ROLL-OUT:</line>
+	<line>Drag Chute--deploy (lower case d)</line>
+   <line> </line>
+   <line>CLICKABLE PANEL:  Hit Ctrl-C to see hot spots</line>
+
+	</help>
+
+</sim>
+
+<autopilot>
+	<locks>
+		<auto-ils type="bool">false</auto-ils>
+		<mach-alt-hold type="bool">false</mach-alt-hold>
+		<mach-hold type="bool">false</mach-hold>
+		<mach-hold-off type="bool">true</mach-hold-off>
+		<heading-constant-hold type="bool">false</heading-constant-hold>
+		<heading-hold-off type="bool">true</heading-hold-off>
+		<heading-nav-hold type="bool">false</heading-nav-hold>
+		<pitch-hold type="bool">false</pitch-hold>
+		<roll type="string"></roll>
+		<roll-hold type="bool">false</roll-hold>
+	</locks>
+	<settings>
+		<flight-control-power type="bool">false</flight-control-power>
+		<pitch-buffer type="double">0</pitch-buffer>
+		<roll-buffer type="double">0</roll-buffer>
+		<target-altitude-ft type="double">0</target-altitude-ft>
+		<target-mach type="double">.5</target-mach>
+		<target-mach-decimal type="double">0</target-mach-decimal>
+		<target-mach-kias type="double">0</target-mach-kias>
+	</settings>
+</autopilot>
+
+<consumables>
+	<fuel>
+		<tank n="0">
+			<density-ppg archive="y">6.48</density-ppg>
+		</tank>
+		<tank n="1">
+			<density-ppg archive="y">6.48</density-ppg>
+		</tank>
+		<tank n="2">
+			<density-ppg archive="y">6.48</density-ppg>
+		</tank>
+		<tank n="3">
+			<density-ppg archive="y">6.48</density-ppg>
+		</tank>
+		<tank n="4">
+			<density-ppg archive="y">6.48</density-ppg>
+		</tank>
+		<tank n="5">
+			<density-ppg archive="y">6.48</density-ppg>
+		</tank>
+	</fuel>
+</consumables>
+
+<controls>
+	<command-mach type="double">0</command-mach>
+	<flight>
+		<elevator-trim>0</elevator-trim>
+	</flight>
+	<lighting>
+		<left-panel>.1</left-panel>
+		<right-panel>.1</right-panel>
+	</lighting>
+	<gear>
+		<brake-parking type="double">1</brake-parking>
+	</gear>
+</controls>
+
+<engines>
+	<engine n="0">
+		<running>true</running>
+	</engine>
+	<engine n="1">
+		<running>true</running>
+	</engine>
+	<engine n="2">
+		<running>true</running>
+	</engine>
+	<engine n="3">
+		<running>true</running>
+	</engine>
+</engines>
+
+<fdm>
+	<jsbsim>
+		<fcs>
+			<aileron-ratio>1</aileron-ratio>
+		</fcs>
+		<systems>
+			<hatch>
+				<command type="double">0</command>
+				<position type="double">0</position>
+			</hatch>
+			<fuel-dump>
+				<activate type="double">0</activate>
+			</fuel-dump>
+			<NWS>
+				<engaged type="double">0</engaged>
+				<ratio type="double">.2</ratio>
+			</NWS>
+			<view>
+				<initialize type="double">0</initialize>
+			</view>
+		</systems>
+	</jsbsim>
+</fdm>
+
+<input>
+
+	<joysticks>
+		<js>
+			<button n="0">
+			<desc>disengage autopilot-all axes</desc>
+			<binding>
+				<command>property-assign</command>
+				<property>/autopilot/locks/roll-hold</property>
+				<value type="bool">false</value>
+				<condition>
+					<and>
+						<property>/autopilot/settings/flight-control-power</property>
+						<not>
+							<property>/gear/gear[1]/wow</property>
+						</not>
+					</and>
+				</condition>
+			</binding>
+			<binding>
+				<command>property-assign</command>
+				<property>/autopilot/locks/pitch-hold</property>
+				<value type="bool">false</value>
+				<condition>
+					<and>
+						<property>/autopilot/settings/flight-control-power</property>
+						<not>
+							<property>/gear/gear[1]/wow</property>
+						</not>
+					</and>
+				</condition>
+			</binding>
+			<binding>
+				<command>property-assign</command>
+				<property>/autopilot/locks/auto-ils</property>
+				<value type="bool">false</value>
+				<condition>
+					<and>
+						<property>/autopilot/settings/flight-control-power</property>
+						<not>
+							<property>/gear/gear[1]/wow</property>
+						</not>
+					</and>
+				</condition>
+			</binding>
+			</button>
+		</js>
+	</joysticks>
+
+	<keyboard>
+
+
+		<key n="9">
+			<name>Control-i</name>
+			<desc>toggle auto ils</desc>
+			<binding>
+			<command>property-toggle</command>
+			<property>/autopilot/locks/auto-ils</property>
+			<condition>
+				<and>
+					<property>/autopilot/settings/flight-control-power</property>
+						<not>
+							<property>/gear/gear[1]/wow</property>
+						</not>
+						<greater-than>
+							<property>/position/altitude-agl-ft</property>
+							<value>50</value>
+						</greater-than>
+					</and>
+				</condition>
+			</binding>
+		</key>
+
+		<key n="15">
+			<name>Control-o</name>
+			<desc>disengage autopilot-all axes</desc>
+			<binding>
+				<command>property-assign</command>
+				<property>/autopilot/locks/auto-ils</property>
+				<value type="bool">false</value>
+				<condition>
+					<and>
+						<property>/autopilot/settings/flight-control-power</property>
+						<not>
+							<property>/gear/gear[1]/wow</property>
+						</not>
+					</and>
+				</condition>
+			</binding>
+			<binding>
+				<command>property-assign</command>
+				<property>/autopilot/locks/roll-hold</property>
+				<value type="bool">false</value>
+				<condition>
+					<and>
+						<property>/autopilot/settings/flight-control-power</property>
+						<not>
+							<property>/gear/gear[1]/wow</property>
+						</not>
+					</and>
+				</condition>
+			</binding>
+		</key>
+
+	<key n="32">
+		<name>space bar</name>
+		<desc>jettison pod</desc>
+		<binding>
+			<command>property-assign</command>
+			<property>fdm/jsbsim/systems/pod/release</property>
+			<value>1</value>
+		</binding>
+		<binding>
+			<command>property-assign</command>
+			<property>consumables/fuel/tank[4]/level-gal_us</property>
+			<value>0</value>
+		</binding>
+		<binding>
+			<command>property-assign</command>
+			<property>consumables/fuel/tank[5]/level-gal_us</property>
+			<value>0</value>
+		</binding>
+	</key>
+
+    <key n="68">
+     <name>D (shift-d)</name>
+     <desc>dump fuel</desc>
+     <binding>
+       <command>property-toggle</command>
+       <property>/fdm/jsbsim/propulsion/fuel_dump</property>
+     </binding>
+    </key>
+
+    <key n="82">
+     <name>R (shift-r)</name>
+     <desc>add fuel</desc>
+     <binding>
+       <command>property-toggle</command>
+       <property>/fdm/jsbsim/propulsion/refuel</property>
+     </binding>
+    </key>
+
+    <key n="99">
+     <name>c</name>
+     <desc>toggle hatches</desc>
+     <binding>
+       <command>property-toggle</command>
+       <property>fdm/jsbsim/systems/hatch/command</property>
+     </binding>
+    </key>
+
+   <key n="100">
+     <name>d</name>
+     <desc>deploy drag chute</desc>
+     <binding>
+      <command>property-assign</command>
+      <property>fdm/jsbsim/systems/drag-chute/deploy</property>
+      <value type="int">1</value>
+     </binding>
+    </key>
+
+    <key n="106">
+      <name>j</name>
+      <desc>jettison drag chute</desc>
+      <binding>
+       <command>property-assign</command>
+       <property>/fdm/jsbsim/systems/drag-chute/deploy</property>
+       <value type="int">0</value>
+      </binding>
+      <binding>
+       <command>property-assign</command>
+       <property>/fdm/jsbsim/systems/drag-chute/jettison</property>
+       <value type="int">1</value>
+      </binding>
+    </key>
+
+	</keyboard>
+</input>
+
+<instrumentation>
+	<accelerometer>
+		<G type="double">0</G>
+		<G-min type="double">1</G-min>
+		<G-max type="double">1</G-max>
+		<reset type="int">0</reset>
+	</accelerometer>
+	<cdi>
+		<course-set type="double">0</course-set>
+	</cdi>
+	<clock>
+		<timer>
+			<min-reset type="double">0</min-reset>
+			<sequence type="double">0</sequence>
+			<start-minutes type="double">0</start-minutes>
+			<elapsed-minutes type="double">0</elapsed-minutes>
+			<rt-reset type="double">0</rt-reset>
+			<run-time type="double">0</run-time>
+			<run type="double">0</run>
+			<zero type="double">1</zero>
+			<start-time type="double">0</start-time>
+			<st-set type="double">0</st-set>
+			<elapsed-time type="double">0</elapsed-time>
+			<set-time type="double">0</set-time>
+		</timer>
+	</clock>
+	<marker-beacon>
+		<volume type="double" archive="y">0.25</volume>
+	</marker-beacon>
+	<radar-altimeter>
+		<set>200</set>
+	</radar-altimeter>
+</instrumentation>
+
+<nasal>
+	<B-58A>
+		<file>Aircraft/B-58A/Nasal/astrotracker.nas</file>
+		<file>Aircraft/B-58A/Nasal/B-58A-instruments.nas</file>
+		<file>Aircraft/B-58A/Nasal/nav-computer.nas</file>
+		<file>Aircraft/B-58A/Nasal/takeoff-trim.nas</file>
+		<file>Aircraft/B-58A/Nasal/tire-rotation.nas</file>
+	</B-58A>
+</nasal>
+
+<orientation>
+	<track-deg>0</track-deg>
+</orientation>
+
+<systems>
+	<nav-computer>
+		<desired-track-deg type="double">0</desired-track-deg>
+		<destination>
+			<latitude-deg type="double">38</latitude-deg>
+			<latitude-min type="double">38.4</latitude-min>
+			<longitude-deg type="double">-076</longitude-deg>
+			<longitude-min type="double">-52.2</longitude-min>
+		</destination>
+		<position>
+			<latitude-deg type="double">0</latitude-deg>
+			<latitude-min type="double">0</latitude-min>
+			<longitude-deg type="double">0</longitude-deg>
+			<longitude-min type="double">0</longitude-min>
+		</position>
+	</nav-computer>
+</systems>
+
+<velocities>
+	<approach-speed-kt type="double">0</approach-speed-kt>
+	<groundspeed-kt type="double">0</groundspeed-kt>
+	<reference-airspeed-kt type="double">0</reference-airspeed-kt>
+</velocities>
+
+</PropertyList>
+

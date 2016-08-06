@@ -1,0 +1,41 @@
+<?xml version = '1.0' ?>
+<PropertyList>
+
+<!-- Drag Chute -->
+
+<path>drag-chute.ac</path>
+
+<animation>
+	<type>select</type>
+	<object-name>drag-chute</object-name>
+	<condition>
+		<equals>
+			<property>fdm/jsbsim/systems/drag-chute/deploy</property>
+			<value>1</value>
+		</equals>
+	</condition>
+</animation>
+
+<animation>
+	<type>scale</type>
+	<object-name>drag-chute</object-name>
+	<property>fdm/jsbsim/systems/drag-chute/unfurl-norm</property>
+	<x-min>1</x-min>
+	<y-min>1</y-min>
+	<z-min>1</z-min>
+	<x-factor>1</x-factor>
+	<y-factor>10</y-factor>
+	<z-factor>10</z-factor>
+</animation>
+
+<animation>
+	<type>translate</type>
+	<object-name>drag-chute</object-name>
+	<property>fdm/jsbsim/systems/drag-chute/unfurl-norm</property>
+	<factor>12.125</factor>
+	<axis> 
+		<x>1</x>
+	</axis>
+</animation>
+
+</PropertyList>

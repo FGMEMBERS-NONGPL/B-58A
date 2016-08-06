@@ -1,0 +1,373 @@
+<?xml version="1.0"?>
+<PropertyList> 
+
+<!--B-58A clock-->
+
+<path>clock.ac</path>
+
+<!--LIGHTING-->
+
+<animation>
+	<type>material</type>
+	<object-name>indicator</object-name>
+	<emission>
+		<red>0.75</red>
+		<green>0.25</green>
+		<blue>0.25</blue>
+		<factor-prop>/controls/lighting/left-panel</factor-prop>
+	</emission> 
+</animation>
+
+<!--METAL EFFECTS-->
+
+<animation>
+	<type>shader</type>
+	<shader>chrome</shader>
+	<texture>metal-shader.png</texture>
+		<object-name>screws1</object-name>
+</animation>
+
+<animation>
+	<type>shader</type>
+	<shader>chrome</shader>
+	<texture>brass-shader.png</texture>
+		<object-name>screws2</object-name>
+</animation>
+
+<!--ROTATIONS-->
+
+<animation> 
+	<type>rotate</type>
+	<object-name>hours</object-name>
+	<property>/instrumentation/clock/indicated-sec</property>
+	<factor>0.008333333333333333333</factor>
+	<axis> 
+		<x>-1</x>
+	</axis>
+</animation>
+
+<animation> 
+	<type>rotate</type>
+	<object-name>minutes</object-name>
+	<property>/instrumentation/clock/indicated-sec</property>
+		<factor>.1</factor>
+	<axis> 
+		<x>-1</x>
+	</axis>
+</animation>
+
+<animation> 
+	<type>rotate</type>
+	<object-name>seconds</object-name>
+	<property>/instrumentation/clock/indicated-sec</property>
+	<factor>6</factor>
+	<axis> 
+		<x>-1</x>
+	</axis>
+</animation>
+
+<!--MINUTES TIMER-->
+ 
+<animation>
+	<type>pick</type>
+	<object-name>push</object-name>
+	<visible>true</visible>
+	<action>
+		<button>0</button>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>property-assign</command>
+			<property>instrumentation/clock/timer/min-reset</property>
+			<value>1</value>
+		</binding>
+		<mod-up>
+			<binding>
+				<command>property-assign</command>
+				<property>instrumentation/clock/timer/min-reset</property>
+				<value>0</value>
+			</binding>
+		</mod-up>
+		<binding>
+			<command>property-adjust</command>
+      		<property>instrumentation/clock/timer/sequence</property>
+			<step>1</step>
+			<min>0</min>
+			<max>3</max>
+			<wrap>true</wrap>
+		</binding>
+	</action>
+</animation>
+
+<animation>
+	<type>select</type>
+	<object-name>min0</object-name>
+	<object-name>min-zero</object-name>
+	<condition>
+		<equals>
+			<property>instrumentation/clock/timer/sequence</property>
+			<value>0</value>
+		</equals>
+	</condition>
+</animation>
+
+<animation>
+	<type>select</type>
+	<object-name>min</object-name>
+	<condition>
+		<or>
+			<equals>
+				<property>instrumentation/clock/timer/sequence</property>
+				<value>1</value>
+			</equals>
+			<equals>
+				<property>instrumentation/clock/timer/sequence</property>
+				<value>2</value>
+			</equals>
+		</or>
+	</condition>
+</animation>
+
+<animation>
+	<type>select</type>
+	<object-name>min-run</object-name>
+	<condition>
+		<equals>
+			<property>instrumentation/clock/timer/sequence</property>
+			<value>1</value>
+		</equals>
+	</condition>
+</animation>
+
+<animation>
+	<type>select</type>
+	<object-name>min-stop</object-name>
+	<condition>
+		<equals>
+			<property>instrumentation/clock/timer/sequence</property>
+			<value>2</value>
+		</equals>
+	</condition>
+</animation>
+
+<animation> 
+	<type>rotate</type>
+	<object-name>min</object-name>
+	<property>/instrumentation/clock/timer/elapsed-minutes</property>
+	<factor>.2</factor>
+	<condition>
+		<equals>
+			<property>instrumentation/clock/timer/sequence</property>
+			<value>1</value>
+		</equals>
+	</condition>
+	<center>
+		<x-m>0</x-m>
+		<y-m>0</y-m>
+		<z-m>-0.015000</z-m>
+	</center>
+	<axis> 
+		<x>-1</x>
+	</axis>
+</animation>
+
+<!--ELAPSED TIMER-->
+ 
+<animation>
+	<type>pick</type>
+	<object-name>go</object-name>
+	<visible>false</visible>
+	<action>
+		<button>0</button>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>property-assign</command>
+			<property>instrumentation/clock/timer/run</property>
+			<value>1</value>
+		</binding>
+		<binding>
+			<command>property-assign</command>
+			<property>instrumentation/clock/timer/rt-reset</property>
+			<value>1</value>
+		</binding>
+		<mod-up>
+			<binding>
+				<command>property-assign</command>
+				<property>instrumentation/clock/timer/rt-reset</property>
+				<value>0</value>
+			</binding>
+		</mod-up>
+		<binding>
+			<command>property-assign</command>
+			<property>instrumentation/clock/timer/zero</property>
+			<value>0</value>
+		</binding>
+	</action>
+</animation>
+ 
+<animation>
+	<type>select</type>
+	<object-name>et-go</object-name>
+	<condition>
+		<and>
+		<equals>
+			<property>instrumentation/clock/timer/run</property>
+			<value>1</value>
+		</equals>
+		<equals>
+			<property>instrumentation/clock/timer/zero</property>
+			<value>0</value>
+		</equals>
+		</and>
+	</condition>
+</animation>
+
+<animation>
+	<type>pick</type>
+	<object-name>stop</object-name>
+	<visible>false</visible>
+	<action>
+		<button>0</button>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>property-assign</command>
+			<property>instrumentation/clock/timer/st-set</property>
+			<value>1</value>
+		</binding>
+		<mod-up>
+			<binding>
+				<command>property-assign</command>
+				<property>instrumentation/clock/timer/st-set</property>
+				<value>0</value>
+			</binding>
+		</mod-up>
+		<binding>
+			<command>property-assign</command>
+			<property>instrumentation/clock/timer/run</property>
+			<value>0</value>
+		</binding>
+		<binding>
+			<command>property-assign</command>
+			<property>instrumentation/clock/timer/zero</property>
+			<value>0</value>
+		</binding>
+	</action>
+</animation>
+ 
+<animation>
+	<type>select</type>
+	<object-name>et-stop</object-name>
+	<condition>
+		<and>
+		<equals>
+			<property>instrumentation/clock/timer/run</property>
+			<value>0</value>
+		</equals>
+		<equals>
+			<property>instrumentation/clock/timer/zero</property>
+			<value>0</value>
+		</equals>
+		</and>
+	</condition>
+</animation>
+ 
+<animation>
+	<type>pick</type>
+	<object-name>zero</object-name>
+	<visible>false</visible>
+	<action>
+		<button>0</button>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>property-assign</command>
+			<property>instrumentation/clock/timer/zero</property>
+			<value>1</value>
+		</binding>
+		<binding>
+			<command>property-assign</command>
+			<property>instrumentation/clock/timer/elapsed-time</property>
+			<value>0</value>
+		</binding>
+		<binding>
+			<command>property-assign</command>
+			<property>instrumentation/clock/timer/run</property>
+			<value>0</value>
+		</binding>
+	</action>
+</animation>
+ 
+<animation>
+	<type>select</type>
+	<object-name>et-zero</object-name>
+	<object-name>et1-0</object-name>
+	<object-name>et2-0</object-name>
+	<condition>
+		<equals>
+			<property>instrumentation/clock/timer/zero</property>
+			<value>1</value>
+		</equals>
+	</condition>
+</animation>
+
+<animation>
+	<type>select</type>
+	<object-name>et1</object-name>
+	<object-name>et2</object-name>
+	<condition>
+		<equals>
+			<property>instrumentation/clock/timer/zero</property>
+			<value>0</value>
+		</equals>
+	</condition>
+</animation>
+
+<animation> 
+	<type>rotate</type>
+	<object-name>et1</object-name>
+	<property>/instrumentation/clock/timer/elapsed-time</property>
+	<factor>.1</factor>
+	<condition>
+		<equals>
+			<property>instrumentation/clock/timer/run</property>
+			<value>1</value>
+		</equals>
+	</condition>
+	<center>
+		<x-m>0</x-m>
+		<y-m>0</y-m>
+		<z-m>0.015000</z-m>
+	</center>
+	<axis> 
+		<x>-1</x>
+	</axis>
+</animation>
+
+<animation> 
+	<type>rotate</type>
+	<object-name>et2</object-name>
+	<property>/instrumentation/clock/timer/elapsed-time</property>
+	<factor>0.008333333333333333333</factor>
+	<condition>
+		<equals>
+			<property>instrumentation/clock/timer/run</property>
+			<value>1</value>
+		</equals>
+	</condition>
+	<center>
+		<x-m>0</x-m>
+		<y-m>0</y-m>
+		<z-m>0.015000</z-m>
+	</center>
+	<axis> 
+		<x>-1</x>
+	</axis>
+</animation>
+
+<!--LoD-->
+
+<animation> 
+	<type>range</type>
+	<min-m>0</min-m>
+	<max-m>5</max-m>
+</animation>
+
+</PropertyList>

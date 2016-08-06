@@ -1,0 +1,247 @@
+<?xml version = '1.0'?>
+<PropertyList>
+
+<!--B-58A course indicator-->
+
+<path>cdi.ac</path>
+
+<!--LIGHTING-->
+
+<animation>
+	<type>material</type>
+	<object-name>indicator</object-name>
+	<object-name>front</object-name>
+	<emission>
+		<red>0.75</red>
+		<green>0.25</green>
+		<blue>0.25</blue>
+		<factor-prop>/controls/lighting/left-panel</factor-prop>
+	</emission> 
+</animation>    
+
+<!--METAL EFFECTS-->
+
+<animation>
+	<type>shader</type>
+	<shader>chrome</shader>
+	<texture>metal-shader.png</texture>
+		<object-name>base</object-name>
+		<object-name>screws</object-name>
+</animation>
+
+<!--NEEDLES-->
+
+<animation>
+	<type>rotate</type>
+	<object-name>GS-needle</object-name>
+	<property>/instrumentation/nav[0]/gs-needle-deflection</property>
+	<min>-10.0</min>
+	<max>10.0</max>
+	<interpolation>
+		<entry><ind>-10.0</ind><dep>35</dep></entry>
+		<entry><ind>0.0</ind><dep>0</dep></entry>
+		<entry><ind>10.0</ind><dep>-35</dep></entry>
+	</interpolation>
+	<center>
+		<x-m>0</x-m>
+		<y-m>-0.021632</y-m>
+		<z-m>-0.004998</z-m>
+	</center>
+	<axis>
+		<x>-1</x>
+	</axis>
+</animation>
+
+<animation>
+	<type>rotate</type>
+	<object-name>LOC-needle</object-name>
+	<property>/instrumentation/nav[0]/heading-needle-deflection</property>
+	<min>-10.0</min>
+	<max>10.0</max>
+	<interpolation>
+		<entry><ind>-10.0</ind><dep>35</dep></entry>
+		<entry><ind>0.0</ind><dep>0</dep></entry>
+		<entry><ind>10.0</ind><dep>-35</dep></entry>
+	</interpolation>
+	<center>
+		<x-m>0</x-m>
+		<y-m>0</y-m>
+		<z-m>0.016861</z-m>
+	</center>
+	<axis>
+		<x>-1</x>
+	</axis>
+</animation>
+
+<!--FLAGS-->
+
+<animation>
+	<type>select</type>
+	<object-name>GS-flag</object-name>
+	<condition>
+		<or>
+			<not>
+				<property>/instrumentation/nav[0]/in-range</property>
+			</not>
+			<not>
+				<property>/instrumentation/nav[0]/gs-in-range</property>
+			</not>
+		</or>
+	</condition>
+</animation>
+
+<animation>
+	<type>select</type>
+	<object-name>LOC-flag</object-name>
+	<condition>
+		<not>
+			<property>/instrumentation/nav[0]/in-range</property>
+		</not>
+	</condition>
+</animation>
+
+<!--POINTER-->
+
+<animation>
+	<type>rotate</type>
+	<object-name>pointer</object-name>
+	<property>/instrumentation/cdi/pointer</property>
+	<center>
+		<x-m>0</x-m>
+		<y-m>0</y-m>
+		<z-m>-0.004965</z-m>
+	</center>
+	<axis>
+		<x>-1</x>
+	</axis>
+</animation>
+
+<!--COURSE SET-->
+
+<animation>
+	<type>rotate</type>
+	<object-name>set-knob</object-name>
+	<property>/instrumentation/cdi/course-set</property>
+	<center>
+		<x-m>0</x-m>
+		<y-m>-0.024905</y-m>
+		<z-m>-0.024795</z-m>
+	</center>
+	<axis>
+		<x>-1</x>
+	</axis>
+</animation>
+
+<animation>
+	<type>pick</type>
+	<object-name>decrease</object-name>
+	<visible>false</visible>
+	<action>
+		<button>0</button>
+		<repeatable>true</repeatable>
+		<interval-sec>0.05</interval-sec>
+		<binding>
+			<command>property-adjust</command>
+			<property>/instrumentation/cdi/course-set</property>
+			<step>-1</step>
+			<min>0</min>
+			<max>360</max>
+			<wrap>1</wrap>
+		</binding>
+	</action>
+</animation>   
+
+<animation>
+	<type>pick</type>
+	<object-name>increase</object-name>
+	<visible>false</visible>
+	<action>
+		<button>0</button>
+		<repeatable>true</repeatable>
+		<interval-sec>0.05</interval-sec>
+		<binding>
+			<command>property-adjust</command>
+			<property>/instrumentation/cdi/course-set</property>
+			<step>1</step>
+			<min>0</min>
+			<max>360</max>
+			<wrap>1</wrap>
+		</binding>
+	</action>
+</animation>   
+
+<!--COURSE NUMERICAL DISPLAY-->
+
+<animation>
+	<type>textranslate</type>
+	<object-name>digit1</object-name>
+	<property>/instrumentation/cdi/course-set</property>
+	<factor>0.001</factor>
+	<step>100</step>
+	<scroll>0.5</scroll>
+	<axis>
+		<y>-1</y>
+	</axis>
+</animation>
+
+<animation>
+	<type>textranslate</type>
+	<object-name>digit2</object-name>
+	<property>/instrumentation/cdi/course-set</property>
+	<factor>0.01</factor>
+	<step>10</step>
+	<scroll>0.5</scroll>
+	<axis>
+		<y>-1</y>
+	</axis>
+</animation>
+
+<animation>
+	<type>textranslate</type>
+	<object-name>digit3</object-name>
+	<property>/instrumentation/cdi/course-set</property>
+	<factor>0.1</factor>
+	<axis>
+		<y>-1</y>
+	</axis>
+</animation>
+
+<!--MARKER BEACON-->
+
+<animation>
+	<type>select</type>
+	<object-name>lens-off</object-name>
+	<condition>
+		<not>
+			<property>/instrumentation/marker-beacon/inner</property>
+		</not>
+		<not>
+			<property>/instrumentation/marker-beacon/middle</property>
+		</not>
+		<not>
+			<property>/instrumentation/marker-beacon/outer</property>
+		</not>
+	</condition>
+</animation>    
+
+<animation>
+	<type>select</type>
+	<object-name>lens-on</object-name>
+	<condition>
+		<or>
+			<property>/instrumentation/marker-beacon/inner</property>
+			<property>/instrumentation/marker-beacon/middle</property>
+			<property>/instrumentation/marker-beacon/outer</property>
+		</or>
+	</condition>
+</animation>    
+
+<!--LoD-->
+
+<animation>
+	<type>range</type>
+	<min-m>0</min-m>
+	<max-m>5</max-m>
+</animation>
+
+</PropertyList>

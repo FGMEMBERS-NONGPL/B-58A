@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--B-58A navigator's navigation panel-->
+
+<PropertyList>
+
+  <path>nav-panel.ac</path>
+
+<!--LIGHTING-->
+
+<animation>
+	<type>material</type>
+	<object-name>panel-face</object-name>
+	<emission>
+		<red>0.15</red>
+		<green>0.15</green>
+		<blue>0.15</blue>
+		<factor-prop>/controls/lighting/panel</factor-prop>
+	</emission>
+</animation>    
+
+<animation>
+	<type>material</type>
+	<object-name>indicator</object-name>
+	<emission>
+		<red>0.75</red>
+		<green>0.50</green>
+		<blue>0.50</blue>
+		<factor-prop>/controls/lighting/panel</factor-prop>
+	</emission>
+</animation>
+
+<!--METAL EFFECTS-->
+
+<animation>
+	<type>shader</type>
+	<shader>chrome</shader>
+	<texture>metal-shader.png</texture>
+		<object-name>switches</object-name>
+		<object-name>dzus-fasteners</object-name>
+</animation>
+
+<!--PRESENT POSITION, LATITUDE-->
+
+<animation>
+	<type>select</type>
+	<object-name>N</object-name>
+	<condition>
+		<greater-than>
+			<property>/systems/nav-computer/position/latitude-deg</property>
+			<value>0</value>
+		</greater-than>
+	</condition>
+</animation>
+
+<animation>
+	<type>select</type>
+	<object-name>S</object-name>
+	<condition>
+		<less-than>
+			<property>/systems/nav-computer/position/latitude-deg</property>
+			<value>0</value>
+		</less-than>
+	</condition>
+</animation>
+
+<animation>
+	<type>textranslate</type>
+	<object-name>lat-1</object-name>
+	<property>/systems/nav-computer/position/latitude-degrees</property>
+	<factor>0.01</factor>
+	<step>10</step>
+	<scroll>0</scroll>
+	<axis>
+		<y>-1</y>
+	</axis>
+</animation>
+
+<animation>
+	<type>textranslate</type>
+	<object-name>lat-2</object-name>
+	<property>/systems/nav-computer/position/latitude-degrees</property>
+	<factor>0.1</factor>
+	<step>1</step>
+	<scroll>0</scroll>
+	<axis>
+		<y>-1</y>
+	</axis>
+</animation>
+
+<animation>
+	<type>textranslate</type>
+	<object-name>lat-3</object-name>
+	<property>/systems/nav-computer/position/latitude-minutes</property>
+	<factor>0.01</factor>
+	<step>10</step>
+	<scroll>0</scroll>
+	<axis>
+		<y>-1</y>
+	</axis>
+</animation>
+
+<animation>
+	<type>textranslate</type>
+	<object-name>lat-4</object-name>
+	<property>/systems/nav-computer/position/latitude-minutes</property>
+	<factor>0.1</factor>
+	<step>1</step>
+	<scroll>0</scroll>
+	<axis>
+		<y>-1</y>
+	</axis>
+</animation>
+
+<animation>
+	<type>textranslate</type>
+	<object-name>lat-5</object-name>
+	<property>/systems/nav-computer/position/latitude-minutes</property>
+	<factor>1</factor>
+	<step>.1</step>
+	<scroll>1</scroll>
+	<axis>
+		<y>-1</y>
+	</axis>
+</animation>
+
+<!--PRESENT POSITION, LONGITUDE-->
+
+<animation>
+	<type>select</type>
+	<object-name>E</object-name>
+	<condition>
+		<greater-than>
+			<property>/systems/nav-computer/position/longitude-deg</property>
+			<value>0</value>
+		</greater-than>
+	</condition>
+</animation>
+
+<animation>
+	<type>select</type>
+	<object-name>W</object-name>
+	<condition>
+		<less-than>
+			<property>/systems/nav-computer/position/longitude-deg</property>
+			<value>0</value>
+		</less-than>
+	</condition>
+</animation>
+
+<animation>
+	<type>textranslate</type>
+	<object-name>lon-1</object-name>
+	<property>/systems/nav-computer/position/longitude-degrees</property>
+	<factor>0.001</factor>
+	<step>100</step>
+	<scroll>0</scroll>
+	<axis>
+		<y>-1</y>
+	</axis>
+</animation>
+
+<animation>
+	<type>textranslate</type>
+	<object-name>lon-2</object-name>
+	<property>/systems/nav-computer/position/longitude-degrees</property>
+	<factor>0.01</factor>
+	<step>10</step>
+	<scroll>0</scroll>
+	<axis>
+		<y>-1</y>
+	</axis>
+</animation>
+
+<animation>
+	<type>textranslate</type>
+	<object-name>lon-3</object-name>
+	<property>/systems/nav-computer/position/longitude-degrees</property>
+	<factor>0.1</factor>
+	<step>1</step>
+	<scroll>0</scroll>
+	<axis>
+		<y>-1</y>
+	</axis>
+</animation>
+
+<animation>
+	<type>textranslate</type>
+	<object-name>lon-4</object-name>
+	<property>/systems/nav-computer/position/longitude-minutes</property>
+	<factor>0.01</factor>
+	<step>10</step>
+	<scroll>0</scroll>
+	<axis>
+		<y>-1</y>
+	</axis>
+</animation>
+
+<animation>
+	<type>textranslate</type>
+	<object-name>lon-5</object-name>
+	<property>/systems/nav-computer/position/longitude-minutes</property>
+	<factor>0.1</factor>
+	<step>1</step>
+	<scroll>0</scroll>
+	<axis>
+		<y>-1</y>
+	</axis>
+</animation>
+
+<animation>
+	<type>textranslate</type>
+	<object-name>lon-6</object-name>
+	<property>/systems/nav-computer/position/longitude-minutes</property>
+	<factor>1</factor>
+	<step>.1</step>
+	<scroll>1</scroll>
+	<axis>
+		<y>-1</y>
+	</axis>
+</animation>
+
+<!--LoD-->
+
+<animation> 
+	<type>range</type>
+	<min-m>0</min-m>
+	<max-m>5</max-m>
+</animation>
+
+</PropertyList>
+

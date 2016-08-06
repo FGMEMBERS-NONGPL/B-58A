@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- B-58A trim panel -->
+
+<PropertyList>
+
+<path>trim-panel.ac</path>
+
+<!--LIGHTING-->
+
+<animation>
+	<type>material</type>
+	<object-name>indicator</object-name>
+	<emission>
+		<red>0.75</red>
+		<green>0.25</green>
+		<blue>0.25</blue>
+		<factor-prop>/controls/lighting/left-panel</factor-prop>
+	</emission> 
+</animation>
+
+<animation>
+	<type>material</type>
+	<object-name>faces</object-name>
+	<emission>
+		<red>0.30</red>
+		<green>0.30</green>
+		<blue>0.30</blue>
+		<factor-prop>/controls/lighting/left-panel</factor-prop>
+	</emission>
+</animation>    
+
+<!--METAL EFFECTS-->
+
+<animation>
+	<type>shader</type>
+	<shader>chrome</shader>
+	<texture>metal-shader.png</texture>
+		<object-name>switches</object-name>
+</animation>
+
+<!--MACH WINDOW-->
+
+<animation>
+	<type>textranslate</type>
+	<object-name>mach1</object-name>
+	<property>/autopilot/settings/target-mach</property>
+	<factor>0.1</factor>
+	<step>1</step>
+	<axis>
+		<y>-1</y>
+	</axis>
+</animation>
+
+<animation>
+	<type>textranslate</type>
+	<object-name>mach2</object-name>
+	<property>/autopilot/settings/target-mach</property>
+	<factor>1</factor>
+	<step>.1</step>
+	<axis>
+		<y>-1</y>
+	</axis>
+</animation>
+
+<animation>
+	<type>textranslate</type>
+	<object-name>mach3</object-name>
+	<property>/autopilot/settings/target-mach</property>
+	<factor>10</factor>
+	<step>.01</step>
+	<axis>
+		<y>-1</y>
+	</axis>
+</animation>
+
+<!--COMMAND MACH SWITCH -->
+
+<animation>
+	<type>pick</type>
+	<object-name>inc</object-name>
+	<visible>false</visible>
+	<action>
+		<button>0</button>
+		<repeatable>true</repeatable>
+		<interval-sec>0.05</interval-sec>
+		<binding>
+			<command>property-adjust</command>
+			<property>/autopilot/settings/target-mach</property>
+			<step>.01</step>
+			<min>0</min>
+			<max>2.2</max>
+		</binding>
+		<binding>
+			<command>property-assign</command>
+			<property>/controls/command-mach</property>
+			<value>1</value> 
+		</binding>
+		<mod-up>
+			<binding>
+			<command>property-assign</command>
+			<property>/controls/command-mach</property>
+			<value>0</value> 
+			</binding>
+		</mod-up>
+	</action>
+</animation>
+
+<animation>
+	<type>pick</type>
+	<object-name>dec</object-name>
+	<visible>false</visible>
+	<action>
+		<button>0</button>
+		<repeatable>true</repeatable>
+		<interval-sec>0.05</interval-sec>
+		<binding>
+			<command>property-adjust</command>
+			<property>/autopilot/settings/target-mach</property>
+			<step>-.01</step>
+			<min>0.0</min>
+			<max>2.2</max>
+		</binding>
+		<binding>
+			<command>property-assign</command>
+			<property>/controls/command-mach</property>
+			<value>-1</value> 
+		</binding>
+		<mod-up>
+			<binding>
+				<command>property-assign</command>
+				<property>/controls/command-mach</property>
+				<value>0</value> 
+			</binding>
+		</mod-up>
+	</action>
+</animation>
+ 
+<animation>
+	<type>rotate</type>
+	<object-name>mach-shaft</object-name>
+	<property>/controls/command-mach</property>
+	<interpolation>
+		<entry><ind>1</ind><dep>30</dep></entry>
+		<entry><ind>0</ind><dep>0</dep></entry>
+		<entry><ind>-1</ind><dep>-30</dep></entry>
+	</interpolation>
+	<axis>
+		<y>-1</y>
+	</axis>
+	<center>
+		<x-m>0.020179</x-m>
+		<y-m>0</y-m>
+		<z-m>0.000598</z-m>
+	</center>
+</animation>
+
+<!-- LoD -->
+
+<animation> 
+	<type>range</type>
+	<min-m>0</min-m>
+	<max-m>5</max-m>
+</animation>
+
+</PropertyList>

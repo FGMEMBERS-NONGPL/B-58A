@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+
+<system name="view">
+
+  <property value="-15">systems/view/pod-initial</property>
+
+  <channel name="ground-shift">
+
+	<switch>
+		<default value="0"/>
+		<test value="1">
+			gear/unit[1]/WOW == 0
+		</test>
+		<output>systems/view/initialize</output>
+	</switch>
+
+   <kinematic>
+     <input>systems/view/initialize</input>
+     <traverse>
+       <setting>
+          <position>0</position>
+          <time>0</time>
+       </setting>
+       <setting>
+          <position>6.5</position>
+          <time>1</time>
+       </setting>
+     </traverse>
+     <output>systems/view/pod-offset</output>
+   </kinematic>
+
+   <summer>
+      <input>systems/view/pod-initial</input>
+      <input>-systems/view/pod-offset</input>
+      <output>/sim[0]/view[0]/config/pitch-offset-deg</output>
+      <output>/sim[0]/current-view/config/pitch-offset-deg</output>
+   </summer>
+
+  </channel>
+
+</system>

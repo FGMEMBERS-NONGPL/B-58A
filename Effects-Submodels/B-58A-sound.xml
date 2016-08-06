@@ -1,0 +1,291 @@
+<?xml version="1.0"?>
+
+<!--original by Dave Culp-->
+ 
+<PropertyList>
+
+ <fx>
+
+<!--ENGINES-->
+
+  <engine>
+   <name>compressor-whine-internal</name>
+   <mode>looped</mode>
+   <path>Sounds/turbojet_fan.wav</path>
+   <condition>
+     <property>/engines/engine[0]/running</property>
+     <property>/sim/current-view/internal</property>
+   </condition>
+   <volume>
+    <property>/controls/engines/engine[0]/throttle</property>
+    <factor>0.2</factor>
+    <min>0.2</min>
+    <max>0.4</max>
+   </volume>
+  </engine>
+
+  <engine>
+   <name>burner-internal</name>
+   <mode>looped</mode>
+   <path>Aircraft/B-58A/Effects-Submodels/afterburner.wav</path>
+   <condition>
+     <property>/engines/engine[0]/augmentation</property>
+    <property>/sim/current-view/internal</property>
+   </condition>
+   <volume>
+    <property>/controls/throttle[0]</property>
+    <factor>1</factor>
+    <min>0.4</min>
+    <max>0.4</max>
+   </volume>
+  </engine>
+
+  <engine>
+   <name>compressor-whine-external</name>
+   <path>Sounds/turbojet_fan.wav</path>
+   <mode>looped</mode>
+   <condition>
+    <not>
+     <property>/sim/current-view/internal</property>
+    </not>
+    <greater-than>
+      <property>/engines/engine/n2</property>
+      <value>1</value>
+    </greater-than>
+    <less-than>
+      <property>/engines/engine/n2</property>
+      <value>99</value>
+    </less-than>
+   </condition>
+   <orientation>
+    <x> 0.0</x>
+    <y> 0.0</y>
+    <z> 180.0</z>
+    <inner-cone>50.0</inner-cone>
+    <outer-cone>180.0</outer-cone>
+    <outer-gain>0.5</outer-gain>
+   </orientation>
+   <pitch>
+    <property>/engines/engine/n2</property>
+    <type>lin</type>
+    <factor>0.006</factor>
+    <offset>0.4</offset>
+   </pitch>
+   <volume>
+    <property>/engines/engine/n2</property>
+    <factor>0.002</factor>
+    <min>0</min>
+    <max>0.2</max>
+   </volume>
+  </engine>
+
+  <engine>
+   <name>burner-external</name>
+   <mode>looped</mode>
+   <path>Aircraft/B-58A/Effects-Submodels/afterburner.wav</path>
+   <condition>
+    <property>/engines/engine[0]/augmentation</property>
+    <not>
+     <property>/sim/current-view/internal</property>
+    </not>
+   </condition>
+   <orientation>
+    <x>0.0</x>
+    <y>0.0</y>
+    <z>180.0</z>
+    <inner-cone>180.0</inner-cone>
+    <outer-cone>360.0</outer-cone>
+    <outer-gain>0.2</outer-gain>
+   </orientation>
+   <volume>
+    <property>/controls/throttle[0]</property>
+    <min>0.4</min>
+    <max>0.5</max>
+   </volume>
+  </engine>
+
+<!--GEAR/TIRES-->
+
+<squeal>
+	<name>touchdown-chirp</name>
+	<path>Sounds/squeal.wav</path>
+	<condition>
+    <or>
+     <property>/gear/gear[0]/wow</property>
+     <property>/gear/gear[1]/wow</property>
+     <property>/gear/gear[2]/wow</property>
+    </or>
+	</condition>
+	<pitch>
+		<property>/velocities/airspeed-kt</property>
+		<factor>0.0025</factor>
+		<offset>1.2</offset>
+	</pitch>
+</squeal>
+
+<tire-rumble>
+	<name>tire-rumble</name>
+	<mode>looped</mode>
+	<path>Sounds/rumble.wav</path>
+	<condition>
+		<and>
+			<property>/sim/current-view/internal</property>
+			<or>
+				<property>/gear/gear[0]/wow</property>
+				<property>/gear/gear[1]/wow</property>
+				<property>/gear/gear[2]/wow</property>
+			</or>
+		</and>
+	</condition>
+	<volume>
+		<property>/velocities/airspeed-kt</property>
+		<factor>0.004</factor>
+		<max>0.3</max>
+	</volume>
+</tire-rumble>
+
+<gear-wind>
+	<name>gear-wind</name>
+	<mode>looped</mode>
+	<path>Sounds/rumble.wav</path>
+	<condition>
+		<and>
+			<property>/sim/current-view/internal</property>
+			<greater-than>
+				<property>/gear/gear[1]/position-norm[0]</property>
+				<value>0.01</value>
+			</greater-than>
+		</and>
+	</condition>
+	<volume>
+		<property>/velocities/airspeed-kt</property>
+		<factor>0.002</factor>
+		<max>1.0</max>
+	</volume>
+</gear-wind>
+
+<gear>
+	<name>gear</name>
+	<mode>in-transit</mode>
+	<path>Sounds/gear.wav</path>
+	<property>/gear/gear[0]/position-norm</property>
+	<pitch>
+		<internal>dt_play</internal>
+		<offset>1.0</offset>
+		<factor>-0.001</factor>
+		<min>0.1</min>
+		<max>0.9</max>
+	</pitch>
+</gear>
+
+<gear>
+	<name>gear-lock-nose</name>
+	<path>Sounds/gear-lck.wav</path>
+	<condition>
+		<or>
+			<equals>
+				<property>/gear/gear[0]/position-norm</property>
+				<value>1</value>
+			</equals>
+			<equals>
+				<property>/gear/gear[0]/position-norm</property>
+				<value>0</value>
+			</equals>
+		</or>
+	</condition>
+</gear>
+ 
+<gear>
+	<name>gear-lock-left-main</name>
+	<path>Sounds/gear-lck.wav</path>
+	<condition>
+		<or>
+			<equals>
+				<property>/gear/gear[1]/position-norm</property>
+				<value>1</value>
+			</equals>
+			<equals>
+				<property>/gear/gear[1]/position-norm</property>
+				<value>0</value>
+			</equals>
+		</or>
+	</condition>
+</gear>
+ 
+<gear>
+	<name>gear-lock-right-main</name>
+	<path>Sounds/gear-lck.wav</path>
+	<condition>
+		<or>
+			<equals>
+				<property>/gear/gear[2]/position-norm</property>
+				<value>1</value>
+			</equals>
+			<equals>
+				<property>/gear/gear[2]/position-norm</property>
+				<value>0</value>
+			</equals>
+		</or>
+	</condition>
+</gear>
+
+<!--WIND-->
+
+  <wind>
+   <name>wind</name>
+   <mode>looped</mode>
+   <path>Sounds/wind.wav</path>
+   <condition>
+     <property>/sim/current-view/internal</property>
+   </condition>
+   <property>/velocities/airspeed-kt</property>
+   <volume>
+    <property>/fdm/jsbsim/aero/qbar-psf</property>
+    <factor>0.0002</factor>
+    <min>0.0</min>
+    <max>0.3</max>
+   </volume>
+   <pitch>
+    <property>/fdm/jsbsim/aero/qbar-psf</property>
+    <factor>0.002</factor>
+    <offset>1.25</offset>
+   </pitch>
+  </wind>
+
+<!--ALPHA BUFFET-->
+
+<buffet>
+	<name>alpha-buffet</name>
+	<mode>looped</mode>
+   <path>Sounds/rumble.wav</path>
+	<condition>
+		<property>/sim/current-view/internal</property>
+		<greater-than>
+			<property>/fdm/jsbsim/aero/alpha-deg</property>
+			<value>15.0</value>
+		</greater-than>
+	</condition>
+	<volume>
+		<property>/fdm/jsbsim/aero/alpha-rad</property>
+		<factor>15.0</factor>
+		<max>1.0</max>
+	</volume>
+	<pitch>
+		<property>/fdm/jsbsim/aero/alpha-rad</property>
+		<factor>0.005</factor>
+	</pitch>
+</buffet>
+
+<!--CRASH-->
+
+<crash>
+	<name>crash</name>
+	<path>Sounds/crash.wav</path>
+	<condition>
+		<property>fdm/jsbsim/systems/crash-detect/crashed</property>
+	</condition>
+</crash>
+
+</fx>
+ 
+</PropertyList>

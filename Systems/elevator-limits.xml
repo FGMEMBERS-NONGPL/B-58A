@@ -1,0 +1,203 @@
+<?xml version="1.0"?>
+
+<system name="elevator limits">
+
+	<property value="1">systems/elevator-limits/factor-ratio</property>
+
+	<channel name ="calculations">
+
+		<scheduled_gain>
+			<input>systems/elevator-limits/factor-ratio</input>
+			<table>
+				<independentVar lookup="row">velocities/mach</independentVar>
+				<tableData>
+						0			36.0
+						.26		27.0
+						.3			20.5
+						.4			15.5
+						.5			13.0
+						.6			11.0
+						.7			10.0
+						.8			8.5
+						.9			7.0
+						.97		5.0
+						1.0		5.5
+						1.1		9.0
+						1.2		16.0
+						1.3		18.5
+						1.35		19.0
+						1.4		18.5
+						1.5		16.0
+						1.6		10.0
+						1.7		6.0
+						1.8		5.0
+						1.9		4.5
+						2.0		4.0
+						2.2		4.0
+				</tableData>
+			</table>
+			<output>systems/elevator-limits/mach-factor</output>
+		</scheduled_gain>
+
+		<scheduled_gain>
+			<input>systems/elevator-limits/factor-ratio</input>
+			<table>
+				<independentVar lookup="row">position/h-sl-ft</independentVar>
+				<independentVar lookup="column">systems/elevator-limits/mach-factor</independentVar>
+				<tableData>
+											      0		36.0
+								 0				  0		73.0
+						10000			   3.5		75.0
+						20000			   7.0		78.0
+						30000			11.0			78.0
+						40000			15.0			78.0
+						50000			18.0			78.0
+						60000			20.0			78.0
+						70000			23.5			78.0
+				</tableData>
+			</table>
+			<output>systems/elevator-limits/altitude-factor</output>
+		</scheduled_gain>
+
+		<scheduled_gain>
+			<input>systems/elevator-limits/factor-ratio</input>
+			<table>
+				<independentVar lookup="row">systems/elevator-limits/altitude-factor</independentVar>
+				<tableData>
+						  0				19.5
+						78				83.0
+				</tableData>
+			</table>
+			<output>systems/elevator-limits/trim-factor</output>
+		</scheduled_gain>
+
+		<scheduled_gain>
+			<input>systems/elevator-limits/factor-ratio</input>
+			<table>
+				<independentVar lookup="row">inertia/weight-lbs</independentVar>
+				<independentVar lookup="column">systems/elevator-limits/trim-factor</independentVar>
+					<tableData>
+									   					0			19.5			63.0			67.5			71.5			77.0			83.0		
+						 			   0			1.25			1.25			20.0			20.0			20.0			20.0			20.0			
+							100000			1.25			1.25			20.0			20.0			20.0			20.0			20.0
+							105000			1.25			1.25			19.8			20.0			20.0			20.0			20.0
+							110000			1.25			1.25			17.0			18.2			20.0			20.0			20.0
+							115000			1.25			1.25			15.8			17.0			18.3			20.0			20.0
+							120000			1.25			1.25			14.2			15.5			16.7			18.2			19.8
+							125000			1.25			1.25			12.8			13.9			15.0			16.3			17.9
+							130000			1.25			1.25			11.4			12.4			13.3			14.5			15.9
+							135000			1.25			1.25			10.0			10.9			11.7			12.7			13.9
+				</tableData>
+			</table>
+			<output>systems/elevator-limits/elevator-uncorrected</output>
+		</scheduled_gain>
+
+  </channel>
+
+  <channel name="switch">
+
+		<switch>
+			<default value="0"/>
+				<test logic="AND" value="1">
+					position/h-sl-ft lt 20000
+					velocities/vc-kts lt 300
+				</test>
+			<output>systems/elevator-limits/switch</output>
+		</switch>
+
+		<kinematic>
+			<input>systems/elevator-limits/switch</input>
+			<traverse>
+				<setting>
+					<position>1</position>
+					<time>0</time>
+				</setting>
+				<setting>
+					<position>2</position>
+					<time>5</time>
+				</setting>
+			</traverse>
+			<output>systems/elevator-limits/switch-factor</output>
+		</kinematic>
+
+	</channel>
+
+	<channel name="aileron animation">
+
+		<kinematic>
+			<input>systems/elevator-limits/switch</input>
+			<traverse>
+				<setting>
+					<position>.5</position>
+					<time>0</time>
+				</setting>
+				<setting>
+					<position>1</position>
+					<time>5</time>
+				</setting>
+			</traverse>
+			<output>fcs/aileron-ratio</output>
+		</kinematic>
+
+	</channel>
+
+	<channel name="pitch animation">
+
+		<pure_gain>
+			<input>systems/elevator-limits/elevator-uncorrected</input>
+			<gain>systems/elevator-limits/switch-factor</gain>
+				<clipto>
+					<min>1.25</min>
+					<max>20</max>
+				</clipto>
+			<output>systems/elevator-limits/elevator-available</output>
+		</pure_gain>
+
+		<pure_gain>
+			<input>systems/elevator-limits/elevator-available</input>
+			<gain>-1</gain>
+			<output>systems/elevator-limits/upper</output>
+		</pure_gain>
+
+		<pure_gain>
+			<input>systems/elevator-limits/elevator-available</input>
+			<gain>1</gain>
+				<clipto>
+					<min>1.25</min>
+					<max>10</max>
+				</clipto>
+			<output>systems/elevator-limits/lower</output>
+		</pure_gain>
+
+		<pure_gain>
+			<input>fcs/pitch-trim-cmd-norm</input>
+			<gain>10</gain>
+			<output>fcs/pitch-trim-degrees</output>
+		</pure_gain>
+
+		<aerosurface_scale>
+			<input>fcs/elevator-cmd-norm</input>
+				<range>
+					<min>-20</min>
+					<max>10</max>
+				</range>
+				<clipto>
+					<min>systems/elevator-limits/upper</min>
+					<max>systems/elevator-limits/lower</max>
+				</clipto>
+			<output>fcs/elevator-degrees</output>
+		</aerosurface_scale>
+
+		<summer>
+			<input>fcs/pitch-trim-degrees</input>
+			<input>fcs/elevator-degrees</input>
+				<clipto>
+					<min>-30</min>
+					<max>20</max>
+				</clipto>
+			<output>fcs/elevator-pos-degrees</output>
+		</summer>
+
+	</channel>
+
+</system>

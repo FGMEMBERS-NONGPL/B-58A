@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+
+
+<system name="view">
+
+	<channel name="adjust-view">
+
+	<summer>
+		<input>-/gear/gear[1]/wow</input>
+		<input>/controls/gear/gear-down</input>
+		<output>systems/view/trigger</output>
+		<clipto>
+			<min>0</min>
+			<max>1</max>
+		</clipto>
+	</summer>
+
+	<kinematic name="view-transition">
+		<input>systems/view/trigger</input>
+		<traverse>
+			<setting>
+				<position>0</position>
+				<time>0</time>
+			</setting>
+			<setting>
+				<position>1</position>
+				<time>2</time>
+			</setting>
+		</traverse>
+		<output>systems/view/factor</output>
+	</kinematic>
+
+	<switch>
+		<default value="0"/>
+		 <test logic="AND" value="1">
+			systems/view/initialize EQ 1
+			systems/view/factor GT 0
+			systems/view/factor LT 1
+		</test>
+		<output>systems/view/transit</output>
+	</switch>
+
+	</channel>
+
+</system>

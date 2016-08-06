@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+<submodel>
+	<name>jettison pod</name>
+	<model>Aircraft/B-58A/Effects-Submodels/pod-assembly.xml</model>
+	<trigger>/fdm/jsbsim/systems/pod/release</trigger>
+	<trigger-once>true</trigger-once>
+	<speed>0</speed>
+	<count>1</count>
+	<eda>120</eda>
+	<weight>8550</weight>
+	<cd>0.045</cd>
+	<collision>false</collision>
+	<impact>false</impact>
+</submodel>
+
+<submodel>
+	<name>jettison drag chute</name>
+	<model>Aircraft/B-58A/Effects-Submodels/drag-chute-jett.ac</model>
+	<trigger>/fdm/jsbsim/systems/drag-chute/jettison</trigger>
+	<speed>0</speed>
+	<repeat>false</repeat>
+	<count>1</count>
+	<x-offset>-40</x-offset>
+	<y-offset>0</y-offset>
+	<z-offset>0</z-offset>
+	<yaw-offset>0</yaw-offset>
+	<pitch-offset>0</pitch-offset>
+	<buoyancy>25</buoyancy>
+	<wind>true</wind>
+	<life>4.0</life> 
+	<eda>250</eda>
+	<weight>50</weight>
+	<aero-stabilised>false</aero-stabilised>
+</submodel>
+
+</PropertyList>

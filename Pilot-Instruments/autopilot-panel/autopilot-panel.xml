@@ -1,0 +1,446 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--B-58A autopilot panel-->
+
+<PropertyList>
+
+<path>autopilot-panel.ac</path>
+
+<!--LIGHTING-->
+
+<animation>
+	<type>material</type>
+	<object-name>indicator</object-name>
+	<emission>
+		<red>0.30</red>
+		<green>0.30</green>
+		<blue>0.30</blue>
+		<factor-prop>/controls/lighting/left-panel</factor-prop>
+	</emission>
+</animation>    
+
+<!--METAL EFFECTS-->
+
+<animation>
+	<type>shader</type>
+	<shader>chrome</shader>
+	<texture>metal-shader.png</texture>
+		<object-name>base</object-name>
+		<object-name>switches</object-name>
+		<object-name>dzus-fasteners</object-name>
+</animation>
+
+<!--FLIGHT CONTROL POWER SWITCH-->
+
+<animation>
+	<type>pick</type>
+	<object-name>fcp-on</object-name>
+	<visible>false</visible>
+	<action>
+		<button>0</button>
+		<binding>
+			<command>property-toggle</command>
+			<property>/autopilot/settings/flight-control-power</property>
+		</binding>
+	</action>
+</animation>
+
+<animation>
+	<type>rotate</type>
+		<object-name>fcp-shaft</object-name>
+		<property>/autopilot/settings/flight-control-power</property><!--off = 0, on = 1-->
+		<factor>-60</factor>
+		<center>
+			<z-m>0.000998</z-m>
+		</center>
+		<axis>
+			<x>-1</x>
+		</axis>
+</animation>
+
+<!--PITCH HOLD SWITCH-->
+
+<animation>
+	<type>pick</type>
+	<object-name>pitch-on</object-name>
+	<visible>false</visible>
+	<action>
+		<button>0</button>
+		<binding>
+			<command>property-toggle</command>
+			<property>/autopilot/locks/pitch-hold</property>
+			<condition>
+				<and>
+					<property>/autopilot/settings/flight-control-power</property>
+					<not>
+						<property>/gear/gear[1]/wow</property>
+					</not>
+				</and>
+			</condition>
+		</binding>
+		<binding>
+			<command>property-assign</command>
+			<property>/autopilot/settings/pitch-buffer</property>
+			<property>/orientation/pitch-deg</property>
+		</binding>
+	</action>
+</animation>
+
+<animation>
+	<type>rotate</type>
+		<object-name>pitch-shaft</object-name>
+		<property>/autopilot/locks/pitch-hold</property><!--off = 0, on = 1-->
+		<factor>-60</factor>
+		<center>
+			<z-m>0.000998</z-m>
+		</center>
+		<axis>
+			<x>-1</x>
+		</axis>
+</animation>
+
+<!--ROLL HOLD SWITCH-->
+
+<animation>
+	<type>pick</type>
+	<object-name>roll-on</object-name>
+	<visible>false</visible>
+	<action>
+		<button>0</button>
+		<binding>
+			<command>property-toggle</command>
+			<property>/autopilot/locks/roll-hold</property>
+			<condition>
+				<and>
+					<property>/autopilot/settings/flight-control-power</property>
+					<not>
+						<property>/gear/gear[1]/wow</property>
+					</not>
+				</and>
+			</condition>
+		</binding>
+		<binding>
+			<command>property-assign</command>
+			<property>/autopilot/settings/roll-buffer</property>
+			<value>0</value>
+			<condition>
+				<and>
+					<less-than>
+						<property>/orientation/roll-deg</property>
+						<value>2</value>
+					</less-than>
+					<greater-than>
+						<property>/orientation/roll-deg</property>
+						<value>-2</value>
+					</greater-than>
+				</and>
+			</condition>
+		</binding>
+		<binding>
+			<command>property-assign</command>
+			<property>/autopilot/settings/roll-buffer</property>
+			<property>/orientation/roll-deg</property>
+			<condition>
+				<or>
+					<less-than-equals>
+						<property>/orientation/roll-deg</property>
+						<value>-2</value>
+					</less-than-equals>
+					<greater-than-equals>
+						<property>/orientation/roll-deg</property>
+						<value>2</value>
+					</greater-than-equals>
+				</or>
+			</condition>
+		</binding>
+	</action>
+</animation>
+
+<animation>
+	<type>rotate</type>
+		<object-name>roll-shaft</object-name>
+		<property>/autopilot/locks/roll-hold</property><!--off = 0, on = 1-->
+		<factor>-60</factor>
+		<center>
+			<z-m>0.000998</z-m>
+		</center>
+		<axis>
+			<x>-1</x>
+		</axis>
+</animation>
+
+<!--MACH HOLD SWITCHES-->
+
+<animation>
+	<type>pick</type>
+	<object-name>mach-alt</object-name>
+	<visible>false</visible>
+	<action>
+		<button>0</button>
+		<binding>
+			<command>property-assign</command>
+			<property>/autopilot/locks/mach-alt-hold</property>
+			<value type="bool">true</value>
+			<condition>
+				<property>/autopilot/locks/pitch-hold</property>
+			</condition>
+		</binding>
+		<binding>
+			<command>property-assign</command>
+			<property>/autopilot/settings/target-mach</property>
+			<property>/velocities/mach</property>
+		</binding>
+		<binding>
+			<command>property-assign</command>
+			<property>/autopilot/settings/target-altitude-ft</property>
+			<property>/instrumentation/altimeter/indicated-altitude-ft</property>
+		</binding>
+		<binding>
+			<command>property-assign</command>
+			<property>/autopilot/locks/mach-hold-off</property>
+			<value type="bool">false</value>
+			<condition>
+				<property>/autopilot/locks/pitch-hold</property>
+			</condition>
+		</binding>
+		<binding>
+			<command>property-assign</command>
+			<property>/autopilot/locks/mach-hold</property>
+			<value type="bool">false</value>
+			<condition>
+				<property>/autopilot/locks/pitch-hold</property>
+			</condition>
+		</binding>
+	</action>
+</animation>
+
+<animation>
+	<type>select</type>
+	<object-name>mach-shaft1</object-name>
+	<condition>
+		<property>/autopilot/locks/mach-alt-hold</property>
+	</condition>
+</animation>   
+
+<animation>
+	<type>pick</type>
+	<object-name>mach-off</object-name>
+	<visible>false</visible>
+	<action>
+		<button>0</button>
+		<binding>
+			<command>property-assign</command>
+			<property>/autopilot/locks/mach-hold-off</property>
+			<value type="bool">true</value>
+			<condition>
+				<property>/autopilot/locks/pitch-hold</property>
+			</condition>
+		</binding>
+		<binding>
+			<command>property-assign</command>
+			<property>/autopilot/locks/mach-alt-hold</property>
+			<value type="bool">false</value>
+			<condition>
+				<property>/autopilot/locks/pitch-hold</property>
+			</condition>
+		</binding>
+		<binding>
+			<command>property-assign</command>
+			<property>/autopilot/locks/mach-hold</property>
+			<value type="bool">false</value>
+			<condition>
+				<property>/autopilot/locks/pitch-hold</property>
+			</condition>
+		</binding>
+	</action>
+</animation>
+
+<animation>
+	<type>select</type>
+	<object-name>mach-shaft0</object-name>
+	<condition>
+		<property>/autopilot/locks/mach-hold-off</property>
+	</condition>
+</animation>   
+
+<animation>
+	<type>pick</type>
+	<object-name>mach</object-name>
+	<visible>false</visible>
+	<action>
+		<button>0</button>
+		<binding>
+			<command>property-assign</command>
+			<property>/autopilot/locks/mach-hold</property>
+			<value type="bool">true</value>
+			<condition>
+				<property>/autopilot/locks/pitch-hold</property>
+			</condition>
+		</binding>
+		<binding>
+			<command>property-assign</command>
+			<property>/autopilot/settings/target-mach</property>
+			<property>/velocities/mach</property>
+		</binding>
+		<binding>
+			<command>property-assign</command>
+			<property>/autopilot/locks/mach-alt-hold</property>
+			<value type="bool">false</value>
+			<condition>
+				<property>/autopilot/locks/pitch-hold</property>
+			</condition>
+		</binding>
+		<binding>
+			<command>property-assign</command>
+			<property>/autopilot/locks/mach-hold-off</property>
+			<value type="bool">false</value>
+			<condition>
+				<property>/autopilot/locks/pitch-hold</property>
+			</condition>
+		</binding>
+	</action>
+</animation>
+
+<animation>
+	<type>select</type>
+	<object-name>mach-shaft2</object-name>
+	<condition>
+		<property>/autopilot/locks/mach-hold</property>
+	</condition>
+</animation>   
+
+<!--HEADING HOLD SWITCHES-->
+
+<animation>
+	<type>pick</type>
+	<object-name>heading</object-name>
+	<visible>false</visible>
+	<action>
+		<button>0</button>
+		<binding>
+			<command>property-assign</command>
+			<property>/autopilot/locks/heading-nav-hold</property>
+			<value type="bool">true</value>
+			<condition>
+				<property>/autopilot/locks/roll-hold</property>
+			</condition>
+		</binding>
+		<binding>
+			<command>property-assign</command>
+			<property>/autopilot/locks/heading-hold-off</property>
+			<value type="bool">false</value>
+			<condition>
+				<property>/autopilot/locks/roll-hold</property>
+			</condition>
+		</binding>
+		<binding>
+			<command>property-assign</command>
+			<property>/autopilot/locks/heading-constant-hold</property>
+			<value type="bool">false</value>
+			<condition>
+				<property>/autopilot/locks/roll-hold</property>
+			</condition>
+		</binding>
+	</action>
+</animation>
+
+<animation>
+	<type>select</type>
+	<object-name>hdg-shaft1</object-name>
+	<condition>
+		<property>/autopilot/locks/heading-nav-hold</property>
+	</condition>
+</animation>   
+
+<animation>
+	<type>pick</type>
+	<object-name>hdg-off</object-name>
+	<visible>false</visible>
+	<action>
+		<button>0</button>
+		<binding>
+			<command>property-assign</command>
+			<value type="bool">true</value>
+			<property>/autopilot/locks/heading-hold-off</property>
+			<condition>
+				<property>/autopilot/locks/roll-hold</property>
+			</condition>
+		</binding>
+		<binding>
+			<command>property-assign</command>
+			<property>/autopilot/locks/heading-nav-hold</property>
+			<value type="bool">false</value>
+			<condition>
+				<property>/autopilot/locks/roll-hold</property>
+			</condition>
+		</binding>
+		<binding>
+			<command>property-assign</command>
+			<property>/autopilot/locks/heading-constant-hold</property>
+			<value type="bool">false</value>
+			<condition>
+				<property>/autopilot/locks/roll-hold</property>
+			</condition>
+		</binding>
+	</action>
+</animation>
+
+<animation>
+	<type>select</type>
+	<object-name>hdg-shaft0</object-name>
+	<condition>
+		<property>/autopilot/locks/heading-hold-off</property>
+	</condition>
+</animation>   
+
+<animation>
+	<type>pick</type>
+	<object-name>const</object-name>
+	<visible>false</visible>
+	<action>
+		<button>0</button>
+		<binding>
+			<command>property-assign</command>
+			<property>/autopilot/locks/heading-constant-hold</property>
+			<value type="bool">true</value>
+			<condition>
+				<property>/autopilot/locks/roll-hold</property>
+			</condition>
+		</binding>
+		<binding>
+			<command>property-assign</command>
+			<property>/autopilot/locks/heading-nav-hold</property>
+			<value type="bool">false</value>
+			<condition>
+				<property>/autopilot/locks/roll-hold</property>
+			</condition>
+		</binding>
+		<binding>
+			<command>property-assign</command>
+			<property>/autopilot/locks/heading-hold-off</property>
+			<value type="bool">false</value>
+			<condition>
+				<property>/autopilot/locks/roll-hold</property>
+			</condition>
+		</binding>
+	</action>
+</animation>
+
+<animation>
+	<type>select</type>
+	<object-name>hdg-shaft2</object-name>
+	<condition>
+		<property>/autopilot/locks/heading-constant-hold</property>
+	</condition>
+</animation>   
+
+<!--LoD-->
+
+<animation> 
+	<type>range</type>
+	<min-m>0</min-m>
+	<max-m>5</max-m>
+</animation>
+
+</PropertyList>
+

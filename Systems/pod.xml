@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+
+<!--B-58A CENTERLINE POD-->
+
+<system name="pod">
+
+  <property value="0">systems/pod/release</property>
+  <property value="1">systems/pod/unreleased</property>
+
+  <channel name="pod-release">
+
+     <switch name="systems/pod/released">
+          <default value="systems/pod/released"/>
+          <test value="1">
+                systems/pod/release == 1
+          </test>
+          <output>systems/pod/released</output>
+     </switch>
+
+  </channel>
+
+  <channel name="pod-weight-loss">
+
+     <switch name="systems/pod/weight-control">
+          <default value="inertia/pointmass-weight-lbs[0]"/>
+          <test value="0">
+                systems/pod/released == 1
+          </test>
+          <output>inertia/pointmass-weight-lbs[0]</output>
+     </switch>
+
+  </channel>
+
+  <channel name="pod-fuel-loss">
+
+     <switch name="systems/pod/fwd-tank">
+          <default value="propulsion/tank[4]/contents-lbs"/>
+          <test value="0">
+                systems/pod/released == 1
+          </test>
+          <output>propulsion/tank[4]/contents-lbs</output>
+     </switch>
+
+     <switch name="systems/pod/aft-tank">
+          <default value="propulsion/tank[5]/contents-lbs"/>
+          <test value="0">
+                systems/pod/released == 1
+          </test>
+          <output>propulsion/tank[5]/contents-lbs</output>
+     </switch>
+
+  </channel>
+
+  <channel name="pod-lift-drag">
+
+     <switch name="systems/pod/lift-drag-correction">
+          <default value="systems/pod/unreleased"/>
+          <test value="0">
+                systems/pod/released == 1
+          </test>
+          <output>systems/pod/unreleased</output>
+     </switch>
+
+  </channel>
+
+
+</system>

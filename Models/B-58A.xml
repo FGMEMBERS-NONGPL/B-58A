@@ -1,0 +1,1242 @@
+<?xml version="1.1"?>
+
+<PropertyList>
+
+<path>Aircraft/B-58A/Models/B-58A.ac</path>
+
+<!--PILOT INSTRUMENTS-->
+
+	<!--panel illumination-->
+
+<animation>
+	<type>material</type>
+	<object-name>center-panel</object-name>
+	<emission>
+		<red>0.30</red>
+		<green>0.30</green>
+		<blue>0.30</blue>
+		<factor-prop>/controls/lighting/left-panel</factor-prop>
+	</emission>
+</animation>    
+
+	<!--accelerometer-->
+
+<model> 
+	<path>Aircraft/B-58A/Pilot-Instruments/accelerometer/accelerometer.xml</path>
+	<offsets> 
+		<x-m>-8.409404</x-m>
+		<y-m>-0.115176</y-m>
+		<z-m>0.281680</z-m>
+		<pitch-deg>-10</pitch-deg>
+	</offsets>
+</model>
+
+	<!--attitude indicator-->
+
+<model> 
+	<path>Aircraft/B-58A/Pilot-Instruments/ai/ai.xml</path>
+	<offsets> 
+		<x-m>-8.468964</x-m>
+		<y-m>-0.039723</y-m>
+		<z-m>0.489523</z-m>
+		<pitch-deg>-10</pitch-deg>
+	</offsets>
+</model>
+
+	<!--attitude indicator, standby-->
+
+<model> 
+	<path>Aircraft/B-58A/Pilot-Instruments/ai-stby/ai-stby.xml</path>
+	<offsets> 
+		<x-m>-8.458041</x-m>
+		<y-m>0.008171</y-m>
+		<z-m>0.558336</z-m>
+		<pitch-deg>-10</pitch-deg>
+	</offsets>
+</model>
+
+	<!--altimeter-->
+
+<model> 
+	<path>Aircraft/B-58A/Pilot-Instruments/alt/alt.xml</path>
+	<offsets> 
+		<x-m>-8.433922</x-m>
+		<y-m>-0.177419</y-m>
+		<z-m>0.421094</z-m>
+		<pitch-deg>-10</pitch-deg>
+	</offsets>
+</model>
+
+	<!--angle of attack indexer-->
+
+<model> 
+	<path>Aircraft/B-58A/Pilot-Instruments/aoa/indexer.xml</path>
+</model>
+
+	<!--angle of attack indicator-->
+
+<model> 
+	<path>Aircraft/B-58A/Pilot-Instruments/aoa/aoa.xml</path>
+	<offsets> 
+		<x-m>-8.434992</x-m>
+		<y-m>0.019736</y-m>
+		<z-m>0.452344</z-m>
+		<pitch-deg>-10</pitch-deg>
+	</offsets>
+</model>
+
+	<!--airspeed indicator-->
+
+<model> 
+	<path>Aircraft/B-58A/Pilot-Instruments/asi/asi.xml</path>
+	<offsets> 
+		<x-m>-8.454938</x-m>
+		<y-m>-0.177419</y-m>
+		<z-m>0.489523</z-m>
+		<pitch-deg>-10</pitch-deg>
+	</offsets>
+</model>
+
+	<!--autopilot panel-->
+
+<model> 
+	<path>Aircraft/B-58A/Pilot-Instruments/autopilot-panel/autopilot-panel.xml</path>
+	<offsets> 
+		<x-m>-7.520926</x-m>
+		<y-m>-0.447801</y-m>
+		<z-m>0.454479</z-m>
+		<roll-deg>7.2</roll-deg>
+	</offsets>
+</model>
+
+	<!--bearing-distance-heading indicator-->
+
+<model> 
+	<path>Aircraft/B-58A/Pilot-Instruments/bdhi/bdhi.xml</path>
+	<offsets> 
+		<x-m>-8.446054</x-m>
+		<y-m>-0.108571</y-m>
+		<z-m>0.489523</z-m>
+		<pitch-deg>-10</pitch-deg>
+	</offsets>
+</model>
+
+	<!--clock-->
+
+<model> 
+	<path>Aircraft/B-58A/Pilot-Instruments/clock/clock.xml</path>
+	<offsets> 
+		<x-m>-8.409404</x-m>
+		<y-m>-0.177419</y-m>
+		<z-m>0.281680</z-m>
+		<pitch-deg>-10</pitch-deg>
+	</offsets>
+</model>
+
+	<!--course deviation indicator-->
+
+<model> 
+	<path>Aircraft/B-58A/Pilot-Instruments/cdi/cdi.xml</path>
+	<offsets> 
+		<x-m>-8.433922</x-m>
+		<y-m>-0.108571</y-m>
+		<z-m>0.421094</z-m>
+		<pitch-deg>-10</pitch-deg>
+	</offsets>
+</model>
+
+	<!--exhaust gas temperature indicators-->
+
+<model> 
+	<path>Aircraft/B-58A/Pilot-Instruments/egt/egt0.xml</path>
+	<offsets> 
+		<x-m>-8.434997</x-m>
+		<y-m>0.063102</y-m>
+		<z-m>0.427259</z-m>
+		<pitch-deg>-10</pitch-deg>
+	</offsets>
+</model>
+
+<model> 
+	<path>Aircraft/B-58A/Pilot-Instruments/egt/egt1.xml</path>
+	<offsets> 
+		<x-m>-8.434997</x-m>
+		<y-m>0.113102</y-m>
+		<z-m>0.427259</z-m>
+		<pitch-deg>-10</pitch-deg>
+	</offsets>
+</model>
+
+<model> 
+	<path>Aircraft/B-58A/Pilot-Instruments/egt/egt2.xml</path>
+	<offsets> 
+		<x-m>-8.434997</x-m>
+		<y-m>0.163102</y-m>
+		<z-m>0.427259</z-m>
+		<pitch-deg>-10</pitch-deg>
+	</offsets>
+</model>
+
+<model> 
+	<path>Aircraft/B-58A/Pilot-Instruments/egt/egt3.xml</path>
+	<offsets> 
+		<x-m>-8.434997</x-m>
+		<y-m>0.213102</y-m>
+		<z-m>0.427259</z-m>
+		<pitch-deg>-10</pitch-deg>
+	</offsets>
+</model>
+
+	<!--elevator control available indicator-->
+
+<model> 
+	<path>Aircraft/B-58A/Pilot-Instruments/elevator/avail.xml</path>
+	<offsets> 
+		<x-m>-8.431082</x-m>
+		<y-m>-0.231898</y-m>
+		<z-m>0.404615</z-m>
+		<pitch-deg>-10</pitch-deg>
+	</offsets>
+</model>
+
+	<!--elevator position indicator-->
+
+<model> 
+	<path>Aircraft/B-58A/Pilot-Instruments/elevator/pos.xml</path>
+	<offsets> 
+		<x-m>-8.424064</x-m>
+		<y-m>-0.231898</y-m>
+		<z-m>0.364612</z-m>
+		<pitch-deg>-10</pitch-deg>
+	</offsets>
+</model>
+
+	<!--engine pressure ratio indicators-->
+
+<model> 
+	<path>Aircraft/B-58A/Pilot-Instruments/epr/epr0.xml</path>
+	<offsets> 
+		<x-m>-8.452361</x-m>
+		<y-m>0.063102</y-m>
+		<z-m>0.525740</z-m>
+		<pitch-deg>-10</pitch-deg>
+	</offsets>
+</model>
+
+<model> 
+	<path>Aircraft/B-58A/Pilot-Instruments/epr/epr1.xml</path>
+	<offsets> 
+		<x-m>-8.452361</x-m>
+		<y-m>0.113102</y-m>
+		<z-m>0.525740</z-m>
+		<pitch-deg>-10</pitch-deg>
+	</offsets>
+</model>
+
+<model> 
+	<path>Aircraft/B-58A/Pilot-Instruments/epr/epr2.xml</path>
+	<offsets> 
+		<x-m>-8.452361</x-m>
+		<y-m>0.163102</y-m>
+		<z-m>0.525740</z-m>
+		<pitch-deg>-10</pitch-deg>
+	</offsets>
+</model>
+
+<model> 
+	<path>Aircraft/B-58A/Pilot-Instruments/epr/epr3.xml</path>
+	<offsets> 
+		<x-m>-8.452361</x-m>
+		<y-m>0.213102</y-m>
+		<z-m>0.525740</z-m>
+		<pitch-deg>-10</pitch-deg>
+	</offsets>
+</model>
+
+	<!--fire circuit test button-->
+
+<model> 
+	<path>Aircraft/B-58A/Pilot-Instruments/fire-handle/test-button.xml</path>
+	<offsets> 
+		<x-m>-8.462034</x-m>
+		<y-m>0.137872</y-m>
+		<z-m>0.580745</z-m>
+		<pitch-deg>-10</pitch-deg>
+	</offsets>
+</model>
+
+	<!--fire handles-->
+
+<model> 
+	<path>Aircraft/B-58A/Pilot-Instruments/fire-handle/handle1.xml</path>
+	<offsets> 
+		<x-m>-8.461042</x-m>
+		<y-m>0.063102</y-m>
+		<z-m>0.575753</z-m>
+		<pitch-deg>-10</pitch-deg>
+	</offsets>
+</model>
+
+<model> 
+	<path>Aircraft/B-58A/Pilot-Instruments/fire-handle/handle2.xml</path>
+	<offsets> 
+		<x-m>-8.461042</x-m>
+		<y-m>0.113102</y-m>
+		<z-m>0.575753</z-m>
+		<pitch-deg>-10</pitch-deg>
+	</offsets>
+</model>
+
+<model> 
+	<path>Aircraft/B-58A/Pilot-Instruments/fire-handle/handle3.xml</path>
+	<offsets> 
+		<x-m>-8.461042</x-m>
+		<y-m>0.163102</y-m>
+		<z-m>0.575753</z-m>
+		<pitch-deg>-10</pitch-deg>
+	</offsets>
+</model>
+
+<model> 
+	<path>Aircraft/B-58A/Pilot-Instruments/fire-handle/handle4.xml</path>
+	<offsets> 
+		<x-m>-8.461042</x-m>
+		<y-m>0.213102</y-m>
+		<z-m>0.575753</z-m>
+		<pitch-deg>-10</pitch-deg>
+	</offsets>
+</model>
+
+	<!--forward left panel-->
+
+<model> 
+	<path>Aircraft/B-58A/Pilot-Instruments/fwd-left-panel/fwd-left-panel.xml</path>
+	<offsets> 
+		<!--x-m>-8.307548</x-m-->
+		<x-m>-8.305548</x-m>
+		<y-m>-0.290429</y-m>
+		<z-m>0.469641</z-m>
+		<heading-deg>30</heading-deg>
+	</offsets>
+</model>
+
+	<!--fuel flow indicators-->
+
+<model> 
+	<path>Aircraft/B-58A/Pilot-Instruments/fuel/flow0.xml</path>
+	<offsets> 
+		<x-m>-8.426314</x-m>
+		<y-m>0.063102</y-m>
+		<z-m>0.378019</z-m>
+		<pitch-deg>-10</pitch-deg>
+	</offsets>
+</model>
+
+<model> 
+	<path>Aircraft/B-58A/Pilot-Instruments/fuel/flow1.xml</path>
+	<offsets> 
+		<x-m>-8.426314</x-m>
+		<y-m>0.113102</y-m>
+		<z-m>0.378019</z-m>
+		<pitch-deg>-10</pitch-deg>
+	</offsets>
+</model>
+
+<model> 
+	<path>Aircraft/B-58A/Pilot-Instruments/fuel/flow2.xml</path>
+	<offsets> 
+		<x-m>-8.426314</x-m>
+		<y-m>0.163102</y-m>
+		<z-m>0.378019</z-m>
+		<pitch-deg>-10</pitch-deg>
+	</offsets>
+</model>
+
+<model> 
+	<path>Aircraft/B-58A/Pilot-Instruments/fuel/flow3.xml</path>
+	<offsets> 
+		<x-m>-8.426314</x-m>
+		<y-m>0.213102</y-m>
+		<z-m>0.378019</z-m>
+		<pitch-deg>-10</pitch-deg>
+	</offsets>
+</model>
+
+	<!--fuel quantity indicator-->
+
+<model> 
+	<path>Aircraft/B-58A/Pilot-Instruments/fuel/quantity.xml</path>
+	<offsets> 
+		<x-m>-8.421743</x-m>
+		<y-m>-0.039022</y-m>
+		<z-m>0.3515030</z-m>
+		<pitch-deg>-10</pitch-deg>
+	</offsets>
+</model>
+
+	<!--left indicator panel-->
+
+<model> 
+	<path>Aircraft/B-58A/Pilot-Instruments/left-indic-panel/left-indic-panel.xml</path>
+	<offsets> 
+		<x-m>-8.416825</x-m>
+		<y-m>-0.253108</y-m>
+		<z-m>0.323509</z-m>
+		<pitch-deg>-10</pitch-deg>
+	</offsets>
+</model>
+
+	<!--light panel-->
+
+<model> 
+	<path>Aircraft/B-58A/Pilot-Instruments/light-panel/light-panel.xml</path>
+	<offsets> 
+		<x-m>-7.641238</x-m>
+		<y-m>0.388754</y-m>
+		<z-m>0.283958</z-m>
+		<roll-deg>12.2</roll-deg>
+	</offsets>
+</model>
+
+	<!--mach indicator-->
+
+<model> 
+	<path>Aircraft/B-58A/Pilot-Instruments/mach/mach.xml</path>
+	<offsets> 
+		<x-m>-8.458054</x-m>
+		<y-m>-0.108571</y-m>
+		<z-m>0.558371</z-m>
+		<pitch-deg>-10</pitch-deg>
+	</offsets>
+</model>
+
+	<!--nozzle position indicators-->
+
+<model> 
+	<path>Aircraft/B-58A/Pilot-Instruments/nozzle/nozzle-position0.xml</path>
+	<offsets> 
+		<x-m>-8.417631</x-m>
+		<y-m>0.063102</y-m>
+		<z-m>0.328779</z-m>
+		<pitch-deg>-10</pitch-deg>
+	</offsets>
+</model>
+
+<model> 
+	<path>Aircraft/B-58A/Pilot-Instruments/nozzle/nozzle-position1.xml</path>
+	<offsets> 
+		<x-m>-8.417631</x-m>
+		<y-m>0.113102</y-m>
+		<z-m>0.328779</z-m>
+		<pitch-deg>-10</pitch-deg>
+	</offsets>
+</model>
+
+<model> 
+	<path>Aircraft/B-58A/Pilot-Instruments/nozzle/nozzle-position2.xml</path>
+	<offsets> 
+		<x-m>-8.417631</x-m>
+		<y-m>0.163102</y-m>
+		<z-m>0.328779</z-m>
+		<pitch-deg>-10</pitch-deg>
+	</offsets>
+</model>
+
+<model> 
+	<path>Aircraft/B-58A/Pilot-Instruments/nozzle/nozzle-position3.xml</path>
+	<offsets> 
+		<x-m>-8.417631</x-m>
+		<y-m>0.213102</y-m>
+		<z-m>0.328779</z-m>
+		<pitch-deg>-10</pitch-deg>
+	</offsets>
+</model>
+
+	<!--oil pressure indicators-->
+
+<model> 
+	<path>Aircraft/B-58A/Pilot-Instruments/oil/oil-pressure0.xml</path>
+	<offsets> 
+		<x-m>-8.408949</x-m>
+		<y-m>0.063102</y-m>
+		<z-m>0.279538</z-m>
+		<pitch-deg>-10</pitch-deg>
+	</offsets>
+</model>
+
+<model> 
+	<path>Aircraft/B-58A/Pilot-Instruments/oil/oil-pressure1.xml</path>
+	<offsets> 
+		<x-m>-8.408949</x-m>
+		<y-m>0.113102</y-m>
+		<z-m>0.279538</z-m>
+		<pitch-deg>-10</pitch-deg>
+	</offsets>
+</model>
+
+<model> 
+	<path>Aircraft/B-58A/Pilot-Instruments/oil/oil-pressure2.xml</path>
+	<offsets> 
+		<x-m>-8.408949</x-m>
+		<y-m>0.163102</y-m>
+		<z-m>0.279538</z-m>
+		<pitch-deg>-10</pitch-deg>
+	</offsets>
+</model>
+
+<model> 
+	<path>Aircraft/B-58A/Pilot-Instruments/oil/oil-pressure3.xml</path>
+	<offsets> 
+		<x-m>-8.408949</x-m>
+		<y-m>0.213102</y-m>
+		<z-m>0.279538</z-m>
+		<pitch-deg>-10</pitch-deg>
+	</offsets>
+</model>
+
+	<!--pilot data indicator-->
+
+<model> 
+	<path>Aircraft/B-58A/Pilot-Instruments/pdi/pdi.xml</path>
+	<offsets> 
+		<x-m>-8.421743</x-m>
+		<y-m>-0.177419</y-m>
+		<z-m>0.351503</z-m>
+		<pitch-deg>-10</pitch-deg>
+	</offsets>
+</model>
+
+	<!--radar altimeter-->
+
+<model> 
+	<path>Aircraft/B-58A/Pilot-Instruments/rad-alt/rad-alt.xml</path>
+	<offsets> 
+		<x-m>-8.421743</x-m>
+		<y-m>-0.107813</y-m>
+		<z-m>0.351503</z-m>
+		<pitch-deg>-10</pitch-deg>
+	</offsets>
+</model>
+
+<model> 
+	<path>Aircraft/B-58A/Pilot-Instruments/rad-alt/warning-light.xml</path>
+	<offsets> 
+		<x-m>-8.431190</x-m>
+		<y-m>0.020518</y-m>
+		<z-m>0.405252</z-m>
+		<pitch-deg>-10</pitch-deg>
+	</offsets>
+</model>
+
+	<!--ram air temperature indicator-->
+
+<model> 
+	<path>Aircraft/B-58A/Pilot-Instruments/ram-air/ram-air.xml</path>
+	<offsets> 
+		<x-m>-8.455787</x-m>
+		<y-m>-0.163299</y-m>
+		<z-m>0.544461</z-m>
+		<pitch-deg>-10</pitch-deg>
+	</offsets>
+</model>
+
+	<!--rudder position indicator-->
+
+<model> 
+	<path>Aircraft/B-58A/Pilot-Instruments/rudder/pos.xml</path>
+	<offsets> 
+		<x-m>-8.416977</x-m>
+		<y-m>-0.231898</y-m>
+		<z-m>0.324549</z-m>
+		<pitch-deg>-10</pitch-deg>
+	</offsets>
+</model>
+
+	<!--tachometers-->
+
+<model> 
+	<path>Aircraft/B-58A/Pilot-Instruments/tach/tach0.xml</path>
+	<offsets> 
+		<x-m>-8.443679</x-m>
+		<y-m>0.063102</y-m>
+		<z-m>0.476500</z-m>
+		<pitch-deg>-10</pitch-deg>
+	</offsets>
+</model>
+
+<model> 
+	<path>Aircraft/B-58A/Pilot-Instruments/tach/tach1.xml</path>
+	<offsets> 
+		<x-m>-8.443679</x-m>
+		<y-m>0.113102</y-m>
+		<z-m>0.476500</z-m>
+		<pitch-deg>-10</pitch-deg>
+	</offsets>
+</model>
+
+<model> 
+	<path>Aircraft/B-58A/Pilot-Instruments/tach/tach2.xml</path>
+	<offsets> 
+		<x-m>-8.443679</x-m>
+		<y-m>0.163102</y-m>
+		<z-m>0.476500</z-m>
+		<pitch-deg>-10</pitch-deg>
+	</offsets>
+</model>
+
+<model> 
+	<path>Aircraft/B-58A/Pilot-Instruments/tach/tach3.xml</path>
+	<offsets> 
+		<x-m>-8.443679</x-m>
+		<y-m>0.213102</y-m>
+		<z-m>0.476500</z-m>
+		<pitch-deg>-10</pitch-deg>
+	</offsets>
+</model>
+
+	<!--throttles-->
+
+<animation> 
+	<type>rotate</type>
+	<object-name>throttles</object-name>
+	<object-name>slot-covers</object-name>
+	<property>/fdm/jsbsim/fcs/throttle-pos-norm[0]</property>
+	<factor>50</factor>
+   <center>
+     <x-m>-8.113998</x-m>
+     <y-m>0</y-m>
+     <z-m>0.184045</z-m>
+   </center>
+	<axis> 
+		<y>-1</y>
+	</axis>
+</animation>
+
+	<!--trim panel-->
+
+<model> 
+	<path>Aircraft/B-58A/Pilot-Instruments/trim-panel/trim-panel.xml</path>
+	<offsets> 
+		<x-m>-8.032516</x-m>
+		<y-m>-0.397139</y-m>
+		<z-m>0.183126</z-m>
+		<pitch-deg>8.45</pitch-deg>
+	</offsets>
+</model>
+
+	<!--turn-slip indicator-->
+
+<model> 
+	<path>Aircraft/B-58A/Pilot-Instruments/turn-slip/turn-slip.xml</path>
+	<offsets> 
+		<x-m>-8.458041</x-m>
+		<y-m>-0.047029</y-m>
+		<z-m>0.558336</z-m>
+		<pitch-deg>-10</pitch-deg>
+	</offsets>
+</model>
+
+	<!--vertical velocity indicator-->
+
+<model> 
+	<path>Aircraft/B-58A/Pilot-Instruments/vvi/vvi.xml</path>
+	<offsets> 
+		<x-m>-8.433922</x-m>
+		<y-m>-0.039723</y-m>
+		<z-m>0.421094</z-m>
+		<pitch-deg>-10</pitch-deg>
+	</offsets>
+</model>
+
+<!--NAVIGATOR INSTRUMENTS-->
+
+	<!--astro panel-->
+
+<model> 
+	<path>Aircraft/B-58A/Nav-Instruments/astro-panel/astro-panel.xml</path>
+	<offsets> 
+		<x-m>-5.793890</x-m>
+		<y-m>-0.292497</y-m>
+		<z-m>0.667182</z-m>
+	</offsets>
+</model>
+
+	<!--indicator panel-->
+
+<model> 
+	<path>Aircraft/B-58A/Nav-Instruments/indicator-panel/indicator-panel.xml</path>
+	<offsets> 
+		<x-m>-5.793890</x-m>
+		<y-m>-0.174893</y-m>
+		<z-m>1.000577</z-m>
+	</offsets>
+</model>
+
+	<!--navigation panel-->
+
+<model> 
+	<path>Aircraft/B-58A/Nav-Instruments/nav-panel/nav-panel.xml</path>
+	<offsets> 
+		<x-m>-5.793890</x-m>
+		<y-m>0.174892</y-m>
+		<z-m>0.758349</z-m>
+	</offsets>
+</model>
+
+	<!--sighting and test panel-->
+
+<model> 
+	<path>Aircraft/B-58A/Nav-Instruments/sighting-panel/sighting-panel.xml</path>
+	<offsets> 
+		<x-m>-5.793890</x-m>
+		<y-m>0.174892</y-m>
+		<z-m>0.354621</z-m>
+	</offsets>
+</model>
+
+<!--METAL EFFECTS-->
+
+<!--animation>
+	<type>noshadow</type>
+		<object-name>metal</object-name>
+		<object-name>radome</object-name>
+		<object-name>anti-glare</object-name>
+		<object-name>pitot-tube</object-name>
+		<object-name>elevon-left</object-name>
+		<object-name>elevon-right</object-name>
+		<object-name>vert-stab</object-name>
+		<object-name>rudder</object-name>
+		<object-name>centerline-pylon</object-name>
+		<object-name>centerline-pod</object-name>
+		<object-name>engine-pylons-inner</object-name>
+		<object-name>engine-pylons-outer</object-name>
+		<object-name>engine1</object-name>
+		<object-name>engine2</object-name>
+		<object-name>engine3</object-name>
+		<object-name>engine4</object-name>
+		<object-name>housing</object-name>
+		<object-name>oleo</object-name>
+		<object-name>outer</object-name>
+		<object-name>gun-cover</object-name>
+		<object-name>shaft</object-name>
+		<object-name>chute-container</object-name>
+		<object-name>chute-door-left</object-name>
+		<object-name>chute-door-right</object-name>
+</animation-->
+
+<animation>
+	<type>shader</type>
+	<shader>chrome</shader>
+	<texture>aluminum.png</texture>
+		<object-name>metal</object-name>
+		<object-name>pitot-tube</object-name>
+		<object-name>elevon-left</object-name>
+		<object-name>elevon-right</object-name>
+		<object-name>vert-stab</object-name>
+		<object-name>rudder</object-name>
+		<object-name>engine-pylons-inner</object-name>
+		<object-name>engine-pylons-outer</object-name>
+		<object-name>engine1</object-name>
+		<object-name>engine2</object-name>
+		<object-name>engine3</object-name>
+		<object-name>engine4</object-name>
+		<object-name>housing</object-name>
+		<object-name>oleo</object-name>
+		<object-name>outer</object-name>
+		<object-name>gun-cover</object-name>
+		<object-name>shaft</object-name>
+		<object-name>chute-container</object-name>
+		<object-name>chute-door-left</object-name>
+		<object-name>chute-door-right</object-name>
+</animation>
+
+<animation>
+	<type>shader</type>
+	<shader>chrome</shader>
+	<texture>anti-glare.png</texture>
+		<object-name>anti-glare</object-name>
+</animation>
+
+<!--POD-->
+
+ <model>
+   <path>Aircraft/B-58A/Effects-Submodels/pod-assembly.xml</path>
+ </model>
+
+<!--NOSE GEAR ASSEMBLY-->
+
+<model> 
+	<path>Aircraft/B-58A/models/nose-gear.xml</path>
+	<offsets> 
+		<x-m>-9.545789</x-m>
+		<y-m>0</y-m>
+		<z-m>-1.023900</z-m>
+	</offsets>
+</model>
+
+<animation> 
+	<type>rotate</type>
+	<object-name>nose-gear-assembly</object-name>
+	<property>gear/gear[0]/position-norm</property>
+	<interpolation>
+		<entry><ind>0</ind><dep>100</dep></entry>
+		<entry><ind>1</ind><dep>0</dep></entry>
+	</interpolation>
+   <center>
+     <x-m>-0.134898</x-m>
+     <y-m>0</y-m>
+     <z-m>0.583463</z-m>
+   </center>
+	<axis> 
+		<y>1</y>
+	</axis>
+</animation>
+
+<!--NOSE DOORS-->
+
+<animation>
+	<type>rotate</type>
+	<object-name>left-nose-door</object-name>
+	<property>gear/gear[0]/position-norm</property>
+	<interpolation>
+		<entry><ind>0</ind><dep>0</dep></entry>
+		<entry><ind>.1</ind><dep>90</dep></entry>
+		<entry><ind>1</ind><dep>90</dep></entry>
+	</interpolation>
+	<axis>
+		<x1-m>-7.949909</x1-m>
+		<y1-m>-0.371771</y1-m>
+		<z1-m>-0.579833</z1-m>
+		<x2-m>-9.986090</x2-m>
+		<y2-m>-0.289355</y2-m>
+		<z2-m>-0.689815</z2-m>
+	</axis>
+</animation>
+
+<animation>
+	<type>rotate</type>
+	<object-name>right-nose-door</object-name>
+	<property>gear/gear[0]/position-norm</property>
+	<interpolation>
+		<entry><ind>0.0</ind><dep>0</dep></entry>
+		<entry><ind>.1</ind><dep>-90</dep></entry>
+		<entry><ind>1.0</ind><dep>-90</dep></entry>
+	</interpolation>
+	<axis>
+		<x1-m>-7.949909</x1-m>
+		<y1-m>0.371651</y1-m>
+		<z1-m>-0.579833</z1-m>
+		<x2-m>-9.986090</x2-m>
+		<y2-m>0.289235</y2-m>
+		<z2-m>-0.689815</z2-m>
+	</axis>
+</animation>
+
+<!--MAIN GEAR ASSEMBLIES-->
+
+<model> 
+	<path>Aircraft/B-58A/models/left-main-gear.xml</path>
+	<offsets> 
+		<x-m>1.964915</x-m>
+		<y-m>-2.068035</y-m>
+		<z-m>-0.675800</z-m>
+	</offsets>
+</model>
+
+<model> 
+	<path>Aircraft/B-58A/models/right-main-gear.xml</path>
+	<offsets> 
+		<x-m>1.964915</x-m>
+		<y-m>2.068035</y-m>
+		<z-m>-0.675800</z-m>
+	</offsets>
+</model>
+
+<animation> 
+	<type>rotate</type>
+	<object-name>main-gear-assembly</object-name>
+	<property>gear/gear[1]/position-norm</property>
+	<interpolation>
+		<entry><ind>0</ind><dep>-90</dep></entry>
+		<entry><ind>1</ind><dep>0</dep></entry>
+	</interpolation>
+	<axis> 
+		<y>1</y>
+	</axis>
+</animation>
+
+<!--MAIN GEAR DOORS-->
+
+<animation> 
+	<type>rotate</type>
+	<object-name>main-door1</object-name>
+	<property>gear/gear[1]/position-norm</property>
+	<interpolation>
+		<entry><ind>0</ind><dep>0</dep></entry>
+		<entry><ind>1</ind><dep>45</dep></entry>
+	</interpolation>
+   <center>
+     <x-m>-0.083468</x-m>
+     <y-m>0</y-m>
+     <z-m>-0.181461</z-m>
+   </center>
+	<axis> 
+		<y>1</y>
+	</axis>
+</animation>
+
+<animation>
+	<type>rotate</type>
+	<object-name>main-door2LL</object-name>
+	<property>gear/gear[1]/position-norm</property>
+	<interpolation>
+		<entry><ind>0</ind><dep>0</dep></entry>
+		<entry><ind>.1</ind><dep>90</dep></entry>
+		<entry><ind>1</ind><dep>90</dep></entry>
+	</interpolation>
+	<axis>
+		<x1-m>4.512240</x1-m>
+		<y1-m>-2.802256</y1-m>
+		<z1-m>-.114832</z1-m>
+		<x2-m>1.114440</x2-m>
+		<y2-m>-2.802256</y2-m>
+		<z2-m>-.114832</z2-m>
+	</axis>
+</animation>
+
+<animation>
+	<type>rotate</type>
+	<object-name>main-door2LR</object-name>
+	<property>gear/gear[1]/position-norm</property>
+	<interpolation>
+		<entry><ind>0</ind><dep>0</dep></entry>
+		<entry><ind>.1</ind><dep>-90</dep></entry>
+		<entry><ind>1</ind><dep>-90</dep></entry>
+	</interpolation>
+	<axis>
+		<x1-m>4.512240</x1-m>
+		<y1-m>-1.332561</y1-m>
+		<z1-m>-.114832</z1-m>
+		<x2-m>1.114440</x2-m>
+		<y2-m>-1.332561</y2-m>
+		<z2-m>-.114832</z2-m>
+	</axis>
+</animation>
+
+<animation>
+	<type>rotate</type>
+	<object-name>main-door2RL</object-name>
+	<property>gear/gear[1]/position-norm</property>
+	<interpolation>
+		<entry><ind>0</ind><dep>0</dep></entry>
+		<entry><ind>.1</ind><dep>90</dep></entry>
+		<entry><ind>1</ind><dep>90</dep></entry>
+	</interpolation>
+	<axis>
+		<x1-m>4.512240</x1-m>
+		<y1-m>1.332450</y1-m>
+		<z1-m>-.114832</z1-m>
+		<x2-m>1.114440</x2-m>
+		<y2-m>1.332450</y2-m>
+		<z2-m>-.114832</z2-m>
+	</axis>
+</animation>
+
+<animation>
+	<type>rotate</type>
+	<object-name>main-door2RR</object-name>
+	<property>gear/gear[1]/position-norm</property>
+	<interpolation>
+		<entry><ind>0</ind><dep>0</dep></entry>
+		<entry><ind>.1</ind><dep>-90</dep></entry>
+		<entry><ind>1</ind><dep>-90</dep></entry>
+	</interpolation>
+	<axis>
+		<x1-m>4.512240</x1-m>
+		<y1-m>2.802048</y1-m>
+		<z1-m>-.114832</z1-m>
+		<x2-m>1.114440</x2-m>
+		<y2-m>2.802048</y2-m>
+		<z2-m>-.114832</z2-m>
+	</axis>
+</animation>
+
+<!--LEFT ELEVON-->
+
+<animation>
+	<type>rotate</type>
+	<object-name>elevon-left</object-name>
+	<property>fdm/jsbsim/fcs/pitch-trim-degrees</property>
+	<axis>
+		<x1-m>7.121148</x1-m>
+		<y1-m>-6.181091</y1-m>
+		<z1-m>0.348303</z1-m>
+		<x2-m>7.121148</x2-m>
+		<y2-m>-1.332566</y2-m>
+		<z2-m>0.413221</z2-m>
+  </axis>
+</animation>
+
+<animation>
+	<type>rotate</type>
+	<object-name>elevon-left</object-name>
+	<property>fdm/jsbsim/fcs/elevator-degrees</property>
+	<axis>
+		<x1-m>7.121148</x1-m>
+		<y1-m>-6.181091</y1-m>
+		<z1-m>0.348303</z1-m>
+		<x2-m>7.121148</x2-m>
+		<y2-m>-1.332566</y2-m>
+		<z2-m>0.413221</z2-m>
+  </axis>
+</animation>
+
+<animation>
+	<type>rotate</type>
+	<object-name>elevon-left</object-name>
+	<property>fdm/jsbsim/fcs/left-aileron-pos-deg</property>
+	<axis>
+		<x1-m>7.121148</x1-m>
+		<y1-m>-6.181091</y1-m>
+		<z1-m>0.348303</z1-m>
+		<x2-m>7.121148</x2-m>
+		<y2-m>-1.332566</y2-m>
+		<z2-m>0.413221</z2-m>
+  </axis>
+</animation>
+
+<!--RIGHT ELEVON-->
+
+<animation>
+	<type>rotate</type>
+	<object-name>elevon-right</object-name>
+	<property>fdm/jsbsim/fcs/pitch-trim-degrees</property>
+	<axis>
+		<x1-m>7.121148</x1-m>
+		<y1-m>1.332444</y1-m>
+		<z1-m>0.348303</z1-m>
+		<x2-m>7.121148</x2-m>
+		<y2-m>6.180949</y2-m>
+		<z2-m>0.348303</z2-m>
+	</axis>
+</animation>
+
+<animation>
+	<type>rotate</type>
+	<object-name>elevon-right</object-name>
+	<property>fdm/jsbsim/fcs/elevator-degrees</property>
+	<axis>
+		<x1-m>7.121148</x1-m>
+		<y1-m>1.332444</y1-m>
+		<z1-m>0.348303</z1-m>
+		<x2-m>7.121148</x2-m>
+		<y2-m>6.180949</y2-m>
+		<z2-m>0.348303</z2-m>
+	</axis>
+</animation>
+
+<animation>
+	<type>rotate</type>
+	<object-name>elevon-right</object-name>
+	<property>fdm/jsbsim/fcs/right-aileron-pos-deg</property>
+	<axis>
+		<x1-m>7.121148</x1-m>
+		<y1-m>6.180949</y1-m>
+		<z1-m>0.348303</z1-m>
+		<x2-m>7.121148</x2-m>
+		<y2-m>1.332444</y2-m>
+		<z2-m>0.348303</z2-m>
+	</axis>
+</animation>
+
+<!--RUDDER-->
+
+<animation>
+	<type>rotate</type>
+	<object-name>rudder</object-name>
+	<property>/fdm/jsbsim/fcs/rudder-pos-degrees</property>
+	<axis>
+		<x1-m>13.002626</x1-m>
+		<y1-m>0</y1-m>
+		<z1-m>5.445879</z1-m>
+		<x2-m>11.259881</x2-m>
+		<y2-m>0</y2-m>
+		<z2-m>2.278270</z2-m>
+	</axis>
+</animation>
+
+<!--NOZZLES AND AFTERBURNER PLUMES-->
+
+ <model>
+   <path>Aircraft/B-58A/Effects-Submodels/nozzle-afterburner0.xml</path>
+   <offsets>
+     <x-m>8.072860</x-m>
+     <y-m>-6.602150</y-m>
+     <z-m>-0.403293</z-m>
+   </offsets>
+ </model>
+
+ <model>
+   <path>Aircraft/B-58A/Effects-Submodels/nozzle-afterburner1.xml</path>
+   <offsets>
+     <x-m>1.428829</x-m>
+     <y-m>-3.968579</y-m>
+     <z-m>-0.955978</z-m>
+   </offsets>
+ </model>
+
+ <model>
+   <path>Aircraft/B-58A/Effects-Submodels/nozzle-afterburner2.xml</path>
+   <offsets>
+     <x-m>1.428829</x-m>
+     <y-m>3.968579</y-m>
+     <z-m>-0.955978</z-m>
+   </offsets>
+ </model>
+
+ <model>
+   <path>Aircraft/B-58A/Effects-Submodels/nozzle-afterburner3.xml</path>
+   <offsets>
+     <x-m>8.072860</x-m>
+     <y-m>6.602150</y-m>
+     <z-m>-0.403293</z-m>
+   </offsets>
+ </model>
+
+
+<!--ANTICOLLISION LIGHTS-->
+
+ <model>
+   <path>Aircraft/B-58A/Effects-Submodels/anticollision-flash.xml</path>
+   <offsets>
+     <x-m>11.867750</x-m>
+     <y-m>0</y-m>
+     <z-m>5.528984</z-m>
+   </offsets>
+ </model>
+
+ <model>
+   <path>Aircraft/B-58A/Effects-Submodels/anticollision-flash.xml</path>
+   <offsets>
+     <x-m>12.714682</x-m>
+     <y-m>0</y-m>
+     <z-m>1.853114</z-m>
+   </offsets>
+ </model>
+
+<!--HATCHES-->
+
+<animation> 
+	<type>rotate</type>
+	<object-name>pilot-hatch</object-name>
+	<property>/hatch/position-norm</property>
+	<factor>45</factor>
+   <center>
+     <x-m>-6.799101</x-m>
+     <y-m>0</y-m>
+     <z-m>1.404233</z-m>
+   </center>
+	<axis> 
+		<y>1</y>
+	</axis>
+</animation>
+
+<animation> 
+	<type>rotate</type>
+	<object-name>nav-hatch</object-name>
+	<property>/hatch/position-norm</property>
+	<factor>45</factor>
+   <center>
+     <x-m>-4.372621</x-m>
+     <y-m>0</y-m>
+     <z-m>1.484275</z-m>
+   </center>
+	<axis> 
+		<y>1</y>
+	</axis>
+</animation>
+
+<animation> 
+	<type>rotate</type>
+	<object-name>DSO-hatch</object-name>
+	<property>/hatch/position-norm</property>
+	<factor>45</factor>
+   <center>
+     <x-m>-2.547960</x-m>
+     <y-m>0</y-m>
+     <z-m>1.389275</z-m>
+   </center>
+	<axis> 
+		<y>1</y>
+	</axis>
+</animation>
+
+<!--DRAG CHUTE AND DOORS-->
+
+ <model>
+   <path>Aircraft/B-58A/Effects-Submodels/drag-chute.xml</path>
+   <offsets>
+     <x-m>12.926939</x-m>
+     <y-m>0</y-m>
+     <z-m>1.086711</z-m>
+   </offsets>
+ </model>
+
+<animation>
+	<type>rotate</type>
+	<object-name>chute-door-left</object-name>
+	<property>/fdm/jsbsim/systems/chute-doors/open-norm</property>
+	<factor>90</factor>
+	<axis>
+		<x1-m>12.926939</x1-m>
+		<y1-m>-0.082662</y1-m>
+		<z1-m>1.097159</z1-m>
+		<x2-m>12.340739</x2-m>
+		<y2-m>-0.125450</y2-m>
+		<z2-m>0.911037</z2-m>
+	</axis>
+</animation>
+
+<animation>
+	<type>rotate</type>
+	<object-name>chute-door-right</object-name>
+	<property>/fdm/jsbsim/systems/chute-doors/open-norm</property>
+	<factor>-90</factor>
+	<axis>
+		<x1-m>12.926939</x1-m>
+		<y1-m>0.082547</y1-m>
+		<z1-m>1.097159</z1-m>
+		<x2-m>12.340739</x2-m>
+		<y2-m>0.125334</y2-m>
+		<z2-m>0.911037</z2-m>
+	</axis>
+</animation>
+
+<!--DESELECT PILOT IN COCKPIT VIEW-->
+
+<animation>
+	<type>select</type>
+	<object-name>pilot+capsule</object-name>
+	<condition>
+		<not-equals>
+			<property>/sim/current-view/view-number</property>
+			<value>0</value>
+		</not-equals>
+	</condition>
+</animation>
+
+<!--DESELECT NAV AND DSO WHEN HATCHES CLOSED-->
+
+<animation>
+	<type>select</type>
+	<object-name>nav+capsule</object-name>
+	<object-name>DSO+capsule</object-name>
+	<condition>
+		<greater-than>
+			<property>/hatch/position-norm</property>
+			<value>0</value>
+		</greater-than>
+	</condition>
+</animation>
+
+</PropertyList>
